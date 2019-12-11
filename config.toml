@@ -3,17 +3,17 @@ baseurl = "your_site_url_address"
 languageCode = "en-uk"
 title = "Precious Chicken: Blog"
 theme = "hugo-theme-cactus-plus"
-googleAnalytics = "your_google_analytics_id"
+#googleAnalytics = "your_google_analytics_id"
 # Set the value to true if your site include CJK (Chinese, Japanese, and Korean languages) characters
 hasCJKLanguage = false
 
 [params]
-	author = "site_author"
+	author = "Precious Chicken"
 	description = "Site Description"
-	bio = "author biography"
+	bio = "freelance software"
 
-	twitter = "your_twitter_id"
-	facebook = "your_facebook_id"
+	twitter = "PreciousChikSys"
+#facebook = "your_facebook_id"
 
 	enableRSS = true
 	enableToc = true
@@ -74,6 +74,6 @@ hasCJKLanguage = false
 
 # Add additional social link entries underneath
 [social]
-	facebook-square = "https://www.facebook.com/nodejh"
-	twitter-square = "https://www.twitter.com/nodejh"
-	github-square = "https://www.github.com/nodejh"
+#facebook-square = "https://www.facebook.com/nodejh"
+	twitter-square = "https://www.twitter.com/PreciousChikSys"
+	github-square = "https://www.github.com/PreciousChicken"

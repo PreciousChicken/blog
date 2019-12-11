@@ -14,11 +14,11 @@ Here is how I did it on Ubuntu 18.04 LTS with a WD My Cloud Mirror:
 
 3.  Using the terminal open your fstab file using `gksudo gedit /etc/fstab`. This fstab file deternmines what drive Ubuntu mounts at startup.
 
-4.  Create a new line at the end of the fstab file and add the following:
+4.  Create a new line at the end of the fstab file and; where 'wdmycloudmirror' is your device name (see Configuring Settings in the [User Manual](https://products.wdc.com/library/UM/ENG/4779-705145.pdf)), the first `Backup` is the share you created at Step 1 and `/mnt/Backup` is the folder you created at Step 2; add the following 
 
-`wdmycloudmirror.local:/nfs/Backup /mnt/Backup nfs defaults 0 0`
-
-where 'wdmycloudmirror' is your device name (see Configuring Settings in the [User Manual](https://products.wdc.com/library/UM/ENG/4779-705145.pdf)), the first `Backup` is the share you created at Step 1 and and `/mnt/Backup` is the folder you created at Step 2.
+```bash
+wdmycloudmirror.local:/nfs/Backup /mnt/Backup nfs defaults 0 0
+```
 
 5.  Using the terminal create a file using `gksudo gedit /etc/network/if-up.d/fstab`.
 
@@ -33,10 +33,9 @@ mount -a
 
 8.  Reboot.  The drive should mount on startup.
 
-9.  Open Backups on Ubuntu (although the name is Deja Dup, it is not known as that), so to Storage location.  For storage location select 'Local Folder' and then choose `/mnt/Backup` or whatever folder you chose at Step 2.
+9.  Open Backups on Ubuntu (although the name is Deja Dup, it is not known as that) and select 'Storage location'.  For storage location select 'Local Folder' and then choose `/mnt/Backup` or whatever folder you chose at Step 2.
 
 10.  Select 'Back Up Now' from Overview and set up scheduling.
 
 These instruction borrow heavily from an [answer on Ubuntu Forums](https://ubuntuforums.org/showthread.php?t=2392742&p=13795542#post13795542), which was helpfully [reposted on Ask Ubuntu](https://askubuntu.com/a/1153732).
 
-Following the advice from this [answer]
