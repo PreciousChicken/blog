@@ -1,7 +1,8 @@
 ---
 title: "Configuring Deja Dup Ubuntu Backup on a WD My Cloud NAS"
 date: 2019-12-04T11:05:57Z
-draft: true
+tags: ["Linux", "Deja Dup Backup"]
+draft: false
 ---
 
 Considering that the sole purpose of [Deja Dup](https://wiki.gnome.org/Apps/DejaDup) is to backup and one of the main selling points of a WD My Cloud NAS drive is as a place to store your backup; it is surprisingly difficult to do it in a seamless way on Ubuntu.  By seamless I mean it happens in the background without you having to think about it.
