@@ -5,7 +5,7 @@ tags: ["Vim", "C Programming Language", "Oni", "IDE"]
 draft: false
 ---
 
-**Update Dec 19**: Whereas [Oni](https://www.onivim.io/) was freely downloadable, there since appears to have been a change in project direction.  The IDE is now called Onivim 2 and there is a fee to pre-order.  No idea if you can still install the version I used below, but I'm not deleting the post as it might be useful in other contexts.
+**Update Dec 19**: Whereas previously [Oni](https://www.onivim.io/) was freely downloadable, there since appears to have been a change in project direction.  The IDE is now called Onivim 2 and there is a pre-order fee.  No idea if you can still install the version I used below, but the post might be useful in other contexts.
 
 ---
 
