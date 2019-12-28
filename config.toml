@@ -60,7 +60,7 @@ hasCJKLanguage = false
 	# Share
 	enableShare = true
 	tweet = ""
-	share = ""
+#share = ""
 
 	# 404 page
 	title404 = ""
@@ -74,6 +74,5 @@ hasCJKLanguage = false
 
 # Add additional social link entries underneath
 [social]
-#facebook-square = "https://www.facebook.com/nodejh"
 	twitter-square = "https://www.twitter.com/PreciousChikSys"
 	github-square = "https://www.github.com/PreciousChicken"
