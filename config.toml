@@ -34,7 +34,7 @@ hasCJKLanguage = false
 
 	enableTwitterCard = false
 	# The url for twitter card image, default is avatar.png in static/images directory
-	twitterCardImage = "http://preciouschicken.com/img/chicken-silhouette-image.png"
+	twitterCardImage = "images/chicken.png"
 
 	# Add custom assets with their paths relative to the static folder
 	customCSS = []
