@@ -15,13 +15,13 @@ Here is how I did it on Ubuntu 18.04 LTS with a WD My Cloud Mirror:
 
 Using the My Cloud interface create a 'share' on the WD My Cloud (see About Shares in the [User Manual](https://products.wdc.com/library/UM/ENG/4779-705145.pdf)), ensure NFS is set to on and give the share a relevant name (e.g. Backup).
 
-### 2. Create a local folder to mount
+### 2. Create a local folder to act as mount point
 
 Using the terminal create a folder on the computer you are backing up: `sudo mkdir /mnt/Backup`.  This is the folder you will mount the NAS drive too; you can create this folder anywhere you consider sensible.
 
 ### 3. Open *fstab* file 
 
-Using the terminal open your fstab file using `gksudo gedit /etc/fstab`. This fstab file deternmines what drive Ubuntu mounts at startup.
+Using the terminal open your fstab file using `gksudo gedit /etc/fstab`. This fstab file determines what drive Ubuntu mounts at startup.
 
 ### 4.  Add new line to *fstab* file
 
