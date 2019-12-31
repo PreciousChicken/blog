@@ -15,13 +15,13 @@ The [AppImage FAQ](https://docs.appimage.org/user-guide/faq.html#question-where-
 
 > If you don’t want to leave them in $HOME/Downloads, then $HOME/Applications is a good choice.
 
-### Why not $HOME/Downloads?
+### Why not leave them in $HOME/Downloads?
 
-What's wrong with this?  Can't I just leave them in *$HOME/Downloads*?  No.  If you are anything like me *Downloads* is full of random dross that is accumulated as you browse the net, kind of like digital lint.  Anything worth preserving gets filed, anything left in there is assumed to be delete-worthy.  Which admittedly gets done very infrequently, but enough that it is not a permanent storage place.
+What's wrong with this?  Can't I just leave them in *$HOME/Downloads*?  No.  If you are anything like me *Downloads* is full of random accumulated dross, kind of like digital lint.  Anything worth preserving gets filed, anything left is assumed to be delete-worthy.  Which admittedly gets done very infrequently, but enough that it is not a permanent storage place.
 
 ### So $HOME/Applications, then?
 
-So if this doesn't work why not create *$HOME/Applications* and use this?  Although this makes more sense than *Downloads* it still doesn't fit.  As my choice of OS is [Regolith](https://regolith-linux.org) I access applications via [Rofi](https://github.com/davatorium/rofi) - i.e. I open an application by key combination and then typing its name.  Even if I was using stock Ubuntu then I would presumably use the dock to access application icons.  I therefore have no need, pretty much ever, to navigate to a folder, find the right application and then double-click on it to open.  I have even less need to do this when the folder does not contain all of my applications but only a subset of them (i.e. the ones I have installed using an AppImage) - which is the case here.  Now my understanding of the *$HOME* folder is that it is meant to actually contain things which the user cares about and wants to interact with - otherwise we might as well put everything in *$HOME* and not bother with the rest of the filesytem.  This [criticism has also been raised with Snap applications](https://bugs.launchpad.net/ubuntu/+source/snapd/+bug/1575053), which follows a similar delivery format.  So why put them in a folder in *$HOME* if we are never actually going to want to access them; why don't we put them somewhere out of the way with the rest of the Linux gubbins?
+So why not create and use *$HOME/Applications*?  Although this makes more sense than *Downloads*, it still doesn't fit.  As my choice of OS is [Regolith](https://regolith-linux.org) I access applications via [Rofi](https://github.com/davatorium/rofi) - i.e. I open an application by key combination and then typing its name.  Even if I was using stock Ubuntu then I would presumably use the dock to access application icons.  I therefore have no need, pretty much ever, to navigate to a folder, find the right application and then double-click on it to open.  I have even less need to do this when the folder does not contain all of my applications but only a subset of them (i.e. the ones I have installed using an AppImage) - which is the case here.  Now my understanding of the *$HOME* folder is that it is meant to actually contain things which the user cares about and wants to interact with - otherwise we might as well put everything in *$HOME* and not bother with the rest of the filesytem.  This [criticism has also been raised with Snap applications](https://bugs.launchpad.net/ubuntu/+source/snapd/+bug/1575053), which follows a similar delivery format.  So why put them in a folder in *$HOME* if we are never actually going to want to access them; why don't we put them somewhere out of the way with the rest of the Linux gubbins?
 
 ### The answer is /opt
 
@@ -51,4 +51,4 @@ Another option given in the AppImage FAQ is *$HOME/.local/bin* and *$HOME/bin* b
 
 ---
 
-A highly opinionated rant, */opt* works for me, use wherever works for you.  It's also worth adding the designers of AppImages where probably more interested in technical challenges and getting kudos from Linus Torvalds than the relatively minor housekeeping points.  Comment below if you think I'm being dangerously outrageous.
+A highly opinionated rant; */opt* works for me, use wherever works for you.  It's also worth adding the designers of AppImages where probably more interested in technical challenges and getting kudos from Linus Torvalds than these minor housekeeping points.  Comment below if you think I'm being dangerously outrageous.
