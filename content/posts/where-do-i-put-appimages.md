@@ -2,6 +2,9 @@
 title: "Where Do I Put AppImages?"
 date: 2019-12-31T11:05:50Z
 tags: ["AppImage", "Linux"]
+keywords: ["AppImage", "Linux"] 
+categories: ["Unix workbench"]
+description: "A discussion on the most logical place to put AppImages within the Linux Filesystem Hierarchy"
 draft: false
 ---
 
