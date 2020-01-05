@@ -1,5 +1,5 @@
 # Site settings
-baseurl = "http://www.preciouschicken.com/blog/"
+baseurl = "https://www.preciouschicken.com/blog/"
 languageCode = "en-uk"
 title = "Precious Chicken: Blog"
 theme = "hugo-theme-cactus-plus"
