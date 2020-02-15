@@ -1,6 +1,6 @@
 # Site settings
 baseurl = "https://www.preciouschicken.com/blog/"
-languageCode = "en-uk"
+languageCode = "en-gb"
 title = "Precious Chicken: Blog"
 theme = "hugo-theme-cactus-plus"
 #googleAnalytics = "your_google_analytics_id"
