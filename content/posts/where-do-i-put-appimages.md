@@ -48,7 +48,7 @@ Using the */opt* directory also works with [appimaged](https://github.com/AppIma
 
 A potential disadvantage of using */opt* is that all users of the system can access the application, rather than just the current user.  Personally I think that is a plus.
 
-I guess another issue with */opt* is you might forgot that is where you put all your AppImages - there's an easy answer to that: write a blog post...
+I guess another issue with */opt* is you might forget that is where you put all your AppImages - there's an easy answer to that: write a blog post...
 
 Another option given in the AppImage FAQ is *$HOME/.local/bin* and *$HOME/bin* but as the FAQ itself states these are "are useful mainly for CLI tools," and most of my AppImages aren't in this category (though I guess nothing wrong in itself with putting these in a folder intended mostly for CLI tools).
 
