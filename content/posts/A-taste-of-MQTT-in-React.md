@@ -90,7 +90,7 @@ function App() {
 export default App;
 ```
 
-(or alternatively download from my [github repository](https://github.com/PreciousChicken/taste_of_mqtt_in_react)).
+(or alternatively download from [github](https://github.com/PreciousChicken/taste_of_mqtt_in_react)).
 
 
 ### Start the app
@@ -123,6 +123,7 @@ The message should also appear in your browser's console.
 
 In the event you see messages appearing that you haven't written, it means other people are using the same MQTT _Topic_ you are.  In that case remove the string `preciouschicken.com` from the file `src/App.js` and replace with something unique - for instance your birth year followed by your dog's name: e.g. `84rover`.  Use that same phrase in the _Topic_ flag (i.e. `-t`) of the MQTT command line and you will see your own messages only (assuming that other people born in 1984 with a dog named Rover aren't also broadcasting).
 
+I've also uploaded the page to [taste-of-mqtt-in-react.preciouschicken.now.sh](https://taste-of-mqtt-in-react.preciouschicken.now.sh), where hopefully it can be demo'd live.
 
 ### Conclusion
 
