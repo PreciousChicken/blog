@@ -9,7 +9,7 @@ draft: false
 
 ---
 
-[K&R's Second Edition of the C Programming Language](https://amzn.to/2Omcno5) (\*affiliate link) is not an easy read.  To tame it I thought I might use [Oni](https://www.onivim.io/) to do some of the heavy lifting, which is an IDE with [Neovim](https://neovim.io/) as a back end.  It looked pretty and was meant to work out of the box.  I however spent an age getting it to do linting got C, so below are my struggles: 
+[K&R's Second Edition of the C Programming Language](https://amzn.to/2Omcno5) (\*affiliate link) is not an easy read.  To tame it I thought I might use [Oni](https://www.onivim.io/) to do some of the heavy lifting, which is an IDE with [Neovim](https://neovim.io/) as a back end.  It looked pretty and was meant to work out of the box.  I however spent an age getting it to do linting in C, so below are my struggles: 
 
 ---
 
