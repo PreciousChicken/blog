@@ -14,7 +14,7 @@ draft: false
 MQTT, is according to Wikipedia, 
 >"an open OASIS and ISO standard (ISO/IEC PRF 20922) lightweight, publish-subscribe network protocol that transports messages between devices."
 
-It was first used to monitor an oil pipeline through the desert, and is now used in various Internet of Things scenarios.  This guide shows how you might update a [React](https://reactjs.org) page using a MQTT online broker - specifically [Mosquitto](https://mosquitto.org).
+It was first used to monitor an oil pipeline through the desert, and is now used in various Internet of Things scenarios.  This guide for the Linux command line shows how you might update a [React](https://reactjs.org) page using a MQTT online broker - specifically [Mosquitto](https://mosquitto.org).
 
 ### Prerequisites
 
@@ -133,5 +133,6 @@ Congratulations.  You are a step closer to achieving your life's ambition of get
 
 - [Beginner's Guide to the MQTT Protocol](http://www.steves-internet-guide.com/mqtt/)
 - [MQTT.js documentation](https://www.hivemq.com/blog/mqtt-client-library-mqtt-js/) as part of HiveMQ's [MQTT Client Library Encyclopedia](https://www.hivemq.com/mqtt-client-library-encyclopedia/)
+- [Getting Started with Node.js and MQTT](https://blog.risingstack.com/getting-started-with-nodejs-and-mqtt/)
 
 
