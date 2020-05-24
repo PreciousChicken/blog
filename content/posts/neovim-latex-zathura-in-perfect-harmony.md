@@ -13,7 +13,7 @@ draft: false
 
 [![Neovim and Zathura side by side](https://www.preciouschicken.com/blog/images/nvim_zathura.png)](https://www.preciouschicken.com/blog/images/nvim_zathura.png)
 
-Although calling Zathura isn't a big deal from inside Neovim, I thought I'd shave off a couple of seconds each time and reduce this to a key press by taking half a day to write my first ever vimscript.  You may say false economy, I say a good way to procrastinate when you have a deadline due.
+Although calling Zathura isn't a big deal from inside Neovim (`:!zathura mydocument.pdf &`), I thought I'd shave off a couple of seconds each time and reduce this to a key press by taking half a day to write my first ever vimscript.  You may say false economy, I say a good way to procrastinate when you have a deadline due.
 
 So it only takes me a quarter of a day if I decide to do something like this again, here are the steps.  For reference I'm using Ubuntu 18.04.4 LTS on the [Regolith](https://regolith-linux.org) desktop environment, TeX 3.14159265, Neovim v0.4.3 and Zathura 0.3.8 (with the plugin pdf-poppler 0.2.8).
 
@@ -23,7 +23,7 @@ At the terminal type:
 
 `nvim ~/.local/share/nvim/site/ftplugin/tex.vim`
 
-This creates a file which Neovim will read when, and only when, you are editing TeX files; there's no reason you can't just place the code that follows in your .vimrc, but I think this approach is neater.  This also assumes that your folder structure follows mine, which it probably should do if you are using Linux and haven't messed with it too much.
+This creates a file which Neovim will read when, and only when, you are editing TeX files; there's no reason you can't just place the code that follows in your _init.vim_ / _.vimrc_, but I think this approach is neater.  This also assumes that your folder structure follows mine, which it probably should do if you are using Linux and haven't messed with it too much.
 
 I'm led to believe if you are using plain vim rather than neovim this should be:
 
@@ -35,14 +35,18 @@ Copy-paste the following vimscript into the file you've just created:
 
 ```vim
 function! ZathuraOpenPdf()
-	let curFile = substitute(bufname("%"), "tex", "pdf", "")
+	let curFile = substitute(bufname("%"), ".tex", ".pdf", "")
 	execute "silent !zathura " curFile "&"
 endfunction
 
-nnoremap <C-p> :call ZathuraOpenPdf()<CR>
+nnoremap <A-p> :call ZathuraOpenPdf()<CR>
 ```
 
-This finds the name of the current file from the buffer, chops the "tex" off the end, replaces it with "pdf" and then runs Zathura in a new window whenever you press the \<Control-p\> key combination.
+This finds the name of the current file from the buffer, chops the ".tex" off the end, replaces it with ".pdf" and then runs Zathura in a new window whenever you press the \<Alt-p\> key combination.  The Alt key apparently [maps funnily](https://vi.stackexchange.com/questions/9072/why-alt-key-mapping-not-working-in-vim-but-it-works-in-neovim) on some terminals, so you might want to alter this.
+
+### Linter
+
+You might notice from the screenshot I'm using a linter.  This is the [ALE (Asynchronous Lint Engine)](https://github.com/dense-analysis/ale) plugin which features TeX support out of the box.  I really like ALE; though for LaTeX I don't think a linter is essential, but it is nice to have.
 
 ### Conclusion
 
