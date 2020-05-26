@@ -35,8 +35,9 @@ Copy-paste the following vimscript into the file you've just created:
 
 ```vim
 function! ZathuraOpenPdf()
-	let curFile = substitute(bufname("%"), ".tex", ".pdf", "")
-	execute "silent !zathura " curFile "&"
+	let fullPath = expand("%:p")
+	let pdfFile = substitute(fullPath, ".tex", ".pdf", "")
+	execute "silent !zathura '" . pdfFile . "' &"
 endfunction
 
 nnoremap <A-p> :call ZathuraOpenPdf()<CR>
