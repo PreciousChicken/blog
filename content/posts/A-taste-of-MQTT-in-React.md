@@ -7,7 +7,7 @@ description: "A very quick start to updating a page in React using MQTT"
 draft: false
 ---
 
-**Update Apr 20**: This tutorial previously used the MQTT online broker [HiveMQ](https://www.hivemq.com), which worked fine when you were using a local development server.  However once uploaded to a web site provider using https (pretty much everyone now), then it generated a mixed content error message.  This update therefore uses the [Eclipse Mosquitto MQTT broker](https://mosquitto.org), which doesn't have these problems.
+**Update Apr 20**: This tutorial previously used the MQTT online broker [HiveMQ](https://www.hivemq.com), which worked fine when you were using a local development server.  However once uploaded to a web site provider using HTTPS (pretty much everyone now), then it generated a mixed content error message.  This message was generated due to an insecure Web Socket (WS) protocol running underneath the secure HTTPS protocol, hence causing the browser to flag this.  The solution to this is to use the Web Socket Secure (WSS) protocol, which for some reason I could not get to work with HiveMQ.  This update therefore uses the [Eclipse Mosquitto MQTT broker](https://mosquitto.org), which allowed me to use WSS and fixed the issue.
 
 ### Introduction
 
@@ -15,6 +15,8 @@ MQTT, is according to Wikipedia,
 >"an open OASIS and ISO standard (ISO/IEC PRF 20922) lightweight, publish-subscribe network protocol that transports messages between devices."
 
 It was first used to monitor an oil pipeline through the desert, and is now used in various Internet of Things scenarios.  This guide for the Linux command line shows how you might update a [React](https://reactjs.org) page using a MQTT online broker - specifically [Mosquitto](https://mosquitto.org).
+
+For reference I'm using Ubuntu 18.04.4 LTS on the [Regolith](https://regolith-linux.org) desktop environment, mqtt.js 3.0.0, npm 6.14.4 and node 12.6.0.
 
 ### Prerequisites
 
