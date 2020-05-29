@@ -7,7 +7,7 @@ description: "A very quick start to updating a page in React using MQTT"
 draft: false
 ---
 
-**Update Apr 20**: This tutorial previously used the MQTT online broker [HiveMQ](https://www.hivemq.com), which worked fine when you were using a local development server.  However once uploaded to a web site provider using HTTPS (pretty much everyone now), then it generated a mixed content error message.  This message was generated due to an insecure Web Socket (WS) protocol running underneath the secure HTTPS protocol, hence causing the browser to flag this.  The solution to this is to use the Web Socket Secure (WSS) protocol, which for some reason I could not get to work with HiveMQ.  This update therefore uses the [Eclipse Mosquitto MQTT broker](https://mosquitto.org), which allowed me to use WSS and fixed the issue.
+**Update Apr 20**: This tutorial previously used the MQTT online broker [HiveMQ](https://www.hivemq.com), which worked fine when you were using a local development server.  However once uploaded to a web site provider using HTTPS (pretty much everyone now), then it generated a mixed content error message.  This message was generated due to an insecure WebSocket (WS) protocol running underneath the secure HTTPS protocol, hence causing the browser to flag this.  The solution to this is to use the WebSocket Secure (WSS) protocol, which for some reason I could not get to work with HiveMQ.  This update therefore uses the [Eclipse Mosquitto MQTT broker](https://mosquitto.org), which allowed me to use WSS and fixed the issue.
 
 ### Introduction
 
