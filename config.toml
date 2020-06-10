@@ -7,6 +7,18 @@ theme = "hugo-theme-cactus-plus"
 # Set the value to true if your site include CJK (Chinese, Japanese, and Korean languages) characters
 hasCJKLanguage = false
 
+[markup]
+  [markup.highlight]
+    codeFences = true
+    guessSyntax = false
+    hl_Lines = ""
+    lineNoStart = 1
+    lineNos = false
+    lineNumbersInTable = true
+    noClasses = true
+    style = "tango"
+    tabWidth = 4
+
 [params]
 	author = "Precious Chicken"
 	description = "freelance software"
@@ -34,7 +46,7 @@ hasCJKLanguage = false
 
 	enableTwitterCard = false
 	# The url for twitter card image, default is avatar.png in static/images directory
-	twitterCardImage = "images/chicken.png"
+	twitterCardImage = "images/avatar.svg"
 
 	# Add custom assets with their paths relative to the static folder
 	customCSS = []

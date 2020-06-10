@@ -21,13 +21,17 @@ So it only takes me a quarter of a day if I decide to do something like this aga
 
 At the terminal type:
 
-`nvim ~/.local/share/nvim/site/ftplugin/tex.vim`
+```bash
+nvim ~/.local/share/nvim/site/ftplugin/tex.vim
+```
 
 This creates a file which Neovim will read when, and only when, you are editing TeX files; there's no reason you can't just place the code that follows in your _init.vim_ / _.vimrc_, but I think this approach is neater.  This also assumes that your folder structure follows mine, which it probably should do if you are using Linux and haven't messed with it too much.
 
 I'm led to believe if you are using plain vim rather than neovim this should be:
 
-`vim ~/.vim/ftplugin/tex.vim`
+```bash
+vim ~/.vim/ftplugin/tex.vim
+```
 
 ### Add the vimscript
 
