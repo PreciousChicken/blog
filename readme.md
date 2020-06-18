@@ -1,3 +1,3 @@
-### Blog of preciouschicken.com
+# Blog of preciouschicken.com
 
-Content for hugo generated blog situated at preciouschicken.com/blog.
+Version controlled content for [Hugo](https://gohugo.io) generated [Precious Chicken: Blog](https://www.preciouschicken.com/blog/).
