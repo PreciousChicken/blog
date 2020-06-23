@@ -20,7 +20,7 @@ BN {
 }
 ```
 
-Converting this into individual values on the console is not obvious, so an aide memoire follows.  I'm using Truffle v5.1.30, node v14.4.0 and npm package @openzeppelin/contracts@3.0.2; my OS of choice is Ubuntu 20.04 LTS.
+Converting this into individual values, i.e. integers, on the console is not obvious; so an aide memoire follows.  I'm using Truffle v5.1.30, node v14.4.0 and npm package @openzeppelin/contracts@3.0.2; my OS of choice is Ubuntu 20.04 LTS.
 
 ## The smart contract
 
@@ -48,6 +48,24 @@ module.exports = function(deployer) {
   deployer.deploy(PreciousChickenCoin);
 };
 ```
+
+The ERC20 import is achieved using:
+
+```bash
+npm install @openzeppelin/contracts
+```
+
+Additionally with the version of Truffle I'm using, v5.1.30, you have to explicitly tell it to use a version of Solidity that works with OpenZeppelin 3.0.2.  You do that by modifying the following lines of the _truffle-config.js_ file:
+
+```javascript
+  compilers: {
+    solc: {
+      version: "^0.6.0",    // Fetch exact version from solc-bin (default: truffle's version)
+    }
+  }
+```
+
+## Aim
 
 The objective here is to use OpenZeppelin's ERC20 [balanceOf()](https://docs.openzeppelin.com/contracts/2.x/api/token/erc20#IERC20-balanceOf-address-) method to find out how many PreciousChicken coins the `msg.sender` has received on instantiating the smart contract.
 
