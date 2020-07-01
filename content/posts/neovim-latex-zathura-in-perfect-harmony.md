@@ -1,7 +1,7 @@
 ---
 title: "Neovim, LaTeX and Zathura in perfect harmony"
 date: 2020-05-23T18:09:07+01:00
-tags: ["neovim", "laTeX", "zathura", "vimscript"]
+tags: ["neovim", "LaTeX", "zathura", "vimscript"]
 categories: ["Unix workbench"]
 description: "Vimscript to get Zathura to display LaTeX pdfs without leaving Neovim"
 draft: false
