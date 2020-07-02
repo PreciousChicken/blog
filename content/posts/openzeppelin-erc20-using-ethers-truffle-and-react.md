@@ -15,14 +15,14 @@ Due to the variety of moving parts there's quite a lot of configuration control 
 
 ## Prerequisites
 
--  [NodeJS](https://nodejs.org) - If you haven't installed it before, I found installing it using the Node Version Manager as suggested on this [Stack Overflow answer](https://stackoverflow.com/a/24404451/6333825) to cause less aggravation than downloading via the official website.
+-  [NodeJS](https://nodejs.org) - If you haven't installed it before, I found installing it using the Node Version Manager (nvm) as suggested on this [Stack Overflow answer](https://stackoverflow.com/a/24404451/6333825) to cause less aggravation than downloading via the official website.
 -  If you've previously installed `create-react-app` globally via `npm install -g create-react-app`, then uninstall it with the command `npm uninstall -g create-react-app` so you are using the latest version in the step below. 
 
 ## Ganache
 
 [Ganache](https://www.trufflesuite.com/ganache), part of the Truffle suite, positions itself as a "one-click blockchain."  It allows a developer to host an Ethereum blockchain quickly on a local machine and provides a number of accounts (or wallets) already full of pretend Ether.  This is much easier and quicker than deploying on either a testnet (e.g. Ropsten) or the main Ethereum network (which costs actual money).
 
-Download the Appimage from their [homepage](https://www.trufflesuite.com/ganache) and run (I've blogged previously on how [I like to install Appimages](https://www.preciouschicken.com/blog/posts/where-do-i-put-appimages/), but clearly install how you want).  Once the application is running select the _Quickstart Ethereum_ option when you are invited to 'Create a workspace.'  You should see be presented with the following screen:
+Download the Appimage from their [homepage](https://www.trufflesuite.com/ganache) and run (I've blogged previously on how [I like to install Appimages](https://www.preciouschicken.com/blog/posts/where-do-i-put-appimages/), but clearly install how you want).  Once the application is running select the _Quickstart Ethereum_ option when you are invited to 'Create a workspace.'  You should be presented with something similar to the following:
 
 [![Ganache](https://www.preciouschicken.com/blog/images/ganache.png)](https://www.preciouschicken.com/blog/images/ganache.png)
 
@@ -41,9 +41,10 @@ mkdir erc20-pct
 cd erc20-pct
 ```
 
-Now we initialise Truffle which will install a number of [default files and folders](https://www.trufflesuite.com/tutorials/getting-started-with-drizzle-and-react#directory-structure):
+Now we (globally) install and then initialise Truffle which will install a number of [default files and folders](https://www.trufflesuite.com/tutorials/getting-started-with-drizzle-and-react#directory-structure):
 
 ```bash
+npm install -g truffle
 truffle init
 ```
 
@@ -158,5 +159,366 @@ module.exports = function(deployer) {
 };
 ```
 
-This code is responsible for telling Truffle to deploy the smart contract listed, which we've just written.  It also serves to provide arguments to the constructor method within _PreciousChickenToken.sol_, this had one argument called _\_initialSupply_ which sets the amount of tokens created on deployment of the contract (i.e. one thousand).
+This code is responsible for telling Truffle to deploy the smart contract listed, which we've just written.  It also serves to provide arguments to the constructor method within _PreciousChickenToken.sol_, this had one argument called *\_initialSupply* which sets the amount of tokens created on deployment of the contract (i.e. one thousand).
 
+Lastly we need to make some amends to our existing truffle configuration file:
+
+```bash
+vim truffle-config.js
+```
+
+Delete the entire contents and replace with this:
+
+```javascript
+const path = require("path");
+
+module.exports = {
+	contracts_build_directory: path.join(__dirname, "client/src/contracts"),
+	networks: {
+	},
+	mocha: {
+	},
+	compilers: {
+		solc: {
+			version: "^0.6.0",    // Fetch exact version from solc-bin (default: truffle's version)
+		}
+	}
+}
+```
+
+So a number of changes have been made to the original:
+
+- Comments have been deleted.  Clearly normally we'd keep them in, but for the purposes of this guide it is easier to see what's happening if we delete them.
+- A build directory has been set in a sub-directory.  We are going to be putting our React front end in a subdirectory called *client*.  As the front end needs to have access to the smart contract and can't view the root directory, we need to tell truffle to build the files in a directory it does have access to i.e. *client/src/contracts*.
+- We've changed the solidity compiler to minimum version 0.6.0.  This is different to the Truffle default and without doing so the latest version of the OpenZeppelin ERC20 (3.1.0) will not compile.
+
+If we weren't using React or the latest version of OpenZeppelin's contracts therefore, we could keep this as is.
+
+
+## Build the front end
+
+As we are viewing this in React we now need to generate the front end, to do this we are going to use create-react-app to create a new sub-folder:
+
+```bash
+npx create-react-app client
+```
+
+Once finished you will have your standard create-react-app files and folders, but there are a couple of additional installations we need to do:
+
+```bash 
+cd client
+npm install ethers react-bootstrap bootstrap
+```
+The first of these packages, [ethers.js](https://docs.ethers.io/v5/), is the most important - it aiming to be a "complete and compact library for interacting with the Ethereum Blockchain and its ecosystem"; the second two are for the purposes of UI.
+
+Enter the following file with your text editor:
+
+```bash
+vim src/App.js
+```
+
+Delete all the content, and replace with:
+
+```javascript
+import React, { useState } from 'react';
+import './App.css';
+import { ethers } from "ethers";
+import PreciousChickenToken from "./contracts/PreciousChickenToken.json";
+import { Button, Alert } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+// Needs to change to reflect current PreciousChickenToken address
+const contractAddress ='0x3f45f12c12a6CCA5A0F0aA48Ec2214165FC6E7D0';
+
+let provider;
+let signer;
+let erc20;
+let noProviderAbort = true;
+
+// Ensures metamask or similar installed
+if (typeof window.ethereum !== 'undefined' || (typeof window.web3 !== 'undefined')) {
+	try{
+		// Ethers.js set up, gets data from MetaMask and blockchain
+		provider = new ethers.providers.Web3Provider(window.ethereum);
+		signer = provider.getSigner();
+		erc20 = new ethers.Contract(contractAddress, PreciousChickenToken.abi, signer);
+		noProviderAbort = false;
+
+	} catch(e) {
+		noProviderAbort = true;
+	}
+}
+
+function App() {
+	const [walAddress, setWalAddress] = useState('0x00');
+	const [pctBal, setPctBal] = useState(0);
+	const [ethBal, setEthBal] = useState(0);
+	const [coinSymbol, setCoinSymbol] = useState("Nil");
+	const [transAmount, setTransAmount] = useState('0');
+	const [pendingFrom, setPendingFrom] = useState('0x00');
+	const [pendingTo, setPendingTo] = useState('0x00');
+	const [pendingAmount, setPendingAmount] = useState('0');
+	const [isPending, setIsPending] = useState(false);
+	const [errMsg, setErrMsg] = useState("Transaction failed!");
+	const [isError, setIsError] = useState(false);
+
+	// Aborts app if metamask etc not present
+	if (noProviderAbort) {
+		return (
+			<div>
+			<h1>Error</h1>
+			<p><a href="https://metamask.io">Metamask</a> or equivalent required to access this page.</p>
+			</div>
+		);
+	}
+
+	// Notification to user that transaction sent to blockchain
+	const PendingAlert = () => {
+		if (!isPending) return null;
+		return (
+			<Alert key="pending" variant="info" 
+			style={{position: 'absolute', top: 0}}>
+			Blockchain event notification: transaction of {pendingAmount} 
+			Eth from <br />
+			{pendingFrom} <br /> to <br /> {pendingTo}.
+			</Alert>
+		);
+	};
+
+	// Notification to user of blockchain error
+	const ErrorAlert = () => {
+		if (!isError) return null;
+		return (
+			<Alert key="error" variant="danger" 
+			style={{position: 'absolute', top: 0}}>
+			{errMsg}
+			</Alert>
+		);
+	};
+
+	// Sets current balance of PCT for user
+	signer.getAddress().then(response => {
+		setWalAddress(response);
+		return erc20.balanceOf(response);
+	}).then(balance => {
+		setPctBal(balance.toString())
+	});
+
+	// Sets current balance of Eth for user
+	signer.getAddress().then(response => {
+		return provider.getBalance(response);
+	}).then(balance => {
+		let formattedBalance = ethers.utils.formatUnits(balance, 18);
+		setEthBal(formattedBalance.toString())
+	});
+
+	// Sets symbol of ERC20 token (i.e. PCT)
+	async function getSymbol() {
+		let symbol = await erc20.symbol();
+		return symbol;
+	}
+	let symbol = getSymbol();
+	symbol.then(x => setCoinSymbol(x.toString()));
+
+	// Interacts with smart contract to buy PCT
+	async function buyPCT() {
+		// Converts integer as Eth to Wei,
+		let amount = await ethers.utils.parseEther(transAmount.toString());
+		try {
+			await erc20.buyToken(transAmount, {value: amount});
+			// Listens for event on blockchain
+			await erc20.on("PCTBuyEvent", (from, to, amount) => {
+				setPendingFrom(from.toString());
+				setPendingTo(to.toString());
+				setPendingAmount(amount.toString());
+				setIsPending(true);
+			})
+		} catch(err) {
+			if(typeof err.data !== 'undefined') {
+				setErrMsg("Error: "+ err.data.message);
+			} 
+			setIsError(true);
+		} 	
+	}
+
+	// Interacts with smart contract to sell PCT
+	async function sellPCT() {
+		try {
+			await erc20.sellToken(transAmount);
+			// Listens for event on blockchain
+			await erc20.on("PCTSellEvent", (from, to, amount) => {
+				setPendingFrom(from.toString());
+				setPendingTo(to.toString());
+				setPendingAmount(amount.toString());
+				setIsPending(true);
+			})
+		} catch(err) {
+			if(typeof err.data !== 'undefined') {
+				setErrMsg("Error: "+ err.data.message);
+			} 
+			setIsError(true);
+		} 
+	}
+
+	// Sets state for value to be transacted
+	// Clears extant alerts
+	function valueChange(value) {
+		setTransAmount(value);
+		setIsPending(false);
+		setIsError(false);
+	}
+
+	// Handles user buy form submit
+	const handleBuySubmit = (e: React.FormEvent) => {
+		e.preventDefault();
+		valueChange(e.target.buypct.value);
+		buyPCT();
+	};
+
+	// Handles user sell form submit
+	const handleSellSubmit = (e: React.FormEvent) => {
+		e.preventDefault();
+		valueChange(e.target.sellpct.value);
+		sellPCT();
+	};
+
+	return (
+		<div className="App">
+		<header className="App-header">
+
+		<ErrorAlert />
+		<PendingAlert />
+
+		<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Ethereum-icon-purple.svg/512px-Ethereum-icon-purple.svg.png" className="App-logo" alt="Ethereum logo" />
+
+		<h2>{coinSymbol}</h2>
+
+		<p>
+		User Wallet address: {walAddress}<br/>
+		Eth held: {ethBal}<br />
+		PCT held: {pctBal}<br />
+		</p>
+
+		<form onSubmit={handleBuySubmit}>
+		<p>
+		<label htmlFor="buypct">PCT to buy:</label>
+		<input type="number" step="1" min="0" id="buypct" 
+		name="buypct" onChange={e => valueChange(e.target.value)} required 
+		style={{margin:'12px'}}/>	
+		<Button type="submit" >Buy PCT</Button>
+		</p>
+		</form>
+
+		<form onSubmit={handleSellSubmit}>
+		<p>
+		<label htmlFor="sellpct">PCT to sell:</label>
+		<input type="number" step="1" min="0" id="sellpct" 
+		name="sellpct" onChange={e => valueChange(e.target.value)} required 
+		style={{margin:'12px'}}/>	
+		<Button type="submit" >Sell PCT</Button>
+		</p>
+		</form>
+
+		<a  title="GitR0n1n / CC BY-SA (https://creativecommons.org/licenses/by-sa/4.0)" href="https://commons.wikimedia.org/wiki/File:Ethereum-icon-purple.svg">
+		<span style={{fontSize:'12px',color:'grey'}}>
+		Ethereum logo by GitRon1n
+		</span></a>
+		</header>
+		</div>
+	);
+}
+
+export default App;
+```
+
+## Deploy the contract
+
+With everything built we are going to deploy the smart contract.  At the terminal we change directory back to the one containing our contract and deploy:
+
+```bash
+cd ..
+truffle deploy
+```
+
+If everything works you should see output similar to this:
+
+[![Truffle deploying PreciousChickenToken](https://www.preciouschicken.com/blog/images/truffle_deploy.png)](https://www.preciouschicken.com/blog/images/truffle_deploy.png)
+
+I've highlighted the contract address in a yellow box on the above - this is the address on the blockchain that your contract has been deployed to (your address will be similar but different).
+
+Now we know this address we have to change the client src code to reflect this.  Therefore edit *App.js*:
+
+```bash
+vim client/src/App.js 
+```
+
+find the relevant line of code, in my example it is: 
+
+```javascript
+const contractAddress ='0x3f45f12c12a6CCA5A0F0aA48Ec2214165FC6E7D0';
+```
+
+and replace the string within the single quotes with whatever the address you have noted down.
+
+If you switch to Ganache you will see that the first account (Index 0) no longer has a balance of 100 Eth, this is because a small amount of Eth has been consumed in deploying the contract.  This account now also owns 1000 PreciousChickenTokens, although we don't know that looking at Ganache.
+
+## Approve the transacting account
+
+As the first account in Ganache (Index 0) is now set as the *owner* by the smart contract, e.g. it owns the 1000 ERC20 tokens; we'll be using the account at Index 1 to transact on.  The ERC20 specification says that when the [transferFrom](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-20.md#transferfrom) method is used authorisation has to be given specifically that Account A can pass Account B tokens.  We will do this using truffle console.  Therefore at the terminal:
+
+```bash 
+truffle console
+```
+
+Your prompt show now change to `truffle(ganache)>` or similar.  Enter:
+
+```javascript
+token = await PreciousChickenToken.deployed()
+```
+
+If successful this should return `undefined`.  We can now increase the allowance and then exit truffle console.
+
+```javascript
+token.increaseAllowance(accounts[1], 1000, {from: accounts[0]})
+.exit
+```
+
+This code should output a transaction log to the console.  The command states that accounts[0] or the Ganache account at Index 0, the *owner*, authorises accounts[1] or Index 1, to hold up to 1000 tokens.
+
+## Start React
+
+Time to fire up React:
+
+```bash
+cd client
+npm run start
+```
+
+Your browser should now point to `localhost:3000`.  If you do not have [Metamask](https://metamask.io) installed, or some equivalent software for accessing the Ethereum blockchain, then you will see the error message: *Metamask or equivalent required to access this page*.  The remainder of this guide will assume you have installed Metamask; I haven't tested other options (e.g. [Brave](https://brave.com/) browser), so they may not work.
+
+If your browser is suitably enabled you should otherwise see the rotating Ethereum symbol, and a number of blank fields:
+
+[![Pre-wallet import PreciousChickenToken splash screen](https://www.preciouschicken.com/blog/images/metamask_ff_blank.png)](https://www.preciouschicken.com/blog/images/metamask_ff_blank.png)
+
+## Import wallet into Metamask
+
+This process will assume your starting point is a fresh install of Metamask on Firefox (v77.0.1); other browsers are likely going to be different; and if you have already used Metamask previously you will need to logout etc.
+
+Assuming you do have that fresh install selecting the Metamask extension icon will result in:
+
+[![Pre-wallet import PreciousChickenToken splash screen](https://www.preciouschicken.com/blog/images/metamask_ff_welcome.png)](https://www.preciouschicken.com/blog/images/metamask_ff_welcome.png)
+
+Selecting the *Get Started* option will take us to our set up options.  Here we want to select *No, I already have a seed phrase*:
+
+[![Pre-wallet import PreciousChickenToken splash screen](https://www.preciouschicken.com/blog/images/metamask_ff_new.png)](https://www.preciouschicken.com/blog/images/metamask_ff_new.png)
+
+We now need our seed phrase that Ganache has created for us; at the top of the screen we will find twelve words under the heading *Mnemonic*.  Copy and paste them into the seed phrase box below, and add a password of your choosing:
+
+[![Pre-wallet import PreciousChickenToken splash screen](https://www.preciouschicken.com/blog/images/metamask_ff_import.png)](https://www.preciouschicken.com/blog/images/metamask_ff_import.png)
+
+There will be a number of congratulatory / analytics sreens to click through after which you will see your account.  Currently blank as we haven't connected it to our local blockchain instance.  Therefore select *Networks* from the top right and then *Custom RPC*:
+
+[![Pre-wallet import PreciousChickenToken splash screen](https://www.preciouschicken.com/blog/images/metamask_ff_network.png)](https://www.preciouschicken.com/blog/images/metamask_ff_network.png)
+
+
+## Conclusions
