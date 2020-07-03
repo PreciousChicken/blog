@@ -1,5 +1,5 @@
 ---
-title: "OpenZeppelin's ERC20 using Ethers, Truffle and React"
+title: "PreciousChickenToken: A guided example of OpenZeppelin's ERC20 using Ethers, Truffle and React"
 date: 2020-07-01T17:08:04+01:00
 tags: ["ethereum", "truffle", "ethers.js", "react", "metamask"]
 categories: ["Blockchain development"]
@@ -9,14 +9,28 @@ draft: false
 
 ## Introduction
 
-A step-by-step demonstration of messing around with ERC20 Tokens in React.  This should definitely not be taken as best practice on how to use ERC20.  I wrote this for familiarisation purposes, not production.    
+This guide is a step-by-step demonstration to ERC20 Tokens in React using a local Truffle Ethereum blockchain.  It is not, nor is intended to be, a best practice study on how to write ERC20s.  It is intended to produce familiarisation and working code, which can be the basis for further education.    
 
-Due to the variety of moving parts there's quite a lot of configuration control that needs to go up front.  Your mileage may vary if you are using different versions - in fact expect it not to work at all, there appear to be lots of breaking changes in the Ethereum world.  So components used: node v14.4.0, truffle v5.1.30, ganache v.2.4.0, metamask v7.7.9, @openzeppelin/contracts@3.1.0, ethers@5.0.3, create-react-app v3.4.1 and my OS is Ubuntu 20.04 LTS.
+## ERWhat?
+
+ERC20 is a standard for tokens that applies on the Ethereum network (ERC standing for Ethereum Request for Comments) that, ensures interoperability of these assets across the network.
+
+Having a standard for tokens is a big deal as tokens were a central feature of Ethereum as laid out in the original [whitepaper](https://ethereum.org/en/whitepaper/#token-systems):
+
+> On-blockchain token systems have many applications ranging from sub-currencies representing assets such as USD or gold to company stocks, individual tokens representing smart property, secure unforgeable coupons, and even token systems with no ties to conventional value at all, used as point systems for incentivization. Token systems are surprisingly easy to implement in Ethereum. The key point to understand is that a currency, or token system, fundamentally is a database with one operation: subtract X units from A and give X units to B, with the provision that (1) A had at least X units before the transaction and (2) the transaction is approved by A. 
+
+Using this standard therefore ensures that everyone is using a common list of rules so allowing a token developed by one person to be traded across the system.  There are a number of [other tokens](https://crushcrypto.com/ethereum-erc-token-standards/), however I'm using ERC20 primarily as it is the most well used.
+
+Although it is possible to roll your own ERC20 by implementing the interface provided in the standard, it makes sense to use one that has been created and thoroughly tested by a specialised third party, in this case [OpenZeppelin](https://openzeppelin.com). 
+
+## Configuration control
+
+Due to the variety of moving parts there's quite a lot of configuration control that needs to go up front.  Your mileage may vary if you are using different versions - in fact expect it not to work at all, there appear to be lots of breaking changes in the Ethereum world.  So components used: node v14.4.0, truffle v5.1.30, ganache v.2.4.0, metamask v7.7.9, @openzeppelin/contracts@3.1.0, ethers v5.0.3, create-react-app v3.4.1 and my OS is Ubuntu 20.04 LTS ([Regolith](https://regolith-linux.org) flavour).
 
 ## Prerequisites
 
 -  [NodeJS](https://nodejs.org) - If you haven't installed it before, I found installing it using the Node Version Manager (nvm) as suggested on this [Stack Overflow answer](https://stackoverflow.com/a/24404451/6333825) to cause less aggravation than downloading via the official website.
--  If you've previously installed `create-react-app` globally via `npm install -g create-react-app`, then uninstall it with the command `npm uninstall -g create-react-app` so you are using the latest version in the step below. 
+-  If you've previously installed `create-react-app` globally via `npm install -g create-react-app`, then uninstall it with the command `npm uninstall -g create-react-app` so you are using the latest version as below. 
 
 ## Ganache
 
@@ -32,7 +46,7 @@ There are other non-GUI ways of running a local blockchain, and although I'm gen
 
 ## Truffle
 
-Although Ganache is part of the Truffle suite; the main course, if you like is [Truffle](https://www.trufflesuite.com/truffle) itself.  Truffle is a development framework for Ethereum which allows you to deploy and test smart contracts quickly.
+Although Ganache is part of the Truffle suite; the main course, if you like, is [Truffle](https://www.trufflesuite.com/truffle) itself.  Truffle is a development framework for Ethereum which allows you to deploy and test smart contracts quickly.
 
 Create a directory that will hold our project:
 
@@ -48,19 +62,9 @@ npm install -g truffle
 truffle init
 ```
 
-## OpenZeppelin ERC20
+## Install OpenZeppelin ERC20
 
-ERC20 is a standard for tokens that applies on the Ethereum network (ERC standing for Ethereum Request for Comments) that, ensures interoperability of these assets across the network.
-
-Having a standard for tokens is a big deal as tokens were a central feature of Ethereum as laid out in the original [whitepaper](https://ethereum.org/en/whitepaper/#token-systems):
-
-> On-blockchain token systems have many applications ranging from sub-currencies representing assets such as USD or gold to company stocks, individual tokens representing smart property, secure unforgeable coupons, and even token systems with no ties to conventional value at all, used as point systems for incentivization. Token systems are surprisingly easy to implement in Ethereum. The key point to understand is that a currency, or token system, fundamentally is a database with one operation: subtract X units from A and give X units to B, with the provision that (1) A had at least X units before the transaction and (2) the transaction is approved by A. 
-
-Using this standard therefore ensures that everyone is using a common list of rules so allowing a token developed by one person to be traded across the system.  There are a number of [other tokens](https://crushcrypto.com/ethereum-erc-token-standards/), however I'm using ERC20 primarily as it is the most well used.
-
-Although it is possible to roll your own ERC20 by implementing the interface provided in the standard, it makes sense to use one that has been created and thoroughly tested by a specialised third party, in this case [OpenZeppelin](https://openzeppelin.com). 
-
-To make OpenZeppelin's ERC20 available to  we therefore install it with npm (initialising this first):
+As we will be using OpenZeppelin's implementation of ERC20 we need to install with npm (initialising this first):
 
 ```bash
 npm init -y
@@ -138,7 +142,7 @@ contract PreciousChickenToken is ERC20 {
     }
 }
 ```
-This contract when called generates a number of 'PreciousChickenTokens' and allocates them to the address that deployed the contract - in our case that will be the first address listed in Ganache (marked as 'Index 0').  It then has a function to allow users to buy PCTs in exchange for Ether (with the conversion rate set at 1 Eth equal to one PCT), and to sell those PCT back in return for Ether.  Any Ether collected goes to the contract address itself.
+This contract when called generates a number of 'PreciousChickenTokens' and allocates them to the address that deployed the contract - in our case that will be the first address listed in Ganache (marked as 'Index 0').  It then has a function to allow users to buy PCTs in exchange for Ether (with the conversion rate set at one Eth equal to one PCT), and to sell those PCT back in return for Ether.  Any Ether collected goes to the contract address itself.
 
 Again it is worth re-iterating this code is intended as a demonstrator only and is not intended to be a model for anything production ready that is exposed to financial risk.
 
@@ -159,7 +163,7 @@ module.exports = function(deployer) {
 };
 ```
 
-This code is responsible for telling Truffle to deploy the smart contract listed, which we've just written.  It also serves to provide arguments to the constructor method within _PreciousChickenToken.sol_, this had one argument called *\_initialSupply* which sets the amount of tokens created on deployment of the contract (i.e. one thousand).
+This code is responsible for telling Truffle to deploy the smart contract we've just written above.  It also serves to provide arguments to the constructor method within _PreciousChickenToken.sol_, this had one argument called *\_initialSupply* which sets the amount of tokens created on deployment of the contract (i.e. one thousand).
 
 Lastly we need to make some amends to our existing truffle configuration file:
 
@@ -208,10 +212,11 @@ Once finished you will have your standard create-react-app files and folders, bu
 ```bash 
 cd client
 npm install ethers react-bootstrap bootstrap
+npm audit fix
 ```
-The first of these packages, [ethers.js](https://docs.ethers.io/v5/), is the most important - it aiming to be a "complete and compact library for interacting with the Ethereum Blockchain and its ecosystem"; the second two are for the purposes of UI.
+The first of these packages, [ethers.js](https://github.com/ethers-io/ethers.js/), is the most important - it aiming to be a "complete and compact library for interacting with the Ethereum Blockchain and its ecosystem"; the second two are for the purposes of UI.
 
-Enter the following file with your text editor:
+Edit the following file with your text editor:
 
 ```bash
 vim src/App.js
@@ -228,7 +233,7 @@ import { Button, Alert } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 // Needs to change to reflect current PreciousChickenToken address
-const contractAddress ='0x3f45f12c12a6CCA5A0F0aA48Ec2214165FC6E7D0';
+const contractAddress ='0xa8dC92bEeF9E5D20B21A5CC01bf8b6a5E0a51888';
 
 let provider;
 let signer;
@@ -243,7 +248,6 @@ if (typeof window.ethereum !== 'undefined' || (typeof window.web3 !== 'undefined
 		signer = provider.getSigner();
 		erc20 = new ethers.Contract(contractAddress, PreciousChickenToken.abi, signer);
 		noProviderAbort = false;
-
 	} catch(e) {
 		noProviderAbort = true;
 	}
@@ -279,7 +283,7 @@ function App() {
 			<Alert key="pending" variant="info" 
 			style={{position: 'absolute', top: 0}}>
 			Blockchain event notification: transaction of {pendingAmount} 
-			Eth from <br />
+			&#x39e; from <br />
 			{pendingFrom} <br /> to <br /> {pendingTo}.
 			</Alert>
 		);
@@ -444,7 +448,7 @@ If everything works you should see output similar to this:
 
 [![Truffle deploying PreciousChickenToken](https://www.preciouschicken.com/blog/images/truffle_deploy.png)](https://www.preciouschicken.com/blog/images/truffle_deploy.png)
 
-I've highlighted the contract address in a yellow box on the above - this is the address on the blockchain that your contract has been deployed to (your address will be similar but different).
+I've highlighted the contract address in a yellow box on the above - this is the address on the blockchain that your contract has been deployed to (your address will be similar but different).  Copy this address to clipboard.
 
 Now we know this address we have to change the client src code to reflect this.  Therefore edit *App.js*:
 
@@ -452,19 +456,18 @@ Now we know this address we have to change the client src code to reflect this. 
 vim client/src/App.js 
 ```
 
-find the relevant line of code, in my example it is: 
+Find the relevant line of code, in my example it is: 
 
 ```javascript
-const contractAddress ='0x3f45f12c12a6CCA5A0F0aA48Ec2214165FC6E7D0';
+const contractAddress ='0xa8dC92bEeF9E5D20B21A5CC01bf8b6a5E0a51888';
 ```
-
-and replace the string within the single quotes with whatever the address you have noted down.
+and replace the string within the single quotes with the address you copied from the yellow box above.
 
 If you switch to Ganache you will see that the first account (Index 0) no longer has a balance of 100 Eth, this is because a small amount of Eth has been consumed in deploying the contract.  This account now also owns 1000 PreciousChickenTokens, although we don't know that looking at Ganache.
 
 ## Approve the transacting account
 
-As the first account in Ganache (Index 0) is now set as the *owner* by the smart contract, e.g. it owns the 1000 ERC20 tokens; we'll be using the account at Index 1 to transact on.  The ERC20 specification says that when the [transferFrom](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-20.md#transferfrom) method is used authorisation has to be given specifically that Account A can pass Account B tokens.  We will do this using truffle console.  Therefore at the terminal:
+As the first account in Ganache (Index 0) is now set as the *owner* by the smart contract, e.g. it owns the 1000 ERC20 tokens; we'll be using the account at Index 1 to transact on.  The ERC20 specification says that when the [transferFrom](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-20.md#transferfrom) method is used authorisation has to be given specifically so that Account A can pass Account B tokens.  We will do this using truffle console.  Therefore at the terminal:
 
 ```bash 
 truffle console
@@ -476,14 +479,14 @@ Your prompt show now change to `truffle(ganache)>` or similar.  Enter:
 token = await PreciousChickenToken.deployed()
 ```
 
-If successful this should return `undefined`.  We can now increase the allowance and then exit truffle console.
+If successful this should return `undefined`.  We can now increase the allowance and then exit truffle console:
 
 ```javascript
 token.increaseAllowance(accounts[1], 1000, {from: accounts[0]})
 .exit
 ```
 
-This code should output a transaction log to the console.  The command states that accounts[0] or the Ganache account at Index 0, the *owner*, authorises accounts[1] or Index 1, to hold up to 1000 tokens.
+This code should output a transaction log to the console.  The command states that accounts[0] (e.g. the Ganache account at Index 0 - defined as the *owner* within the smart contract) authorises accounts[1] (e.g. Index 1) to hold up to 1000 tokens.
 
 ## Start React
 
@@ -491,34 +494,95 @@ Time to fire up React:
 
 ```bash
 cd client
-npm run start
+npm start
 ```
 
 Your browser should now point to `localhost:3000`.  If you do not have [Metamask](https://metamask.io) installed, or some equivalent software for accessing the Ethereum blockchain, then you will see the error message: *Metamask or equivalent required to access this page*.  The remainder of this guide will assume you have installed Metamask; I haven't tested other options (e.g. [Brave](https://brave.com/) browser), so they may not work.
 
-If your browser is suitably enabled you should otherwise see the rotating Ethereum symbol, and a number of blank fields:
+If your browser is suitably enabled you should otherwise see the rotating Ethereum symbol, and a number of blank fields (if you installed Metamask after loading the page, you'll need to refresh):
 
 [![Pre-wallet import PreciousChickenToken splash screen](https://www.preciouschicken.com/blog/images/metamask_ff_blank.png)](https://www.preciouschicken.com/blog/images/metamask_ff_blank.png)
 
 ## Import wallet into Metamask
 
-This process will assume your starting point is a fresh install of Metamask on Firefox (v77.0.1); other browsers are likely going to be different; and if you have already used Metamask previously you will need to logout etc.
+This process will assume your starting point is a fresh install of Metamask on Google Chrome (v83.0.4103.116); other browsers are likely going to be different; and if you have already used Metamask previously you will need to logout etc.
 
 Assuming you do have that fresh install selecting the Metamask extension icon will result in:
 
-[![Pre-wallet import PreciousChickenToken splash screen](https://www.preciouschicken.com/blog/images/metamask_ff_welcome.png)](https://www.preciouschicken.com/blog/images/metamask_ff_welcome.png)
+[![Pre-wallet import PreciousChickenToken splash screen](https://www.preciouschicken.com/blog/images/metamask_gc_welcome.png)](https://www.preciouschicken.com/blog/images/metamask_gc_welcome.png)
 
 Selecting the *Get Started* option will take us to our set up options.  Here we want to select *No, I already have a seed phrase*:
 
-[![Pre-wallet import PreciousChickenToken splash screen](https://www.preciouschicken.com/blog/images/metamask_ff_new.png)](https://www.preciouschicken.com/blog/images/metamask_ff_new.png)
+[![Metamask: Choose seed](https://www.preciouschicken.com/blog/images/metamask_gc_new.png)](https://www.preciouschicken.com/blog/images/metamask_gc_new.png)
 
 We now need our seed phrase that Ganache has created for us; at the top of the screen we will find twelve words under the heading *Mnemonic*.  Copy and paste them into the seed phrase box below, and add a password of your choosing:
 
-[![Pre-wallet import PreciousChickenToken splash screen](https://www.preciouschicken.com/blog/images/metamask_ff_import.png)](https://www.preciouschicken.com/blog/images/metamask_ff_import.png)
+[![Metamask: import seed](https://www.preciouschicken.com/blog/images/metamask_ff_import.png)](https://www.preciouschicken.com/blog/images/metamask_gc_import.png)
 
-There will be a number of congratulatory / analytics sreens to click through after which you will see your account.  Currently blank as we haven't connected it to our local blockchain instance.  Therefore select *Networks* from the top right and then *Custom RPC*:
+There will be a number of congratulatory / analytics sreens to click through after which you will see your account.  Currently blank as we haven't connected it to our local blockchain instance.  Therefore select *Custom RPC* from the *Networks* drop-down menu accessed by selecting *Main Ethereum Network* (which is the currently selected network):
 
-[![Pre-wallet import PreciousChickenToken splash screen](https://www.preciouschicken.com/blog/images/metamask_ff_network.png)](https://www.preciouschicken.com/blog/images/metamask_ff_network.png)
+[![Metamask: Networks](https://www.preciouschicken.com/blog/images/metamask_gc_networks.png)](https://www.preciouschicken.com/blog/images/metamask_gc_networks.png)
 
+We now need to enter the details of where Metamask can find Ganache on the network.  Returning to Ganache copy the *RPC Server* details and copy them into *New RPC URL* field on the add network screen, give it a sensible *Network Name*, and click *Save*:
+
+[![Metamask: Custom RPC](https://www.preciouschicken.com/blog/images/metamask_gc_customrpc.png)](https://www.preciouschicken.com/blog/images/metamask_gc_customrpc.png)
+
+From the left hand menu select *Connections*: this will allow us to add our React site to the list of allowed sites.  Add `localhost` and select *Connect*:
+
+[![Metamask: Connect to localhost](https://www.preciouschicken.com/blog/images/metamask_gc_connections.png)](https://www.preciouschicken.com/blog/images/metamask_gc_connections.png)
+
+Returning to our React tab and refreshing the screen we see that Metamask has successfully connected and values appear:
+
+[![Chrome: Account 0 Details](https://www.preciouschicken.com/blog/images/metamask_gc_success0.png)](https://www.preciouschicken.com/blog/images/metamask_gc_success0.png)
+
+This account however shows Account, or Index, 0 - which currently owns all thousand PCT minted.  We will be transacting on Account 1; so we now need to import this account into Metamask.
+
+Returning to Ganache select the key icon to the right of the text *Index 1* and then copy the Private Key that appears:
+
+[![Ganache: private key reveal](https://www.preciouschicken.com/blog/images/ganache_privatekey.png)](https://www.preciouschicken.com/blog/images/ganache_privatekey.png)
+
+Returning to Chrome and the Metamask extension select the Accounts menu, by selecting the multicoloured circular icon on the top-right, and then the *Import account* option:
+
+[![Metamask: import account](https://www.preciouschicken.com/blog/images/metamask_gc_importaccount.png)](https://www.preciouschicken.com/blog/images/metamask_gc_importaccount.png)
+
+And paste the Private Key from Ganache in:
+
+[![Metamask: import private key](https://www.preciouschicken.com/blog/images/metamask_gc_privatekey.png)](https://www.preciouschicken.com/blog/images/metamask_gc_privatekey.png)
+
+Refreshing the page we should now have the details of Account 1 on screen:
+
+[![Chrome: Account 1 Details](https://www.preciouschicken.com/blog/images/metamask_gc_success1.png)](https://www.preciouschicken.com/blog/images/metamask_gc_success1.png)
+
+Success!  A somewhat tortuous process, that varies across browsers.  For instance if you are using Firefox (v78.0.1) then connecting to a local site is handled differently using a *Connected sites* menu option:
+
+[![Firefox: Connected sites](https://www.preciouschicken.com/blog/images/metamask_ff_connectedsites.png)](https://www.preciouschicken.com/blog/images/metamask_ff_connectedsites.png)
+[![Firefox: Connect with Metamask](https://www.preciouschicken.com/blog/images/metamask_ff_localsiteconnect.png)](https://www.preciouschicken.com/blog/images/metamask_ff_localsiteconnect.png)
+
+## Buy, buy, buy; sell, sell, sell!
+
+At this point we can go ahead, test the application, and buy and sell some PCT.  Putting an order to buy PCT will result in a request for authorisation from Metamask (this might pop up, or remain in the background, in which case you will have to manually select the Metamask icon):
+
+[![Metamask authorisation](https://www.preciouschicken.com/blog/images/metamask_gc_authorisation.png)](https://www.preciouschicken.com/blog/images/metamask_gc_authorisation.png)
+
+Authorisation will lead to the relevant block being mined on the local blockchain and if successful a pop up will appear:
+
+[![Google Chrome event success](https://www.preciouschicken.com/blog/images/metamask_gc_eventsuccess.png)](https://www.preciouschicken.com/blog/images/metamask_gc_eventsuccess.png)
+
+Likewise failure (in this case trying to sell more PCT than the Account holds) will lead to an error message:
+
+[![Google Chrome event fail](https://www.preciouschicken.com/blog/images/metamask_gc_eventfail.png)](https://www.preciouschicken.com/blog/images/metamask_gc_eventfail.png)
+
+Go ahead and try and break things.
 
 ## Conclusions
+
+So my aim here was to achieve working code, rather than to develop the next hot ICO (if such things even exist anymore).  There is no testing (__bad__), it doesn't handle decimals, and there are oodles of other things to refactor - however it does give a good idea of how the building blocks stack up.  If you have feedback, observations, etc; please engage in the comments section.
+
+## References and Further Reading
+
+- [OpenZeppelin contracts documentation](https://docs.openzeppelin.com/contracts/3.x/) particularly the [ERC20](https://docs.openzeppelin.com/contracts/3.x/erc20) section
+- [Ethers documentation](https://docs.ethers.io/)
+- [Code Your Own Cryptocurrency on Ethereum (How to Build an ERC-20 Token and Crowd Sale website)](https://www.dappuniversity.com/articles/code-your-own-cryptocurrency-on-ethereum) by Dapp University
+- [Ethereum Dapps with Truffle,Ganache, Metamask, OppenZippelin and React](https://www.techiediaries.com/ethereum-truffle-react/)
+- [Points to consider when creating a fungible token (ERC20, ERC777)](https://forum.openzeppelin.com/t/points-to-consider-when-creating-a-fungible-token-erc20-erc777/2915) by OpenZeppelin
+
