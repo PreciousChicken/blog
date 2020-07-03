@@ -9,28 +9,28 @@ draft: false
 
 ## Introduction
 
-This guide is a step-by-step demonstration to ERC20 Tokens in React using a local Truffle Ethereum blockchain.  It is not, nor is intended to be, a best practice study on how to write ERC20s.  It is intended to produce familiarisation and working code, which can be the basis for further education.    
+This guide is a step-by-step demonstration of ERC20 Tokens in React using a local Truffle Ethereum blockchain.  It is not, nor is intended to be, a best practice study on how to write ERC20s.  It is intended to produce familiarisation and working code, which can be the basis for further education.    
 
 ## ERWhat?
 
-ERC20 is a standard for tokens that applies on the Ethereum network (ERC standing for Ethereum Request for Comments) that, ensures interoperability of these assets across the network.
+ERC20 is a standard for tokens that applies on the Ethereum network (ERC standing for Ethereum Request for Comments) which ensures interoperability of these assets across the network.
 
-Having a standard for tokens is a big deal as tokens were a central feature of Ethereum as laid out in the original [whitepaper](https://ethereum.org/en/whitepaper/#token-systems):
+Having a standard for tokens is a big deal as tokens are a central feature of Ethereum as laid out in the original [whitepaper](https://ethereum.org/en/whitepaper/#token-systems):
 
 > On-blockchain token systems have many applications ranging from sub-currencies representing assets such as USD or gold to company stocks, individual tokens representing smart property, secure unforgeable coupons, and even token systems with no ties to conventional value at all, used as point systems for incentivization. Token systems are surprisingly easy to implement in Ethereum. The key point to understand is that a currency, or token system, fundamentally is a database with one operation: subtract X units from A and give X units to B, with the provision that (1) A had at least X units before the transaction and (2) the transaction is approved by A. 
 
-Using this standard therefore ensures that everyone is using a common list of rules so allowing a token developed by one person to be traded across the system.  There are a number of [other tokens](https://crushcrypto.com/ethereum-erc-token-standards/), however I'm using ERC20 primarily as it is the most well used.
+Using this standard therefore ensures that everyone is following a common set of rules, so allowing a token developed by one person to be traded across the system.  There are a number of [other tokens](https://crushcrypto.com/ethereum-erc-token-standards/), however I'm using ERC20 primarily as it is the most popular.
 
 Although it is possible to roll your own ERC20 by implementing the interface provided in the standard, it makes sense to use one that has been created and thoroughly tested by a specialised third party, in this case [OpenZeppelin](https://openzeppelin.com). 
 
 ## Configuration control
 
-Due to the variety of moving parts there's quite a lot of configuration control that needs to go up front.  Your mileage may vary if you are using different versions - in fact expect it not to work at all, there appear to be lots of breaking changes in the Ethereum world.  So components used: node v14.4.0, truffle v5.1.30, ganache v.2.4.0, metamask v7.7.9, @openzeppelin/contracts@3.1.0, ethers v5.0.3, create-react-app v3.4.1 and my OS is Ubuntu 20.04 LTS ([Regolith](https://regolith-linux.org) flavour).
+Due to the variety of moving parts there's quite a lot of configuration control that needs to go up front.  Your mileage may vary if you are using different versions - in fact expect it not to work at all, there appear to be lots of breaking changes in the Ethereum world.  So components used: node v14.4.0, truffle v5.1.30, ganache v.2.4.0, metamask v7.7.9, openzeppelin/contracts v3.1.0, ethers v5.0.3, create-react-app v3.4.1, solidity v0.6.1 and my OS is Ubuntu 20.04 LTS ([Regolith](https://regolith-linux.org) flavour).
 
 ## Prerequisites
 
 -  [NodeJS](https://nodejs.org) - If you haven't installed it before, I found installing it using the Node Version Manager (nvm) as suggested on this [Stack Overflow answer](https://stackoverflow.com/a/24404451/6333825) to cause less aggravation than downloading via the official website.
--  If you've previously installed `create-react-app` globally via `npm install -g create-react-app`, then uninstall it with the command `npm uninstall -g create-react-app` so you are using the latest version as below. 
+-  If you've previously installed [create-react-app](https://create-react-app.dev) globally via `npm install -g create-react-app`, then uninstall it with the command `npm uninstall -g create-react-app` so you are using the latest version as below. 
 
 ## Ganache
 
@@ -163,7 +163,7 @@ module.exports = function(deployer) {
 };
 ```
 
-This code is responsible for telling Truffle to deploy the smart contract we've just written above.  It also serves to provide arguments to the constructor method within _PreciousChickenToken.sol_, this had one argument called *\_initialSupply* which sets the amount of tokens created on deployment of the contract (i.e. one thousand).
+This code is responsible for telling Truffle to deploy the smart contract we've just written above.  It also serves to provide arguments to the constructor method within _PreciousChickenToken.sol_: this had one argument called *\_initialSupply* which sets the amount of tokens created on deployment of the contract (i.e. one thousand).
 
 Lastly we need to make some amends to our existing truffle configuration file:
 
@@ -214,7 +214,7 @@ cd client
 npm install ethers react-bootstrap bootstrap
 npm audit fix
 ```
-The first of these packages, [ethers.js](https://github.com/ethers-io/ethers.js/), is the most important - it aiming to be a "complete and compact library for interacting with the Ethereum Blockchain and its ecosystem"; the second two are for the purposes of UI.
+The first of these packages, [ethers.js](https://github.com/ethers-io/ethers.js/), is the most important - it aiming to be a "complete and compact library for interacting with the Ethereum Blockchain and its ecosystem"; the second two are for the purposes of UI.  The primary alternative to ethers.js is [web3.js](https://github.com/ethereum/web3.js/), Adrian Li has written more on the [difference between the two](https://github.com/adrianmcli/web3-vs-ethers).
 
 Edit the following file with your text editor:
 
@@ -473,7 +473,7 @@ As the first account in Ganache (Index 0) is now set as the *owner* by the smart
 truffle console
 ```
 
-Your prompt show now change to `truffle(ganache)>` or similar.  Enter:
+Your prompt should now change to `truffle(ganache)>` or similar.  Enter:
 
 ```javascript
 token = await PreciousChickenToken.deployed()
@@ -501,7 +501,7 @@ Your browser should now point to `localhost:3000`.  If you do not have [Metamask
 
 If your browser is suitably enabled you should otherwise see the rotating Ethereum symbol, and a number of blank fields (if you installed Metamask after loading the page, you'll need to refresh):
 
-[![Pre-wallet import PreciousChickenToken splash screen](https://www.preciouschicken.com/blog/images/metamask_ff_blank.png)](https://www.preciouschicken.com/blog/images/metamask_ff_blank.png)
+[![Pre-wallet import PreciousChickenToken splash screen](https://www.preciouschicken.com/blog/images/metamask_gc_blank.png)](https://www.preciouschicken.com/blog/images/metamask_gc_blank.png)
 
 ## Import wallet into Metamask
 
@@ -515,9 +515,9 @@ Selecting the *Get Started* option will take us to our set up options.  Here we 
 
 [![Metamask: Choose seed](https://www.preciouschicken.com/blog/images/metamask_gc_new.png)](https://www.preciouschicken.com/blog/images/metamask_gc_new.png)
 
-We now need our seed phrase that Ganache has created for us; at the top of the screen we will find twelve words under the heading *Mnemonic*.  Copy and paste them into the seed phrase box below, and add a password of your choosing:
+We now need our seed phrase that Ganache has created for us; at the top of the screen we will find twelve words under the heading *Mnemonic*.  Copy and paste them into the *Wallet Seed* field below, and add a password of your choosing:
 
-[![Metamask: import seed](https://www.preciouschicken.com/blog/images/metamask_ff_import.png)](https://www.preciouschicken.com/blog/images/metamask_gc_import.png)
+[![Metamask: import seed](https://www.preciouschicken.com/blog/images/metamask_gc_import.png)](https://www.preciouschicken.com/blog/images/metamask_gc_import.png)
 
 There will be a number of congratulatory / analytics sreens to click through after which you will see your account.  Currently blank as we haven't connected it to our local blockchain instance.  Therefore select *Custom RPC* from the *Networks* drop-down menu accessed by selecting *Main Ethereum Network* (which is the currently selected network):
 
