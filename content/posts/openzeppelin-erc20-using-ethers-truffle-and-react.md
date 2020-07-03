@@ -214,7 +214,7 @@ cd client
 npm install ethers react-bootstrap bootstrap
 npm audit fix
 ```
-The first of these packages, [ethers.js](https://github.com/ethers-io/ethers.js/), is the most important - it aiming to be a "complete and compact library for interacting with the Ethereum Blockchain and its ecosystem"; the second two are for the purposes of UI.  The primary alternative to ethers.js is [web3.js](https://github.com/ethereum/web3.js/), Adrian Li has written more on the [difference between the two](https://github.com/adrianmcli/web3-vs-ethers).
+The first of these packages, [ethers.js](https://github.com/ethers-io/ethers.js/), is the most important - it aiming to be a "complete and compact library for interacting with the Ethereum Blockchain and its ecosystem"; the second two are for the purposes of UI.  The primary alternative to ethers.js is [web3.js](https://github.com/ethereum/web3.js/), [Adrian Li](https://github.com/adrianmcli/web3-vs-ethers) and [infura.io](https://blog.infura.io/ethereum-javascript-libraries-web3-js-vs-ethers-js-part-i/) have written more on the difference between the two.
 
 Edit the following file with your text editor:
 
