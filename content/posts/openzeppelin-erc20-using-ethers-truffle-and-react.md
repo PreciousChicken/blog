@@ -578,11 +578,16 @@ Go ahead and try and break things.
 
 So my aim here was to achieve working code, rather than to develop the next hot ICO (if such things even exist anymore).  There is no testing (__bad__), it doesn't handle decimals, and there are oodles of other things to refactor - however it does give a good idea of how the building blocks stack up.  If you have feedback, observations, etc; please engage in the comments section.
 
-## References and Further Reading
+## Further reading
 
+### Documentation:
 - [OpenZeppelin contracts documentation](https://docs.openzeppelin.com/contracts/3.x/) particularly the [ERC20](https://docs.openzeppelin.com/contracts/3.x/erc20) section
 - [Ethers documentation](https://docs.ethers.io/)
+### Tutorials:
 - [Code Your Own Cryptocurrency on Ethereum (How to Build an ERC-20 Token and Crowd Sale website)](https://www.dappuniversity.com/articles/code-your-own-cryptocurrency-on-ethereum) by Dapp University
+- [How to create an ERC20 token the simple way](https://www.toptal.com/ethereum/create-erc20-token-tutorial)
 - [Ethereum Dapps with Truffle,Ganache, Metamask, OppenZippelin and React](https://www.techiediaries.com/ethereum-truffle-react/)
+### Additional background
 - [Points to consider when creating a fungible token (ERC20, ERC777)](https://forum.openzeppelin.com/t/points-to-consider-when-creating-a-fungible-token-erc20-erc777/2915) by OpenZeppelin
+- [Ethereum smart contract security best practices](https://consensys.github.io/smart-contract-best-practices/)
 
