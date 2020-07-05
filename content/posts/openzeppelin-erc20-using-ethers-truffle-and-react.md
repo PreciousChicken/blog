@@ -1,7 +1,7 @@
 ---
 title: "PreciousChickenToken: A guided example of OpenZeppelin's ERC20 using Ethers, Truffle and React"
 date: 2020-07-01T17:08:04+01:00
-tags: ["ethereum", "truffle", "ethers.js", "react", "metamask"]
+tags: ["ethereum", "truffle", "ethers.js", "react", "solidity", "metamask"]
 categories: ["Blockchain development"]
 description: "A demonstration of OpenZeppelin's ERC20 using Ethers, Truffle and React"
 draft: false
