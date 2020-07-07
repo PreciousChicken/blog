@@ -580,11 +580,12 @@ So my aim here was to achieve working code, rather than to develop the next hot 
 
 ## Further reading
 
-### Documentation:
+### Documentation
 - [OpenZeppelin contracts documentation](https://docs.openzeppelin.com/contracts/3.x/) particularly the [ERC20](https://docs.openzeppelin.com/contracts/3.x/erc20) section
 - [Ethers documentation](https://docs.ethers.io/)
-### Tutorials:
+### Tutorials
 - [Code Your Own Cryptocurrency on Ethereum (How to Build an ERC-20 Token and Crowd Sale website)](https://www.dappuniversity.com/articles/code-your-own-cryptocurrency-on-ethereum) by Dapp University
+- [How to Connect a React App to the Blockchain](https://www.publish0x.com/blockchain-developer/how-to-connect-a-react-app-to-the-blockchain-xvveoe)
 - [How to create an ERC20 token the simple way](https://www.toptal.com/ethereum/create-erc20-token-tutorial)
 - [Ethereum Dapps with Truffle,Ganache, Metamask, OppenZippelin and React](https://www.techiediaries.com/ethereum-truffle-react/)
 ### Additional background
