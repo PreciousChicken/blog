@@ -62,9 +62,9 @@ mount -a
 
 Make the file executable: `sudo chmod +x /etc/network/if-up.d/fstab`.
 
-## 9.  Reboot.  
+## 9.  Mount the drive  
 
-Reboot.  The drive should mount on startup.  Alternatively you can run `mount -a` from a terminal, but I like to reboot just to make sure everything works.
+Run `sudo mount -a` from the terminal and the drive should now mount.  If you have done something wrong, like entered the wrong IP in *fstab*, you will get a message similar to `mount.nfs: Network is unreachable`; success meanwhile is marked simply by the lack of error message.  Alternatively you could also reboot your system which has the same effect - although you don't get to see the error message immediately if there is one.
 
 ## 10.  Select backup options in Deja Dup
 
