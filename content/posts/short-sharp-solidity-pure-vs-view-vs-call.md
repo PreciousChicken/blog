@@ -15,7 +15,7 @@ At time of writing I'm using: Truffle v5.1.30 (core: 5.1.30), Solidity v0.5.16 (
 
 ## The smart contract
 
-If you want to follow along then after creating running `truffle init` in a working folder copy the following code in *contracts/CallDemo.sol*:
+If you want to follow along then after running `truffle init` in a working folder, copy the following code into *contracts/CallDemo.sol*:
 
 ```solidity
 // SPDX-License-Identifier: The Unlicencse
@@ -28,14 +28,20 @@ contract CallDemo {
       sampleNumber = 163;
   }
 
+  // Declared as a view function
+  // e.g. will not modify state
   function viewRetrieve() public view returns (uint) {
       return sampleNumber;
   }
 
+  // Declared as a pure function
+  // e.g. will not modify or read from state
   function pureRetrieve() public pure returns (uint) {
       return 163;
   }
 
+  // Not declared as either pure or view,
+  // will flag as warning in compiler
   function nonViewRetrieve() public returns (uint) {
       return sampleNumber;
   }
@@ -69,7 +75,7 @@ We'll get to this later.
 
 Dropping into `truffle console` let's retrieve the data from the first function:
 
-```bash
+```javascript
 let app = await CallDemo.deployed()
 let viewReturn = await app.viewRetrieve()
 viewReturn.words[0]
@@ -79,14 +85,14 @@ which gives us, correctly, `163`.
 
 So let's run the same on our second function:
 
-```bash
+```javascript
 let pureReturn = await app.pureRetrieve()
 pureReturn.words[0]
 ```
 
 again: `163`.  So by that logic:
 
-```bash
+```javascript
 let nonViewReturn = await app.nonViewRetrieve()
 nonViewReturn.words[0]
 ```
@@ -119,7 +125,7 @@ Should give us `163`, right?  Wrong.  We get `Uncaught TypeError: Cannot read pr
 
 So how do we get our number?  We need to add `.call()` to the end of the function:
 
-```bash
+```javascript
 let nonViewReturnCall = await app.nonViewRetrieve.call()
 nonViewReturnCall.words[0]
 ```
@@ -128,7 +134,7 @@ And this gives us `163`.
 
 ## What's happening?
 
-In essence all three functions are read-only; we are not changing anything on the Ethereum blockchain, we are simply drawing data from it.  The first two functions however are declared as:
+In essence all three functions are read-only; we are not changing anything on the Ethereum blockchain, we are simply drawing data from it.  The first two functions however are declared respectively as:
 
 - *View*: This declares that no state will be changed.  In other words the function is simply returning state (`sampleNumber`), but not making any changes to the data currently on the blockchain.
 - *Pure*: Declares that no state variable will be changed or read.  This is an even more stringent declaration; we are not even reading any data outside of the function itself.  Had we attempted to return the variable `sampleNumber` within a function declare *pure* the contract would have failed to compile.
@@ -138,3 +144,5 @@ As the last function was not defined as either of these, and subsequently genera
 > In order to interface with contracts that do not adhere to the ABI, or to get more direct control over the encoding, the functions `call`, `delegatecall` and `staticcall` are provided.
 
 For a more detailed explanation I would recommend [Calls vs. transactions in Ethereum smart contracts](https://blog.b9lab.com/calls-vs-transactions-in-ethereum-smart-contracts-62d6b17d0bc2).
+
+As an aside you will notice that if you copy and paste *CallDemo.sol* into the online [Remix IDE](https://remix.ethereum.org/) you don't have to worry about the *.call()*  on the last function - the IDE figures out it is needed all by itself. 
