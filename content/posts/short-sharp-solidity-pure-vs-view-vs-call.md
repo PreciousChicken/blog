@@ -29,13 +29,13 @@ contract CallDemo {
   }
 
   // Declared as a view function
-  // e.g. will not modify state
+  // i.e. will not modify state
   function viewRetrieve() public view returns (uint) {
       return sampleNumber;
   }
 
   // Declared as a pure function
-  // e.g. will not modify or read from state
+  // i.e. will not modify or read from state
   function pureRetrieve() public pure returns (uint) {
       return 163;
   }
