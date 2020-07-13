@@ -1,7 +1,7 @@
 ---
 title: "Short, sharp Solidity: pure vs view vs call"
 date: 2020-07-09T16:19:34+01:00
-tags: ["ethereum", "truffle", "solidity", ]
+tags: ["ethereum", "truffle", "solidity"]
 categories: ["Blockchain development"]
 description: "A worked example demonstrating the differences between the read-only Solidity elements pure, view and .call() in the Truffle console."
 draft: false
