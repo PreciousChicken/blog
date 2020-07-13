@@ -1,15 +1,15 @@
 ---
-title: "Short, sharp Solidity: pure versus view versus call"
+title: "Short, sharp Solidity: pure vs view vs call"
 date: 2020-07-09T16:19:34+01:00
 tags: ["ethereum", "truffle", "solidity", ]
 categories: ["Blockchain development"]
-description: "A worked example of how the read-only Solidity elements pure, view and .call() behave in the Truffle console."
+description: "A worked example demonstrating the differences between the read-only Solidity elements pure, view and .call() in the Truffle console."
 draft: false
 ---
 
 ## Introduction
 
-A quick worked example of how the read-only Solidity elements *pure*, *view* and *.call()* behave in the Truffle console.
+A quick worked example demonstrating the differences between the read-only Solidity elements *pure*, *view* and *.call()* in the Truffle console.
 
 At time of writing I'm using: Truffle v5.1.30 (core: 5.1.30), Solidity v0.5.16 (solc-js), Node v14.4.0, Web3.js v1.2.1, and Ubuntu 20.04 LTS (Regolith flavour).
 
