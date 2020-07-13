@@ -1,5 +1,5 @@
 ---
-title: "Short, sharp Solidity: pure versus view versus .call()"
+title: "Short, sharp Solidity: pure versus view versus call"
 date: 2020-07-09T16:19:34+01:00
 tags: ["ethereum", "truffle", "solidity", ]
 categories: ["Blockchain development"]
