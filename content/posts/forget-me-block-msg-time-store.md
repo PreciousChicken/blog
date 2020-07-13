@@ -32,6 +32,7 @@ For the purposes of this deliverable the client side method has been chosen.
 
 ## Solution
 
+
 ### Smart contract
 
 A smart contract satisfying the aim has been deployed to the Ropsten test network at address [0x2c93564045502dBC5e90009e8408C0B7b888523e](https://ropsten.etherscan.io/address/0x2c93564045502dBC5e90009e8408C0B7b888523e).  It has two externally accessible functions:
@@ -42,6 +43,10 @@ A smart contract satisfying the aim has been deployed to the Ropsten test networ
 ### DApp
 
 A web application, written in React, has been published at [forget-me-block-msg-time-store.preciouschicken.com](https://forget-me-block-msg-time-store.preciouschicken.com).  This single-page-application allows users to submit messages whilst deciding how long they wish to keep them 'locked' for.  It will then display unlocked messages (i.e. those which have been stored for the selected duration) on screen either a) automatically checking at 5 minute intervals or b) at user request.
+
+The resulting DApp is as shown:
+
+[![Forget-me-Block: Message Time Store](https://www.preciouschicken.com/blog/images/message-time-store.png)](https://www.preciouschicken.com/blog/images/message-time-store.png)
 
 Users will require a suitable in browser wallet (e.g. [Metamask](https://metamask.io)) and Ropsten test network Ether, available from the [Ropsten Ethereum Faucet](https://faucet.ropsten.be).
 
