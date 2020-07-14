@@ -84,7 +84,7 @@ vim contracts/PreciousChickenToken.sol
 Copy and paste the following text (or alternatively download it from my [github repository](https://github.com/PreciousChicken/openzeppelin-erc20-using-ethers-truffle-and-react)):
 
 ```sol
-// SPDX-License-Identifier: The Unlicencse
+// SPDX-License-Identifier: The Unlicense
 pragma solidity ^0.6.1;
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 
