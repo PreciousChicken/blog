@@ -26,12 +26,11 @@ That leaves the developer with a number of choices:
 
 - [Ethereum Alarm Clock](https://www.ethereum-alarm-clock.com).  A decentralised network which financially motivates participants to run "TimeNodes." These nodes compete to monitor the Ethereum blockchain for time instances where smart contacts should be executed.  Should the node win the right to execute the smart contract, they are rewarded in Ether.  Unfortunately at time of writing however, although this system could be used for scheduling Ether transactions, there appeared little documentation on how this could be integrated within third party smart contracts.
 - [Aion](https://www.aion.ethpantheon.com/).  A third party offering a service to execute smart contracts at a predetermined time in the future, in return for payment.  Advertises it can be "easily integrated into other smart contracts using a single scheduling function."
-- Client side.  The developer takes responsibility for implementing a mechanism to check the smart contract at a suitable date-time within the client (e.g. web page, smartphone application) that the user interfaces the smart contract.
+- Client side.  The developer takes responsibility for implementing a mechanism to check the smart contract at a suitable date-time within the client that is used to interact with the smart contract.  The client could be a web page, smart phone app, etc.
 
 For the purposes of this deliverable the client side method has been chosen.
 
 ## Solution
-
 
 ### Smart contract
 
@@ -65,3 +64,8 @@ For reasons of time compression the following has been minimised:
 
 - Test coverage
 - Smart contract optimisation (specifically ensuring the least Ether possible is used)
+
+## Configuration control
+
+This deliverable used the following software versions for the smart contract: Truffle v5.1.30, Solidity - 0.6.1 (solc-js), Node v14.4.0, Web3.js v1.2.1,  truffle/hdwallet-provider v1.0.38; and for the client: ethers v5.0.5, react v16.13.1. OS was Ubuntu 20.04 (Regolith DE).
+
