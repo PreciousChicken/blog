@@ -568,7 +568,7 @@ And paste the Private Key from Ganache in:
 
 Once done select *Next*.  We now get another confirmation from Metamask as to whether we want to connect Account 2:
 
-[![Chrome: Connect with Metamask to Account 1](https://www.preciouschicken.com/blog/images/metamask_gc_connect_to_a1.png)](https://www.preciouschicken.com/blog/images/metamask_gc_connect_to_a1.png)
+[![Chrome: Connect with Metamask to Account 1](https://www.preciouschicken.com/blog/images/metamask_gc_connect_to_a2.png)](https://www.preciouschicken.com/blog/images/metamask_gc_connect_to_a2.png)
 
 Select *Connect* and after a browser refresh we should now have the details of Ganache Account 1 on screen:
 
