@@ -25,7 +25,7 @@ Although it is possible to roll your own ERC20 by implementing the interface pro
 
 ## Configuration control
 
-Due to the variety of moving parts there's quite a lot of configuration control that needs to go up front.  Your mileage may vary if you are using different versions - in fact expect it not to work at all, there appear to be lots of breaking changes in the Ethereum world.  So components used: node v14.4.0, truffle v5.1.30, ganache v.2.4.0, metamask v7.7.9, openzeppelin/contracts v3.1.0, ethers v5.0.3, create-react-app v3.4.1, solidity v0.6.1 and my OS is Ubuntu 20.04 LTS ([Regolith](https://regolith-linux.org) flavour).
+Due to the variety of moving parts there's quite a lot of configuration control that needs to go up front.  Your mileage may vary if you are using different versions - in fact expect it not to work at all, there appear to be lots of breaking changes in the Ethereum world.  So components used: node v14.4.0, truffle v5.1.30, ganache v.2.4.0, metamask v7.7.9, openzeppelin/contracts v3.1.0, ethers v5.0.3, create-react-app v3.4.1, solidity v0.6.2 and my OS is Ubuntu 20.04 LTS ([Regolith](https://regolith-linux.org) flavour).
 
 ## Prerequisites
 
@@ -85,7 +85,7 @@ Copy and paste the following text (or alternatively download it from my [github 
 
 ```sol
 // SPDX-License-Identifier: The Unlicense
-pragma solidity ^0.6.1;
+pragma solidity ^0.6.2;
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 
 contract PreciousChickenToken is ERC20 {
@@ -108,9 +108,10 @@ contract PreciousChickenToken is ERC20 {
     mapping (address => uint256) pendingWithdrawals;
    
     // Initialises smart contract with supply of tokens going to the address that
-    // deployed the contract
+    // deployed the contract.
     constructor(uint256 _initialSupply) public ERC20("PreciousChickenToken", "PCT") {
         _mint(msg.sender, _initialSupply);
+        _setupDecimals(0); // Sets PCTs as integers only
         owner = msg.sender;
     }
 
@@ -142,6 +143,7 @@ contract PreciousChickenToken is ERC20 {
     }
 }
 ```
+
 This contract when called generates a number of 'PreciousChickenTokens' and allocates them to the address that deployed the contract - in our case that will be the first address listed in Ganache (marked as 'Index 0').  It then has a function to allow users to buy PCTs in exchange for Ether (with the conversion rate set at one Eth equal to one PCT), and to sell those PCT back in return for Ether.  Any Ether collected goes to the contract address itself.
 
 Again it is worth re-iterating this code is intended as a demonstrator only and is not intended to be a model for anything production ready that is exposed to financial risk.
@@ -184,7 +186,7 @@ module.exports = {
 	},
 	compilers: {
 		solc: {
-			version: "^0.6.0",    // Fetch exact version from solc-bin (default: truffle's version)
+			version: "^0.6.2",    // Fetch exact version from solc-bin (default: truffle's version)
 		}
 	}
 }
@@ -193,8 +195,8 @@ module.exports = {
 So a number of changes have been made to the original:
 
 - Comments have been deleted.  Clearly normally we'd keep them in, but for the purposes of this guide it is easier to see what's happening if we delete them.
-- A build directory has been set in a sub-directory.  We are going to be putting our React front end in a subdirectory called *client*.  As the front end needs to have access to the smart contract and can't view the root directory, we need to tell truffle to build the files in a directory it does have access to i.e. *client/src/contracts*.
-- We've changed the solidity compiler to minimum version 0.6.0.  This is different to the Truffle default and without doing so the latest version of the OpenZeppelin ERC20 (3.1.0) will not compile.
+- A build directory has been set in a sub-directory.  We are going to be putting our React front end in a subdirectory called *client*.  As the front end needs to have access to the smart contract and can't view the root directory, we need to tell truffle to build the files in a directory it does have access to i.e. *client/src/contracts*.  An alternative way to do this would be to create a soft link (e.g. `ln -s ../../build/contracts/ contracts`) and let Truffle build the files where it normally would.
+- We've changed the solidity compiler to minimum version 0.6.2.  This is different to the Truffle default which would fail to compile the OpenZeppelin ERC20 (3.1.0) due to dependencies.
 
 If we weren't using React or the latest version of OpenZeppelin's contracts therefore, we could keep this as is.
 
@@ -244,7 +246,9 @@ let noProviderAbort = true;
 if (typeof window.ethereum !== 'undefined' || (typeof window.web3 !== 'undefined')) {
 	try{
 		// Ethers.js set up, gets data from MetaMask and blockchain
-		provider = new ethers.providers.Web3Provider(window.ethereum);
+		window.ethereum.enable().then(
+			provider = new ethers.providers.Web3Provider(window.ethereum)
+		);
 		signer = provider.getSigner();
 		erc20 = new ethers.Contract(contractAddress, PreciousChickenToken.abi, signer);
 		noProviderAbort = false;
@@ -433,6 +437,7 @@ function App() {
 }
 
 export default App;
+
 ```
 
 ## Deploy the contract
@@ -497,9 +502,9 @@ cd client
 npm start
 ```
 
-Your browser should now point to `localhost:3000`.  If you do not have [Metamask](https://metamask.io) installed, or some equivalent software for accessing the Ethereum blockchain, then you will see the error message: *Metamask or equivalent required to access this page*.  The remainder of this guide will assume you have installed Metamask; I haven't tested other options (e.g. [Brave](https://brave.com/) browser), so they may not work.
+Your browser should now point to `localhost:3000`.  If you do not have [Metamask](https://metamask.io) installed, or some equivalent software for accessing the Ethereum blockchain, then you will see the error message: *Metamask or equivalent required to access this page*.  The remainder of this guide will assume you have a fresh install of Metamask; I haven't tested other options (e.g. [Brave](https://brave.com/) browser), so they may not work.
 
-If your browser is suitably enabled you should otherwise see the rotating Ethereum symbol, and a number of blank fields (if you installed Metamask after loading the page, you'll need to refresh):
+If your browser is suitably enabled you should otherwise see the rotating Ethereum symbol, and a number of blank fields:
 
 [![Pre-wallet import PreciousChickenToken splash screen](https://www.preciouschicken.com/blog/images/metamask_gc_blank.png)](https://www.preciouschicken.com/blog/images/metamask_gc_blank.png)
 
@@ -523,19 +528,29 @@ There will be a number of congratulatory / analytics sreens to click through aft
 
 [![Metamask: Networks](https://www.preciouschicken.com/blog/images/metamask_gc_networks.png)](https://www.preciouschicken.com/blog/images/metamask_gc_networks.png)
 
-We now need to enter the details of where Metamask can find Ganache on the network.  Returning to Ganache copy the *RPC Server* details and copy them into *New RPC URL* field on the add network screen, give it a sensible *Network Name*, and click *Save*:
+We now need to enter the details of where Metamask can find Ganache on the network.  Returning to Ganache copy the *RPC Server* details (in my instance this is `HTTP://127.0.0.1:7545`) and copy them into *New RPC URL* field on the add network screen, give it a sensible *Network Name* (e.g. `Ganache`), and click *Save*:
 
 [![Metamask: Custom RPC](https://www.preciouschicken.com/blog/images/metamask_gc_customrpc.png)](https://www.preciouschicken.com/blog/images/metamask_gc_customrpc.png)
 
-From the left hand menu select *Connections*: this will allow us to add our React site to the list of allowed sites.  Add `localhost` and select *Connect*:
+<!---From the left hand menu select *Connections*: this will allow us to add our React site to the list of allowed sites.  Add `localhost` and select *Connect*:
+
 
 [![Metamask: Connect to localhost](https://www.preciouschicken.com/blog/images/metamask_gc_connections.png)](https://www.preciouschicken.com/blog/images/metamask_gc_connections.png)
 
 Returning to our React tab and refreshing the screen we see that Metamask has successfully connected and values appear:
 
-[![Chrome: Account 0 Details](https://www.preciouschicken.com/blog/images/metamask_gc_success0.png)](https://www.preciouschicken.com/blog/images/metamask_gc_success0.png)
+[![Chrome: Account 0 Details](https://www.preciouschicken.com/blog/images/metamask_gc_success0.png)](https://www.preciouschicken.com/blog/images/metamask_gc_success0.png) -->
 
-This account however shows Account, or Index, 0 - which currently owns all thousand PCT minted.  We will be transacting on Account 1; so we now need to import this account into Metamask.
+We now need to return to the page serving our React app (typically this is [http://localhost:3000/](http://localhost:3000/)).  A pop up should now appear asking to 'Connect with Metamask':
+
+[![Chrome: Connect with Metamask](https://www.preciouschicken.com/blog/images/metamask_gc_connect_with_m.png)](https://www.preciouschicken.com/blog/images/metamask_gc_connect_with_m.png)
+
+We don't want to select *Next* to proceed yet though.  Slightly confusingly, as Ganache uses zero-based numbering, when it asks to connect to Account 1, this is actually Ganache Account 0 - which contains all of our PCT.  We want to connect on Ganache Account 1 (which Metamask refers to as Account 2).  Therefore select the *New Account* link, *save* the default option of *Account 2*; then de-select Account 1 and select Account 2 as shown:
+
+[![Chrome: Connect with Metamask to Account 1](https://www.preciouschicken.com/blog/images/metamask_gc_connect_with_newaccount.png)](https://www.preciouschicken.com/blog/images/metamask_gc_connect_with_newaccount.png)
+
+
+<!---Slightly confusingly although Metamask refers to this as Account 1, within Ganache this account is Account, or Index, 0 - which currently owns all thousand PCT minted.  We will be transacting on Account 1; so we now need to import this account into Metamask.
 
 Returning to Ganache select the key icon to the right of the text *Index 1* and then copy the Private Key that appears:
 
@@ -549,14 +564,24 @@ And paste the Private Key from Ganache in:
 
 [![Metamask: import private key](https://www.preciouschicken.com/blog/images/metamask_gc_privatekey.png)](https://www.preciouschicken.com/blog/images/metamask_gc_privatekey.png)
 
-Refreshing the page we should now have the details of Account 1 on screen:
+-->
+
+Once done select *Next*.  We now get another confirmation from Metamask as to whether we want to connect Account 2:
+
+[![Chrome: Connect with Metamask to Account 1](https://www.preciouschicken.com/blog/images/metamask_gc_connect_to_a1.png)](https://www.preciouschicken.com/blog/images/metamask_gc_connect_to_a1.png)
+
+Select *Connect* and after a browser refresh we should now have the details of Ganache Account 1 on screen:
 
 [![Chrome: Account 1 Details](https://www.preciouschicken.com/blog/images/metamask_gc_success1.png)](https://www.preciouschicken.com/blog/images/metamask_gc_success1.png)
 
-Success!  A somewhat tortuous process, that varies across browsers.  For instance if you are using Firefox (v78.0.1) then connecting to a local site is handled differently using a *Connected sites* menu option:
+Success!  A bit of a tortuous process, that varies across browsers.  For instance other browsers might not produce a pop-up, but rather have a far less obvious notification on the Metamask icon itself.
+
+<!---
+For instance if you are using Firefox (v78.0.1) then connecting to a local site is handled differently using a *Connected sites* menu option:
 
 [![Firefox: Connected sites](https://www.preciouschicken.com/blog/images/metamask_ff_connectedsites.png)](https://www.preciouschicken.com/blog/images/metamask_ff_connectedsites.png)
 [![Firefox: Connect with Metamask](https://www.preciouschicken.com/blog/images/metamask_ff_localsiteconnect.png)](https://www.preciouschicken.com/blog/images/metamask_ff_localsiteconnect.png)
+-->
 
 ## Buy, buy, buy; sell, sell, sell!
 
@@ -576,7 +601,16 @@ Go ahead and try and break things.
 
 ## Conclusions
 
-So my aim here was to achieve working code, rather than to develop the next hot ICO (if such things even exist anymore).  There is no testing (__bad__), it doesn't handle decimals, and there are oodles of other things to refactor - however it does give a good idea of how the building blocks stack up.  If you have feedback, observations, etc; please engage in the comments section.
+So my aim here was to achieve working code, rather than to develop the next hot ICO (if such things even exist anymore).  There is no testing (__bad__), it doesn't handle decimals, and there are oodles of other things to refactor - however it does give a good idea of how the building blocks stack up.  I also got some great feedback on the [OpenZeppelin forum](https://forum.openzeppelin.com/t/preciouschickentoken-a-guided-example-of-openzeppelins-erc20-using-ethers-truffle-and-react/3257/2?u=preciouschicken) as to how the structure of the smart contract could be improved:
+
+> I would keep any non-core functionality separate from the token (such as purchasing). The token should ideally just be the functionality to use the token. If you have purchasing functionality you can put this in a separate contract.
+>
+> You could also transfer an amount of tokens to the purchasing functionality contract rather than having to set an allowance for the token contract to be able to use some of the deployer of the token contracts tokens.
+
+Definitely worth bearing in mind if this guide is being used as a jumping off point (or I revisit this).  
+
+
+If you have feedback, observations, etc; I'd love to read them in the comments section.
 
 ## Further reading
 
