@@ -34,7 +34,7 @@ For the purposes of this deliverable the client side method has been chosen.
 
 ### Smart contract
 
-A smart contract satisfying the aim has been deployed to the Ropsten test network at address [0x2c93564045502dBC5e90009e8408C0B7b888523e](https://ropsten.etherscan.io/address/0x2c93564045502dBC5e90009e8408C0B7b888523e).  It has two externally accessible functions:
+A smart contract satisfying the aim has been deployed to the Ropsten test network at address [0x2f7BF4942D3956C117A8d99237e074E9d05D8301](https://ropsten.etherscan.io/address/0x2f7BF4942D3956C117A8d99237e074E9d05D8301).  It has two externally accessible functions:
 
 - *storeMsg(string memory _storedMsg, uint _unlockTime)*.  The two arguments are the message to be stored, and the time (using unix time) it needs to be stored until.  Messages are mapped against *msg.sender* - i.e. the users address.  This means that Alice can only retrieve messages that Alice has submitted, while Bob will only see messages he has submitted.  Eve will see neither. 
 - *getMsgTimed() public view returns (StoredData[] memory)*.  This returns an array of objects containing all messages which have passed the *unlockTime* defined by the user.  The *pragma experimental ABIEncoderV2* option has been used within the smart contract to allow objects to be returned.  Solidity is notable in that although *state* arrays can be dynamic, *memory* arrays cannot be and have to be a fixed length.  Resultantly when the function is called and messages exist that have not yet reached unlock time, the returned array will contain empty values for the yet unlocked messages.  The single-page-application checks for empty values (specifically *id*) prior to presenting to the user, to ameliorate this.
