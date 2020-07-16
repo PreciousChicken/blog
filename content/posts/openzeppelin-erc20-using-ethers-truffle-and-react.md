@@ -23,9 +23,6 @@ Using this standard therefore ensures that everyone is following a common set of
 
 Although it is possible to roll your own ERC20 by implementing the interface provided in the standard, it makes sense to use one that has been created and thoroughly tested by a specialised third party, in this case [OpenZeppelin](https://openzeppelin.com). 
 
-## Configuration control
-
-Due to the variety of moving parts there's quite a lot of configuration control that needs to go up front.  Your mileage may vary if you are using different versions - in fact expect it not to work at all, there appear to be lots of breaking changes in the Ethereum world.  So components used: node v14.4.0, truffle v5.1.30, ganache v.2.4.0, metamask v7.7.9, openzeppelin/contracts v3.1.0, ethers v5.0.3, create-react-app v3.4.1, solidity v0.6.2 and my OS is Ubuntu 20.04 LTS ([Regolith](https://regolith-linux.org) flavour).
 
 ## Prerequisites
 
@@ -46,7 +43,7 @@ There are other non-GUI ways of running a local blockchain, and although I'm gen
 
 ## Truffle
 
-Although Ganache is part of the Truffle suite; the main course, if you like, is [Truffle](https://www.trufflesuite.com/truffle) itself.  Truffle is a development framework for Ethereum which allows you to deploy and test smart contracts quickly.
+Although Ganache is part of the Truffle suite; the main course, if you'll excuse the pun, is [Truffle](https://www.trufflesuite.com/truffle) itself.  Truffle is a development framework for Ethereum which allows you to deploy and test smart contracts quickly.
 
 Create a directory that will hold our project:
 
@@ -598,6 +595,10 @@ Likewise failure (in this case trying to sell more PCT than the Account holds) w
 [![Google Chrome event fail](https://www.preciouschicken.com/blog/images/metamask_gc_eventfail.png)](https://www.preciouschicken.com/blog/images/metamask_gc_eventfail.png)
 
 Go ahead and try and break things.
+
+## Configuration control
+
+If this hasn't worked it might be due to different software versions having been released since this post was written.  This is especially the case due to the number of moving parts plus the frequency of breaking changes in the Ethereum world.  So for reference, components used are: node v14.4.0, truffle v5.1.30, ganache v.2.4.0, metamask v7.7.9, openzeppelin/contracts v3.1.0, ethers v5.0.3, create-react-app v3.4.1, solidity v0.6.2 and my OS is Ubuntu 20.04 LTS ([Regolith](https://regolith-linux.org) flavour).
 
 ## Conclusions
 
