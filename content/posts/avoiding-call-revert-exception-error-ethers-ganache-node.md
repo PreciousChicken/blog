@@ -25,6 +25,8 @@ npm install ethers
 
 I am assuming you have already installed Node, Truffle and Ganache, if not see my earlier post [PreciousChickenToken: A guided example of OpenZeppelin's ERC20 using Ethers, Truffle and React](https://www.preciouschicken.com/blog/posts/openzeppelin-erc20-using-ethers-truffle-and-react/).
 
+Now would also be a good time to fire up Ganache, selecting the *Quickstart Ethereum* option when offered.
+
 ## The JavaScript
 
 Create a file *node_server.js* and copy and paste:
