@@ -18,7 +18,7 @@ At time of writing I'm using: Truffle v5.1.30 (core: 5.1.30), Solidity v0.5.16 (
 If you want to follow along then after running `truffle init` in a working folder, copy the following code into *contracts/CallDemo.sol*:
 
 ```solidity
-// SPDX-License-Identifier: The Unlicencse
+// SPDX-License-Identifier: Unlicencse
 pragma solidity ^0.5.16;
 
 contract CallDemo {
