@@ -1,5 +1,5 @@
 ---
-title: "Forget-me-Block: Message Time Store"
+title: "Forget-me-block: Message Time Store"
 date: 2020-07-13T15:21:35+01:00
 tags: ["ethereum", "blockchain", "solidity" ]
 categories: ["Research"]
