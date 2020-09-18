@@ -9,8 +9,9 @@ draft: false
 
 ## Notice
 
-This page, although live, is currently not indexed - so if you are reading this you are in possession of the URL.  Please bear with me as I update this, very much a work in progress at the minute (as I deal with everything that has been on the back burner when I've been completing my dissertation).
+This page is still draft right now (as I complete the many tasks I've shelved when completing my research), if you are looking for a more finished product, please come back later.
 
+The main thing I need to do is set up eth-cal-auth so that random visitors can demonstrate it; currently if I haven't personally given you access it is designed to show you an 'unauthorised' screen - which isn't very fun.  If you would like access in the meantime please [contact me](https://www.preciouschicken.com/blog/about/).
 
 ## Introduction
 
