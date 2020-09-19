@@ -8,7 +8,7 @@ draft: false
 
 ## The Problem
 
-There seem a ton of ways to get [TiddlyWiki](https://tiddlywiki.com/) running.  I thought I would try the [Node.js version](https://github.com/Jermolene/TiddlyWiki5) on a Raspberry Pi.  I wanted a set up so I could leave the Pi online and access the TiddlyWiki on the rest of my home LAN.  After following the [instructions](https://tiddlywiki.com/static/Installing%2520TiddlyWiki%2520on%2520Node.js.html) I got to the last line:
+There seem a ton of ways to get [TiddlyWiki](https://tiddlywiki.com/) running.  I thought I would try the [Node.js version](https://github.com/Jermolene/TiddlyWiki5) on a Raspberry Pi.  I wanted a set-up so I could leave the Pi online and access the TiddlyWiki on the rest of my home LAN.  After following the [instructions](https://tiddlywiki.com/static/Installing%2520TiddlyWiki%2520on%2520Node.js.html) I got to the last line:
 
 ```bash
 tiddlywiki mynewwiki --listen
