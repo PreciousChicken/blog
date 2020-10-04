@@ -15,11 +15,11 @@ The main thing I need to do is set up eth-cal-auth so that random visitors can d
 
 ## Todo list
 
-- Smart contract: Create / confirm `admin` role in sol
-- Smart contract: Allow `admin` role to grant access to roles in sol
-- Client: Ensure admin cannot have other role 
-- Client: Add `admin` class to map (already there but check)
-- Client: Add banner warning for research only, unencrypted and will be deleted
+- ~~Smart contract: Create / confirm `admin` role in sol~~
+- ~~Smart contract: Allow `admin` role to grant access to roles in sol~~
+- ~~Client: Ensure admin cannot have other role~~ 
+- ~~Client: Add `admin` class to map (already there but check)~~
+- ~~Client: Add banner warning for research only, unencrypted and will be deleted~~
 - Smart contract: Add delete data function owner only
 - Client: Add delete data function
 - Client: Add admin back door to unauthorised page 
