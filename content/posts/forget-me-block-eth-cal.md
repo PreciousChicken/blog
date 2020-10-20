@@ -20,9 +20,10 @@ The main thing I need to do is set up eth-cal-auth so that random visitors can d
 - ~~Client: Ensure admin cannot have other role~~ 
 - ~~Client: Add `admin` class to map (already there but check)~~
 - ~~Client: Add banner warning for research only, unencrypted and will be deleted~~
-- Smart contract: Add delete data function owner only
-- Client: Add delete data function
+- ~~Smart contract: Add delete data function owner only
+- ~~Client: Add delete data function
 - Client: Add admin back door to unauthorised page 
+- Smart contract: Add admin back door function
 
 ## Introduction
 
