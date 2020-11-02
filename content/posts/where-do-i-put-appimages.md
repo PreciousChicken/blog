@@ -42,7 +42,7 @@ chmod a+x nvim.appimage && ./nvim.appimage
 
 ### System integration and appimaged
 
-Using the */opt* directory also works with [appimaged](https://github.com/AppImage/appimaged) which is a daemon that looks for AppImages and registers them with the system (i.e. ensures their icons display etc).
+Using the */opt* directory also works with [appimaged](https://github.com/probonopd/go-appimage) which is a daemon that looks for AppImages and registers them with the system (i.e. ensures their icons display etc).
 
 ### Cons
 
