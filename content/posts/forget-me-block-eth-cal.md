@@ -17,7 +17,7 @@ This proof of concept has also been expanded into a role based access version, [
 
 This post is intended to present a synopsis, links to repositories and running instances of deliverables from my recent MSc Thesis which explore this concept: *Forget-me-block - Exploring digital preservation strategies using Distributed Ledger Technology in the context of personal information management*.
 
-## Thesis executive statement
+## Synopsis
 
 Received wisdom portrays digital records as guaranteeing perpetuity; as the [New York Times wrote](https://www.nytimes.com/2010/07/25/magazine/25privacy-t2.html) a decade ago: "the web means the end of forgetting".  The reality however is that digital records suffer similar risks of access loss as the analogue versions they replaced - but through the mechanisms of software, hardware and organisational change.
 
@@ -27,7 +27,7 @@ The third mechanism is however more abstract as it relates to societal structure
 
 The wholesale outsourcing of these responsibilities, also means we do not own our digital identities. The current technological world sees organisations create our identity for us - whether that is our employer, tech giant or social media empire.  As we move between organisations, we also have to relinquish the identities that those organisations created for us, and with it the data that belongs to those identities. 
 
-This research examines this idea - and asks whether blockchain might be able to challenge these norms.  The form of PIM chosen to implement was a calendar - everyone uses them and they are nice to demonstrate with as you can use them in a web browser or email client (e.g. MS Outlook).  In the course of this research a number of software deliverables were created:
+This research examines this idea - and asks whether blockchain might be able to challenge these norms.  The form of PIM chosen to implement was a calendar - in widespread use and easily demonstratable in a web browser or email client (e.g. MS Outlook).  In the course of this research a number of software deliverables were created:
 
 - **CalStore**.  A smart contract which stores calendar events, with each address that calling the contract being allocated their own calendar.  On request it returns a calendar of events for the calling address using either the *iCal* format (see [RFC 5545](https://tools.ietf.org/html/rfc5545)) or JSON.
 - **CalAuth**.  This smart contract is meant to represent an organisation (e.g. Blankshire General Hospital) who maintains a group calendar on CalStore.  CalAuth lets the contract owner authenticate which accounts are allowed to read and write to the group's calendar on CalStore.  All the functions which relate to creating and reading events have the same arguments and returns as CalStore: when an Externally Owned Account calls CalAuth - assuming they are not the admin and have the required access) then CalAuth essentially acts as an interface or relay to CalStore.  This is illustrated at the Architecture section below.
