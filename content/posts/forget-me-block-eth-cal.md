@@ -1,7 +1,7 @@
 ---
 title: "Forget-me-block: Ethereum Calendar"
 date: 2020-09-01T15:06:49+01:00
-tags: ["Ethereum", "blockchain", "solidity" ]
+tags: ["Ethereum", "blockchain", "solidity", "research", "calendar" ]
 categories: ["Research"]
 description: "Research into using the Ethereum blockchain for data preservation."
 draft: false
@@ -9,9 +9,15 @@ draft: false
 
 ## Introduction
 
-This post is intended to present a quick synopsis, links to repositories and running instances of deliverables from my recent MSc Thesis: *Forget-me-block - Exploring digital preservation strategies using Distributed Ledger Technology in the context of personal information management*.
+As we progress through life's journey we lose digital information.  Who we met, what we talked about, contact details, etc tend to disappear in the digital flux like tears in the rain.  This loss is often due to reasons of software (e.g. file formats changes) and hardware (e.g. corrupt hard drives).  But more prosaically organisational change happens: as we switch providers from Big Tech Corp A to Big Tech Corp B and back again, we often lose access to data we have stored in someone else's stovepipe.
 
-## Abstract
+This post details a proof of concept to combat this by hosting a calendar as an Ethereum smart contract.  The [eth-cal-open](#eth-cal-open) calendar implementation allows read-write access via an Ethereum enabled (e.g. metamask) web browser; it also allows a user to access a read-only version of the calendar in a standard calendar client (e.g. MS Outlook).  The theoretical advantage here is that as long as the Ethereum network exists you will be able to access your data.
+
+This proof of concept has also been expanded into a role based access version, [eth-cal-auth](#eth-cal-auth), where an administrator (which defaults to the smart contract owner) allocates other users (as represented by Ethereum accounts) with date-ranged read or write access.  Typical use cases include an organisational group calendar.  The primary difference between this and today's solutions is that once access has been granted (and provided it is not rescinded) a user's access will continue regardless of their relationship to the organisation - or indeed whether the organisation continues to exist.
+
+This post is intended to present a synopsis, links to repositories and running instances of deliverables from my recent MSc Thesis which explore this concept: *Forget-me-block - Exploring digital preservation strategies using Distributed Ledger Technology in the context of personal information management*.
+
+## Thesis executive statement
 
 Received wisdom portrays digital records as guaranteeing perpetuity; as the [New York Times wrote](https://www.nytimes.com/2010/07/25/magazine/25privacy-t2.html) a decade ago: "the web means the end of forgetting".  The reality however is that digital records suffer similar risks of access loss as the analogue versions they replaced - but through the mechanisms of software, hardware and organisational change.
 
@@ -55,7 +61,7 @@ This instance is live on the Ropsten test net and will accept a connection from 
 
 ## Eth-cal-auth
 
-This instance is live on the Ropsten test net and the view will differ depending on whether you have administrator, read-write, read-only or nil access.
+This instance is live on the Ropsten test net and the view, as shown in screenshots below, will differ depending on whether you have administrator, read-write, read-only or nil access.
 
 ### Live instance
 [forget-me-block-eth-cal-auth.preciouschicken.com](https://forget-me-block-eth-cal-auth.preciouschicken.com/)
@@ -65,8 +71,14 @@ This instance is live on the Ropsten test net and the view will differ depending
 [forget-me-block-eth-cal-auth](https://github.com/PreciousChicken/forget-me-block-eth-cal-auth)
 
 ### Screenshot - Admin dashboard
+
+The view presented to those with administrator access (which defaults to smart contract owner):
+
 [![Eth-cal-auth: Dashboard](https://www.preciouschicken.com/blog/images/ethcalauth-dashboard.png)](https://www.preciouschicken.com/blog/images/ethcalauth-dashboard.png)
 
 ### Screenshot - Calendar
+
+The view presented to those with read-write or read-only access (the access level being displayed to the user next to their Ethereum account address):
+
 [![Eth-cal-auth: Calendar](https://www.preciouschicken.com/blog/images/ethcalauth-view.png)](https://www.preciouschicken.com/blog/images/ethcalauth-view.png)
 
