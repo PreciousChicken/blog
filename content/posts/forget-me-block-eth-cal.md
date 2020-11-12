@@ -15,7 +15,7 @@ This post details a proof of concept to combat this by hosting a calendar as an 
 
 This proof of concept has also been expanded into a role based access version, [eth-cal-auth](#eth-cal-auth), where an administrator (which defaults to the smart contract owner) allocates other users (as represented by Ethereum accounts) with date-ranged read or write access.  Typical use cases include an organisational group calendar.  The primary difference between this and today's solutions is that once access has been granted (and provided it is not rescinded) a user's access will continue regardless of their relationship to the organisation - or indeed whether the organisation continues to exist.
 
-This post is intended to present a synopsis, links to repositories and running instances of deliverables from my recent MSc Thesis which explore this concept: *Forget-me-block - Exploring digital preservation strategies using Distributed Ledger Technology in the context of personal information management*.
+This post is intended to present a synopsis, links to repositories and running instances of deliverables from my recent MSc Thesis which explores this concept: [Forget-me-block - Exploring digital preservation strategies using Distributed Ledger Technology in the context of personal information management](https://arxiv.org/abs/2011.05759).
 
 ## Synopsis
 
