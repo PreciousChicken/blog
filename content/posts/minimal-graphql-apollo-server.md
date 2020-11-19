@@ -91,15 +91,14 @@ server.listen().then(({ url }) => {
 
 ## Schemas and resolvers
 
-GraphQL relies upon:
+Two important concepts within GraphQL are:
 
--  Schemas.  This defines the objects the queries will be calling and the types (e.g. integer, string, etc) one can expect. 
--  Resolvers.
-
+-  Schemas.  This defines the objects the queries will be calling.  This includes what types make up the object (e.g. integer, string, etc). 
+-  Resolvers.  As GraphQL is essentially a layer that you can query sitting on top of a data store (for instance a SQL database), this is the interface where we access the datastore so returning the schema above.  In the case of a SQL database this might be made up of SLQ statements (or a reference to a file that did contain those statements).
 
 ## Schema.js
 
-Create a file named `schema.js` and paste:
+We create the schema and resolvers by pasting the following into a new file named `schema.js`:
 
 ```javascript
 const { gql } = require('apollo-server');
@@ -231,6 +230,9 @@ const resolvers = {
 exports.typeDefs = typeDefs;
 exports.resolvers = resolvers;
 ```
+
+## Start the server
+
 
 
 ## Enter data into
