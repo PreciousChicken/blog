@@ -3,7 +3,7 @@ title: "Oh-so minimal GraphQL API example with Apollo Server"
 date: 2020-11-16T07:48:47Z
 tags: ["Node", "GraphQL", "Apollo Server"]
 categories: ["Web dev"]
-draft: false
+draft: true
 ---
 
 ## Introduction
@@ -34,40 +34,36 @@ We need some data to query so create a file named `db.json` and insert the follo
 {
   "beasts": [
     {
-	    "id": 1,
+	    "id": "md",
 	    "legs": 6,
 	    "binomial": "Musca domestica",
 	    "commonName": "housefly",
-	    "class": "Insecta",
-	    "eats": [],
-	    "isEatenBy": [2]
+	    "taxClass": "Insecta",
+	    "eats": [ ]
     },
     {
-	    "id": 2,
+	    "id": "nr",
 	    "legs": 8,
 	    "binomial": "Neriene radiata",
 	    "commonName": "filmy dome spider",
-	    "class": "Arachnida",
-	    "eats": [1],
-	    "isEatenBy": [3]
+	    "taxClass": "Arachnida",
+	    "eats": [ "md" ]
     },
     {
-	    "id": 3,
+	    "id": "cc",
 	    "legs": 2,
 	    "binomial": "Corvus corone",
 	    "commonName": "carrion crow",
-	    "class": "Aves",
-	    "eats": [2],
-	    "isEatenBy": [4]
+	    "taxClass": "Aves",
+	    "eats": [ "nr"]
     },
     {
-	    "id": 4,
+	    "id": "fc",
 	    "legs": 4,
 	    "binomial": "Felis catus",
 	    "commonName": "cat",
-	    "class": "Mammalia",
-	    "eats": [3],
-	    "isEatenBy": []
+	    "taxClass": "Mammalia",
+	    "eats": [ "cc", "nr" ]
     }
   ]
 }
@@ -79,11 +75,11 @@ Create the file `index.js` and paste the following, which is responsible for the
 
 ```javascript
 const { ApolloServer } = require('apollo-server');
-const { resolvers, typeDefs } = require('./schema');
+const { typeDefs, resolvers  } = require('./schema');
 
 const server = new ApolloServer({ typeDefs, resolvers });
 
-// launches web server
+// The `listen` method launches a web server.
 server.listen().then(({ url }) => {
   console.log(`Server ready at ${url}`);
 });
@@ -93,7 +89,7 @@ server.listen().then(({ url }) => {
 
 Two important concepts within GraphQL are:
 
--  Schemas.  This defines the objects the queries will be calling.  This includes what types make up the object (e.g. integer, string, etc). 
+-  Schema (referred to as `typeDefs` below).  This defines the objects the queries will be calling.  This includes what types make up the object (e.g. integer, string, etc). 
 -  Resolvers.  As GraphQL is essentially a layer that you can query sitting on top of a data store (for instance a SQL database), this is the interface where we access the datastore so returning the schema above.  In the case of a SQL database this might be made up of SLQ statements (or a reference to a file that did contain those statements).
 
 ## Schema.js
@@ -117,7 +113,7 @@ const typeDefs = gql`
 		"a beast's name to you and I"
 		commonName: String
 		"taxonomy grouping"
-		class: String
+		taxClass: String
 		"a beast's prey"
 		eats: [ Beast ]
 		"a beast's predators"
@@ -132,7 +128,7 @@ const typeDefs = gql`
 
 	type Mutation {
 		createBeast(id: ID!, legs: Int!, binomial: String!, 
-			commonName: String!, class: String!, eats: [ ID ]
+			commonName: String!, taxClass: String!, eats: [ ID ]
 			): Beast 
 	}
 `
@@ -218,7 +214,7 @@ const resolvers = {
 				legs: args.legs, 
 				binomial: args.binomial, 
 				commonName: args.commonName,
-				class: args.class,
+				taxClass: args.taxClass,
 				eats: args.eats 
 			}
 			db.beasts.push(newBeast);
@@ -233,20 +229,114 @@ exports.resolvers = resolvers;
 
 ## Start the server
 
+At the terminal enter:
 
+```bash
+node index.js
+``` 
 
-## Enter data into
+Assuming success you should see a message similar to the following:
 
-Our data set is missing some information; the old woman who has eaten all of these creatures, therefore in the playground enter:
+```bash
+Server ready at http://localhost:4000/
+```
+
+## Playground
+
+Pointing your browser at the URL given previously you should now see the built-in playground where you can test your API.  
+
+Below the statement *#Write your query or mutation here* enter the following query:
 
 ```json
-mutation {
-  createBeast(id:"hs", legs:2, binomial:"homo sapiens", commonName:"old woman", class:"Mammalia", eats: ["md", "nr", "cc", "fc"]) {
+{
+  beasts {
     commonName
     legs
   }
 }
 ```
+
+If everything has worked you should see the following response:
+
+[![GraphQL playground](https://www.preciouschicken.com/blog/images/graphql_beast_query.png)](https://www.preciouschicken.com/blog/images/graphql_beast_query.png)
+
+## Arguments
+
+The resolvers we have built also allow us to supply arguments to define our search, so entering:
+
+```json
+{
+  beast(id: "cc") {
+    commonName
+    taxClass
+  }
+}
+```
+
+
+Will pull up data on the crow only:
+
+[![GraphQL playground](https://www.preciouschicken.com/blog/images/graphql_beast_args.png)](https://www.preciouschicken.com/blog/images/graphql_beast_args.png)
+
+Using our API for real we will likely not be hardcoding an argument directly into the query so the *Query Variables* section of the playground allows us to add variables in a similar way as to how we might via a web front page (e.g. a form).  To use this enter in the main query section:
+
+```json
+query($input: String!) {
+  calledBy(commonName: $input) {
+    binomial
+    legs
+  }
+}
+```
+
+then in the *Query variables* section below enter the variable as so:
+
+```json
+{"input": "housefly"}
+```
+
+which should result in the following:
+
+[![GraphQL playground](https://www.preciouschicken.com/blog/images/graphql_beasts_query_variables.png)](https://www.preciouschicken.com/blog/images/graphql_beasts_query_variables.png)
+
+## Mutations
+
+So far we have just been querying the data, we can also amend it via a *mutation*.
+
+Our data set is missing some information; the old woman who has eaten all of these creatures.  Therefore in the playground enter:
+
+```json
+mutation {
+  createBeast(
+    id: "hs"
+    legs: 2
+    binomial: "Homo sapiens"
+    commonName: "old woman"
+    taxClass: "Mammalia"
+    eats: ["md", "nr", "cc", "fc"]
+  ) {
+    commonName
+    eats {
+      commonName
+    }
+  }
+}
+```
+
+Success that the data has been entered should appear with a list of the beasts the poor lady has eaten:
+
+[![GraphQL playground](https://www.preciouschicken.com/blog/images/graphql_beasts_query_variables.png)](https://www.preciouschicken.com/blog/images/graphql_beasts_query_variables.png)
+
+As this is a minimal example this mutation is in-memory only and isn't saved to disk - if you restart the server the data will be erased.
+
+## Alternative server start
+
+The disadvantage to starting the server with `node index.js` as above, is that every time you make a change to the source code (like add a new resolver or amend the schema), you have to restart from the command line.  Alternatively if you start the server with:
+
+```bash
+npx nodemon index.js
+```
+your code will be monitored and the server will restart automatically.  Very handy when you are making lots of changes.
 
 ## Further reading
 
