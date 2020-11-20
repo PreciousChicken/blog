@@ -1,7 +1,7 @@
 ---
 title: "Oh-so minimal GraphQL API example with Apollo Server"
 date: 2020-11-16T07:48:47Z
-tags: ["Node", "GraphQL", "Apollo Server"]
+tags: ["Node", "GraphQL", "Apollo Server", "JavaScript"]
 categories: ["Web development"]
 draft: false
 ---
@@ -10,7 +10,7 @@ draft: false
 
 [GraphQL](https://graphql.org/) is a query language for APIs designed by Facebook and intended as a replacement for REST.  [Apollo Server](https://www.apollographql.com/) is a community maintained open-source server designed for GraphQL that runs on node.  This post is a really minimal example of getting Apollo Server running - just so one gets a feel for the core parts.  I'm therefore using a simple json flat file as a data store, and querying that with JavaScript; this isn't a particularly realistic GraphQL use case, but it is deliberately vanilla so as not to distract.
 
-All code can be downloaded from my [minimal-graphql-apollo-server](https://github.com/PreciousChicken/minimal-graphql-apollo-server) repository.
+All code can be downloaded from my [minimal-graphql-apollo-server](https://github.com/PreciousChicken/minimal-graphql-apollo-server) repository.  This worked example requires NodeJS, if you haven't installed it I'd recommend doing so following this [StackOverflow answer](https://stackoverflow.com/a/24404451).
 
 I'm running Ubuntu 20.04.1 (Regolith flavour), Node 15.2.0, GraphQL 15.4.0 and Apollo Server 2.19.0.
 
@@ -364,4 +364,4 @@ If you have found this useful, or have feedback, then please let me know in the 
 
 -  [Introduction to Apollo Server](https://www.apollographql.com/docs/apollo-server/).  The definitive guide.
 - [Introduction - Apollo Basics](https://www.apollographql.com/docs/tutorial/introduction/).  More of the same but this is the complete full stack walk through which queries live data.
--  [Learn to Build a GraphQL Server with Minimal Effort](https://www.freecodecamp.org/news/learn-to-build-a-graphql-server-with-minimal-effort-fc7fcabe8ebd/).  Another useful light-weight demonstration, although this has a more realistic back end than this as it interfaces with a mock REST API.
+-  [Learn to Build a GraphQL Server with Minimal Effort](https://www.freecodecamp.org/news/learn-to-build-a-graphql-server-with-minimal-effort-fc7fcabe8ebd/).  Another useful light-weight demonstration, although with a more realistic back end than our *db.json* as it interfaces with a mock REST API.
