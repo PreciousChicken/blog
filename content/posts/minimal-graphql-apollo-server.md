@@ -2,13 +2,13 @@
 title: "Oh-so minimal GraphQL API example with Apollo Server"
 date: 2020-11-16T07:48:47Z
 tags: ["Node", "GraphQL", "Apollo Server"]
-categories: ["Web dev"]
-draft: true
+categories: ["Web development"]
+draft: false
 ---
 
 ## Introduction
 
-[GraphQL](https://graphql.org/) is a query language for APIs designed by Facebook and intended as a replacement for REST.  [Apollo Server](https://www.apollographql.com/docs/apollo-server/) is a community maintained open-source server designed for GraphQL that runs on node.  This post is a really minimal example of getting Apollo Server running - just so one gets a feel for the core parts.  I'm therefore using a simple json flat file as a data store, and querying that with JavaScript; this isn't particularly realistic as to how you would use GraphQL for real, but as it is vanilla as you can get it doesn't distract.
+[GraphQL](https://graphql.org/) is a query language for APIs designed by Facebook and intended as a replacement for REST.  [Apollo Server](https://www.apollographql.com/) is a community maintained open-source server designed for GraphQL that runs on node.  This post is a really minimal example of getting Apollo Server running - just so one gets a feel for the core parts.  I'm therefore using a simple json flat file as a data store, and querying that with JavaScript; this isn't a particularly realistic GraphQL use case, but it is deliberately vanilla so as not to distract.
 
 All code can be downloaded from my [minimal-graphql-apollo-server](https://github.com/PreciousChicken/minimal-graphql-apollo-server) repository.
 
@@ -28,7 +28,7 @@ npm install apollo-server graphql
 
 ## The data
 
-We need some data to query so create a file named `db.json` and insert the following text (clearly inspired by [There was an old lady who swallowed a fly](https://en.wikipedia.org/wiki/There_Was_an_Old_Lady_Who_Swallowed_a_Fly)):
+We need some data to query so create a file named `db.json` and insert the following text (I'm taking my inspiration from [There was an old lady who swallowed a fly](https://en.wikipedia.org/wiki/There_Was_an_Old_Lady_Who_Swallowed_a_Fly)):
 
 ```json
 {
@@ -87,10 +87,10 @@ server.listen().then(({ url }) => {
 
 ## Schemas and resolvers
 
-Two important concepts within GraphQL are:
+Before we get on with the meat of the example it is worth briefly covering two of the most important concepts within GraphQL:
 
--  Schema (referred to as `typeDefs` below).  This defines the objects the queries will be calling.  This includes what types make up the object (e.g. integer, string, etc). 
--  Resolvers.  As GraphQL is essentially a layer that you can query sitting on top of a data store (for instance a SQL database), this is the interface where we access the datastore so returning the schema above.  In the case of a SQL database this might be made up of SLQ statements (or a reference to a file that did contain those statements).
+-  Schemas (referred to as `typeDefs` below).  This defines the objects the queries will be calling and includes what types make up the object (e.g. integer, string, etc). 
+-  Resolvers.  As GraphQL is essentially a query layer sitting on top of a data store (for instance a SQL database), this is the interface where we access the datastore so returning the schema above.  In the case of a SQL database this might be made up of SQL statements (or a reference to a file that did contain those statements).
 
 ## Schema.js
 
@@ -165,9 +165,9 @@ const resolvers = {
 	Beast: {
 
 		// Returns an array of beasts eaten (e.g. prey).
-		// This is a field within db.json, so simply field 
-		// for each beast and see what beasts match this id
-		// and then return as array.
+		// This is a field corresponding to an array of IDs
+		// within db.json; so this matches those IDs to Beast
+		// objects and then returns those objects as an array.
 		// Parent argument is beast that API is currently 
 		// focussed on e.g. housefly.
 		eats (parent) {
@@ -184,6 +184,7 @@ const resolvers = {
 		// (e.g. predators).
 		// This is NOT a field within db.json, so 
 		// involves calculating from list of prey within db.json.
+		// i.e. if x eats y, then y isEatenBy x.
 		isEatenBy (parent) {
 			let predators = [];
 			for (let beast of db.beasts) {
@@ -205,7 +206,7 @@ const resolvers = {
 
 	// Adds (and returns) new beast created by user.
 	// As this is a minimal example it does not save to 
-	// db.json and is in memory only so will delete 
+	// db.json.  As it is in memory only will delete 
 	// on node restart.
 	Mutation: {
 		createBeast (_, args) {
@@ -227,9 +228,26 @@ exports.typeDefs = typeDefs;
 exports.resolvers = resolvers;
 ```
 
+The first section of this code, `typeDefs`, defines the schema we will be using.  It starts with our primary object: `Beast`.  The statements within quotes are free text - and can be skipped - but serve to make the lives of other developers (and you when you are reading your code months later) easier, by providing human readable descriptions of the fields.   The majority of the fields in `Beast` are self-explanatory - they correspond exactly to the fields in *db.json*.  The one exception however is `isEatenBy`, if you examine *db.json* you will see this is not present.  We will therefore have to construct a resolver to implicitly tell the API what a beast is eaten by (logically we know this information - the database does have an `eats` field, and it follows that if x eats y, then y is eaten by x).
+
+After our `Beast` object is `Query`.  This shows we have three ways of querying this information: 
+
+-  `beasts` which returns an array of all beasts in the data store.
+-  `beast(id: ID!)` which returns one beast only which we look up by ID, the exclamation marks present indicates that the argument is mandatory.
+-  `calledBy(commonName: String!)` which returns an array of beasts where the string we provide matches their common name - e.g. 'ca' would match both 'carrion crow' and 'cat'.  
+
+
+The last section of `typeDefs` is 'Mutation` - this is the part of the schema which allows us to add to the datastore, rather than just query it.
+
+The next variable in the code is `resolvers` which is broken into three sections:
+
+-  `Query`.  This provides the JavaScript code for querying the data store when any of the defined queries are called.  For instance the first query `beasts` simply returns an array of all beasts from *db.json*.
+-  `Beast`.  GraphQL is smart enough to realise that when you call `beasts` and ask for `legs` to be included within that data, all it has to do is look for the field named `legs` within *db.json*.  But some queries are more difficult.  For instance when we look up `eats` we don't particularly want, for example, `cc` returned (which is one of the corresponding values within *db.json*) but rather the Beast object that represents the carrion crow.  Likewise `isEatenBy` does not even have a field within *db.json* so we have to write logic that will return a Beast object when the API is asked.
+-  `Mutation`.  Lastly we have the JavaScript telling the API how to add new information to the dataset.  Of note is that this function also returns the Beast object just added; this allows the user to immediately see the information that they have added.
+
 ## Start the server
 
-At the terminal enter:
+Explanations over, let's start the server.  At the terminal enter:
 
 ```bash
 node index.js
@@ -243,7 +261,7 @@ Server ready at http://localhost:4000/
 
 ## Playground
 
-Pointing your browser at the URL given previously you should now see the built-in playground where you can test your API.  
+Pointing your browser at the URL given above you should now see the built-in playground where you can test your API.  
 
 Below the statement *#Write your query or mutation here* enter the following query:
 
@@ -278,7 +296,9 @@ Will pull up data on the crow only:
 
 [![GraphQL playground](https://www.preciouschicken.com/blog/images/graphql_beast_args.png)](https://www.preciouschicken.com/blog/images/graphql_beast_args.png)
 
-Using our API for real we will likely not be hardcoding an argument directly into the query so the *Query Variables* section of the playground allows us to add variables in a similar way as to how we might via a web front page (e.g. a form).  To use this enter in the main query section:
+## Query variables
+
+Using our API for real we will likely not be hardcoding an argument directly into the query so the *Query Variables* section of the playground allows us to add variables in a similar way as to how we might via a web page (e.g. a form).  To use this enter in the main query section:
 
 ```json
 query($input: String!) {
@@ -289,7 +309,7 @@ query($input: String!) {
 }
 ```
 
-then in the *Query variables* section below enter the variable as so:
+then in the *Query variables* field found at the bottom of the browser window enter the variable as so:
 
 ```json
 {"input": "housefly"}
@@ -325,9 +345,9 @@ mutation {
 
 Success that the data has been entered should appear with a list of the beasts the poor lady has eaten:
 
-[![GraphQL playground](https://www.preciouschicken.com/blog/images/graphql_beasts_query_variables.png)](https://www.preciouschicken.com/blog/images/graphql_beasts_mutation.png)
+[![GraphQL playground](https://www.preciouschicken.com/blog/images/graphql_beasts_mutation.png)](https://www.preciouschicken.com/blog/images/graphql_beasts_mutation.png)
 
-As this is a minimal example this mutation is in-memory only and isn't saved to disk - if you restart the server the data will be erased.
+As this is a minimal example this mutation is in-memory only and isn't saved to disk (i.e. the *db.json* file) - if you restart the server the data will be erased.
 
 ## Alternative server start
 
@@ -336,9 +356,12 @@ The disadvantage to starting the server with `node index.js` as above, is that e
 ```bash
 npx nodemon index.js
 ```
-your code will be monitored and the server will restart automatically.  Very handy when you are making lots of changes.
+your code will be monitored and the server will restart automatically.  Will save you lots of time if you are making frequent changes.
 
-## Further reading
+## Conclusion and Further reading
 
--  [Introduction to Apollo Server](https://www.apollographql.com/docs/apollo-server/)
--  [Learn to Build a GraphQL Server with Minimal Effort](https://www.freecodecamp.org/news/learn-to-build-a-graphql-server-with-minimal-effort-fc7fcabe8ebd/).  Though I'd argue more effort than this.
+If you have found this useful, or have feedback, then please let me know in the comments.  Further reading on this can be found at:
+
+-  [Introduction to Apollo Server](https://www.apollographql.com/docs/apollo-server/).  The definitive guide.
+- [Introduction - Apollo Basics](https://www.apollographql.com/docs/tutorial/introduction/).  More of the same but this is the complete full stack walk through which queries live data.
+-  [Learn to Build a GraphQL Server with Minimal Effort](https://www.freecodecamp.org/news/learn-to-build-a-graphql-server-with-minimal-effort-fc7fcabe8ebd/).  Another useful light-weight demonstration, although this has a more realistic back end than this as it interfaces with a mock REST API.
