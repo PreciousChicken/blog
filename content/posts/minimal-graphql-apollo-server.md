@@ -325,7 +325,7 @@ mutation {
 
 Success that the data has been entered should appear with a list of the beasts the poor lady has eaten:
 
-[![GraphQL playground](https://www.preciouschicken.com/blog/images/graphql_beasts_query_variables.png)](https://www.preciouschicken.com/blog/images/graphql_beasts_query_variables.png)
+[![GraphQL playground](https://www.preciouschicken.com/blog/images/graphql_beasts_query_variables.png)](https://www.preciouschicken.com/blog/images/graphql_beasts_mutation.png)
 
 As this is a minimal example this mutation is in-memory only and isn't saved to disk - if you restart the server the data will be erased.
 
