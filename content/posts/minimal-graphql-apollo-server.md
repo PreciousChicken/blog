@@ -237,7 +237,7 @@ After our `Beast` object is `Query`.  This shows we have three ways of querying 
 -  `calledBy(commonName: String!)` which returns an array of beasts where the string we provide matches their common name - e.g. 'ca' would match both 'carrion crow' and 'cat'.  
 
 
-The last section of `typeDefs` is 'Mutation` - this is the part of the schema which allows us to add to the datastore, rather than just query it.
+The last section of `typeDefs` is `Mutation` - this is the part of the schema which allows us to add to the datastore, rather than just query it.
 
 The next variable in the code is `resolvers` which is broken into three sections:
 
@@ -249,13 +249,13 @@ The next variable in the code is `resolvers` which is broken into three sections
 
 Explanations over, let's start the server.  At the terminal enter:
 
-```bash
+```shell
 node index.js
 ``` 
 
 Assuming success you should see a message similar to the following:
 
-```bash
+```shell
 Server ready at http://localhost:4000/
 ```
 
@@ -353,7 +353,7 @@ As this is a minimal example this mutation is in-memory only and isn't saved to 
 
 The disadvantage to starting the server with `node index.js` as above, is that every time you make a change to the source code (like add a new resolver or amend the schema), you have to restart from the command line.  Alternatively if you start the server with:
 
-```bash
+```shell
 npx nodemon index.js
 ```
 your code will be monitored and the server will restart automatically.  Will save you lots of time if you are making frequent changes.
