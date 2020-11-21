@@ -9,7 +9,7 @@ draft: false
 
 ## Introduction
 
-As we progress through life's journey we lose digital information.  Who we met, what we talked about, contact details, etc tend to disappear in the digital flux like tears in the rain.  This loss is often due to reasons of software (e.g. file formats changes) and hardware (e.g. corrupt hard drives).  But more prosaically organisational change happens: as we switch providers from Big Tech Corp A to Big Tech Corp B and back again, we often lose access to data we have stored in someone else's stovepipe.
+As we progress through life's journey we lose digital information.  Who we met, what we talked about, contact details, etc tend to disappear in the digital flux like tears in the rain.  Often this happens as we switch providers from Big Tech Corp A to Big Tech Corp B and back again - access is lost to data we have stored in someone else's stovepipe.
 
 This post details a proof of concept to combat this by hosting a calendar as an Ethereum smart contract.  The [eth-cal-open](#eth-cal-open) calendar implementation allows read-write access via an Ethereum enabled (e.g. metamask) web browser; it also allows a user to access a read-only version of the calendar in a standard calendar client (e.g. MS Outlook).  The theoretical advantage here is that as long as the Ethereum network exists you will be able to access your data.
 
@@ -17,7 +17,7 @@ This proof of concept has also been expanded into a role based access version, [
 
 This post is intended to present a synopsis, links to repositories and running instances of deliverables from my recent MSc Thesis which explores this concept: [Forget-me-block - Exploring digital preservation strategies using Distributed Ledger Technology in the context of personal information management](https://arxiv.org/abs/2011.05759).
 
-## Synopsis
+## Research Synopsis
 
 Received wisdom portrays digital records as guaranteeing perpetuity; as the [New York Times wrote](https://www.nytimes.com/2010/07/25/magazine/25privacy-t2.html) a decade ago: "the web means the end of forgetting".  The reality however is that digital records suffer similar risks of access loss as the analogue versions they replaced - but through the mechanisms of software, hardware and organisational change.
 
@@ -80,7 +80,11 @@ Although the administrator account automatically defaults to the contract owner,
 ### GitHub repo
 [forget-me-block-eth-cal-auth](https://github.com/PreciousChicken/forget-me-block-eth-cal-auth)
 
+## Non-software deliverables
+
+The [research](https://arxiv.org/abs/2011.05759) also provides guidelines for future developers looking to use distributed ledger technology (e.g. blockchain) for the purposes of digital preservation.  These guidelines consider the key criteria of storage, accessibility, integrity, control & identity and usability.
+
 ## Conclusion
 
-Clearly further details are available within the [thesis](https://arxiv.org/abs/2011.05759); but feel free to leave questions or comments below (or [contact me](https://www.preciouschicken.com/blog/about/)).
+Further details are available within the [thesis](https://arxiv.org/abs/2011.05759); but feel free to leave questions or comments below (or [contact me](https://www.preciouschicken.com/blog/about/)).
 
