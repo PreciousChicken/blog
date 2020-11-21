@@ -36,7 +36,7 @@ In the course of this research a number of software deliverables were created:
 - **CalStore**.  A smart contract which stores calendar events, with each address that calling the contract being allocated their own calendar.  On request it returns a calendar of events for the calling address using either the *iCal* format (see [RFC 5545](https://tools.ietf.org/html/rfc5545)) or JSON.
 - **CalAuth**.  This smart contract is meant to represent an organisation (e.g. Blankshire General Hospital) who maintains a group calendar on CalStore.  CalAuth lets the contract owner authenticate which accounts are allowed to read and write to the group's calendar on CalStore.  All the functions which relate to creating and reading events have the same arguments and returns as CalStore: when an Externally Owned Account calls CalAuth - assuming they are not the admin and have the required access) then CalAuth essentially acts as an interface or relay to CalStore.  This is illustrated at the Architecture section below.
 - **Eth-cal-open**.  A web calendar and API (generating an *iCal* feed to be used within a calendar client such as MS Outlook), this is a front end to *CalStore*.
-- **Eth-cal-auth**.  This view depends on your account's level of access.  The contract owner will see an administrator's dashboard (where they can authenticate others), an authenticated user will see a web calendar featuring the group calendar (and API link) and an unauthenticated user will be denied access.
+- **Eth-cal-auth**.  This view, which acts as a front end to *CalAuth*, will vary dependent on your account's level of access.  The contract owner will see an administrator's dashboard (where they can authenticate others), an authenticated user will see a web calendar featuring the group calendar (and API link) and an unauthenticated user will be denied access.
 
 The artefacts above seek to demonstrate that there may be alternatives to the current norm - alternatives that give ownership of digital identities back to the individual. Within the artefacts once you have been granted access to an organisation’s data within a certain date range – unless the organisation specifically forbids you – then you will continue to have access to that data regardless of your association with that organisation. Indeed the organisation could cease to exist, yet your access to that data, would live on unaffected. This is a starkly different model to the current norm.
 
@@ -54,7 +54,7 @@ The following UML sequence diagram shows the processes involved with Bob reading
 
 [![Eth-cal-open](https://www.preciouschicken.com/blog/images/ethcalopen-view.png)](https://www.preciouschicken.com/blog/images/ethcalopen-view.png)
 
-This instance is live on the Ropsten test net and will accept read-write access from any account.  Access is either via a web interface, as featured above, or via a read-only iCal feed which you can ingest into your standard calendar application (e.g. MS Office).
+This instance is live on the Ropsten test net and will accept read-write access from any account.  Access is either via a web interface, as featured above, or via a read-only iCal feed which a standard calendar application (e.g. MS Office) can ingest.
 
 The React web interface was built using [Big Calendar](https://jquense.github.io/react-big-calendar/examples/index.html).
 
@@ -66,11 +66,11 @@ The React web interface was built using [Big Calendar](https://jquense.github.io
 
 ## Eth-cal-auth
 
-This instance is live on the Ropsten test net; however, unlike eth-cal-open, the view will differ depending on whether you have administrator, read-write, read-only or nil access.  Considerable use of the OpenZeppelin [Access Control](https://docs.openzeppelin.com/contracts/2.x/access-control) library was used in this deliverable.  The screenshot below shows administrator access:
+This instance is live on the Ropsten test net; however, unlike eth-cal-open, the view will differ depending on whether you have administrator, read-write, read-only or nil access.  Considerable use of the OpenZeppelin [Access Control](https://docs.openzeppelin.com/contracts/2.x/access-control) solidity library was used in this deliverable.  The screenshot below shows administrator access:
 
 [![Eth-cal-auth: Dashboard](https://www.preciouschicken.com/blog/images/ethcalauth-dashboard.png)](https://www.preciouschicken.com/blog/images/ethcalauth-dashboard.png)
 
-Although the administrator account automatically defaults to the contract owner, a 'back door' has been added to the instance to allow administrator rights to be requested by anyone.  Read-write or read-only privileges can then be granted to any account, which will allow those accounts to access the eth-cal-auth calendar as below (read-write or read-only access being indicated next to the logged-on account address):
+Although the administrator account automatically defaults to the contract owner, a 'back door' allows administrator rights to be requested by anyone.  Read-write or read-only privileges can then be granted to any account, which will allow those accounts to access the eth-cal-auth calendar as below (read-write or read-only access being indicated next to the logged-on account address):
 
 [![Eth-cal-auth: Calendar](https://www.preciouschicken.com/blog/images/ethcalauth-view.png)](https://www.preciouschicken.com/blog/images/ethcalauth-view.png)
 
@@ -86,5 +86,5 @@ The [research](https://arxiv.org/abs/2011.05759) also provides guidelines for fu
 
 ## Conclusion
 
-Further details are available within the [thesis](https://arxiv.org/abs/2011.05759); but feel free to leave questions or comments below (or [contact me](https://www.preciouschicken.com/blog/about/)).
+Further details are available within the [thesis](https://arxiv.org/abs/2011.05759); but  questions or comments are welcome below.  For more involved discussion please feel free to [contact me](https://www.preciouschicken.com/blog/about/) directly.
 
