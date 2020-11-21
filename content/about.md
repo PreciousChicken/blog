@@ -6,7 +6,7 @@ draft: false
 
 ## About
 
-Freelance software developer, with deep experience of understanding complex organisational requirements.  Feel free to say <hello@preciouschicken.com>.
+Freelance software developer with deep experience of understanding complex organisational requirements.  Feel free to say <hello@preciouschicken.com>.
 
 ## Presence elsewhere
 
