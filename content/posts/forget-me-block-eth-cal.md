@@ -86,5 +86,7 @@ The [research](https://arxiv.org/abs/2011.05759) also provides guidelines for fu
 
 ## Conclusion
 
-Further details are available within the [thesis](https://arxiv.org/abs/2011.05759); but  questions or comments are welcome below.  For more involved discussion please feel free to [contact me](https://www.preciouschicken.com/blog/about/) directly.
+As this is a proof of concept there are many caveats to this current implementation - for instance storage space is constrained to what will fit within a smart contract and calendar details are visible to anyone with access to a block explorer.
+
+These caveats and much else is explored within the [thesis](https://arxiv.org/abs/2011.05759); but  questions or comments are welcome below.  For more involved discussion please feel free to [contact me](https://www.preciouschicken.com/blog/about/) directly.
 
