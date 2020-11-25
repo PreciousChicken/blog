@@ -213,6 +213,10 @@ cd client
 npm install ethers react-bootstrap bootstrap
 npm audit fix
 ```
+
+(**Update 25 November 2020**: Currently running the above command with npm version 7.0.8 creates a `npm ERR! Cannot read property 'length' of undefined` error.  Using version 6.14.9 however does not.  If this command generates an error therefore, check your npm version with `npm -v`.)
+
+
 The first of these packages, [ethers.js](https://github.com/ethers-io/ethers.js/), is the most important - it aiming to be a "complete and compact library for interacting with the Ethereum Blockchain and its ecosystem"; the second two are for the purposes of UI.  The primary alternative to ethers.js is [web3.js](https://github.com/ethereum/web3.js/), [Adrian Li](https://github.com/adrianmcli/web3-vs-ethers) and [infura.io](https://blog.infura.io/ethereum-javascript-libraries-web3-js-vs-ethers-js-part-i/) have written more on the difference between the two.
 
 Edit the following file with your text editor:
@@ -525,9 +529,11 @@ There will be a number of congratulatory / analytics sreens to click through aft
 
 [![Metamask: Networks](https://www.preciouschicken.com/blog/images/metamask_gc_networks.png)](https://www.preciouschicken.com/blog/images/metamask_gc_networks.png)
 
-We now need to enter the details of where Metamask can find Ganache on the network.  Returning to Ganache copy the *RPC Server* details (in my instance this is `HTTP://127.0.0.1:7545`) and copy them into *New RPC URL* field on the add network screen, give it a sensible *Network Name* (e.g. `Ganache`), and click *Save*:
+We now need to enter the details of where Metamask can find Ganache on the network.  Returning to Ganache copy the *RPC Server* details (in my instance this is `HTTP://127.0.0.1:7545`) and copy them into *New RPC URL* field on the add network screen, give it a sensible *Network Name* (e.g. `Ganache`), and select *Save*:
 
 [![Metamask: Custom RPC](https://www.preciouschicken.com/blog/images/metamask_gc_customrpc.png)](https://www.preciouschicken.com/blog/images/metamask_gc_customrpc.png)
+
+Ensure that *Ganache* (or whatever you called your network) is now displayed in the network dropdown menu at the top of the Metamask window, as opposed to the default of *Main Ethereum Network*.  This ensures the application is talking to your local blockchain (where we have deployed the smart contract), rather than the real-world Ethereum network (where we have not).
 
 <!---From the left hand menu select *Connections*: this will allow us to add our React site to the list of allowed sites.  Add `localhost` and select *Connect*:
 
