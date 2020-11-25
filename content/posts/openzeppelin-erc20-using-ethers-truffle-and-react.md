@@ -533,7 +533,7 @@ We now need to enter the details of where Metamask can find Ganache on the netwo
 
 [![Metamask: Custom RPC](https://www.preciouschicken.com/blog/images/metamask_gc_customrpc.png)](https://www.preciouschicken.com/blog/images/metamask_gc_customrpc.png)
 
-Ensure that *Ganache* (or whatever you called your network) is now displayed in the network dropdown menu at the top of the Metamask window, as opposed to the default of *Main Ethereum Network*.  This ensures the application is talking to your local blockchain (where we have deployed the smart contract), rather than the real-world Ethereum network (where we have not).
+Confirm that *Ganache* (or whatever you called your network) is now displayed in the network dropdown menu at the top of the Metamask window, as opposed to the default of *Main Ethereum Network*.  This ensures the application is talking to your local blockchain (where we have deployed the smart contract), rather than the real-world Ethereum network (where we have not).
 
 <!---From the left hand menu select *Connections*: this will allow us to add our React site to the list of allowed sites.  Add `localhost` and select *Connect*:
 
