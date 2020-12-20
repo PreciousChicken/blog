@@ -3,7 +3,7 @@ title: "Forget-me-block: Message Time Store"
 date: 2020-07-13T15:21:35+01:00
 tags: ["ethereum", "blockchain", "solidity" ]
 categories: ["Research"]
-description: "Research into using the Ethereum blockchain for data preservation."
+description: "Research into using the Ethereum blockchain for digital preservation."
 draft: false
 ---
 

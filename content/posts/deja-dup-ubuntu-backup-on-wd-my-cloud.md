@@ -2,6 +2,7 @@
 title: "Configuring Deja Dup Ubuntu Backup on a WD My Cloud NAS"
 date: 2019-12-04T11:05:57Z
 tags: ["Linux", "Deja Dup Backup"]
+description: "How to set up automated Deja Dup Ubuntu Backups on a WD My Cloud NAS"
 draft: false
 ---
 

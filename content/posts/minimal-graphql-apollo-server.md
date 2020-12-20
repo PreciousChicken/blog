@@ -3,6 +3,7 @@ title: "Oh-so minimal GraphQL API example with Apollo Server"
 date: 2020-11-16T07:48:47Z
 tags: ["Node", "GraphQL", "Apollo Server", "JavaScript"]
 categories: ["Web development"]
+description: "A worked example of setting up a GraphQL API with Apollo Server"
 draft: false
 ---
 
