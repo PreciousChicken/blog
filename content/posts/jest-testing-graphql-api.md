@@ -9,7 +9,7 @@ draft: false
 
 ## Introduction
 
-There are many options to test a [GraphQL](https://graphql.org/) API, but in this worked example I'm going to use [Jest](https://jestjs.io/) which is a JavaScript testing framework developed by Facebook.  I've written previously on how to set up a [very minimal GraphQL API](https://www.preciouschicken.com/blog/posts/minimal-graphql-apollo-server/).  This is however a standalone demonstration and relies on a publicly accessible GraphQL API providing [Finnish public transport data](https://digitransit.fi/en/developers/).  As per the title absolutely nothing funny about any of this, just a super concise guide to what you need to do.
+There are many options to test a [GraphQL](https://graphql.org/) API, but in this worked example I'm going to use [Jest](https://jestjs.io/) which is a JavaScript testing framework developed by Facebook.  I've written previously on how to set up a [very minimal GraphQL API](https://www.preciouschicken.com/blog/posts/minimal-graphql-apollo-server/).  This is however a standalone demonstration and relies on a publicly accessible GraphQL API providing [Finnish public transport data](https://digitransit.fi/en/developers/).  As per the awful pun in the title absolutely nothing funny about any of this, just a super concise guide to what you need to do.
 
 All code can be downloaded from my [jest-testing-graphql-api](https://github.com/PreciousChicken/jest-testing-graphql-api) repository.  This worked example requires NodeJS, if you haven't installed it I'd recommend doing so following this [StackOverflow answer](https://stackoverflow.com/a/24404451).
 
