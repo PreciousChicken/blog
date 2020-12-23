@@ -1,5 +1,5 @@
 ---
-title: "The no jokes guide to testing a GraphQL API with Jest"
+title: "A no jokes guide to testing a GraphQL API with Jest"
 date: 2020-12-21T20:11:37Z
 tags: ["Jest", "Testing", "JavaScript", "GraphQL"]
 categories: ["Web development"]
