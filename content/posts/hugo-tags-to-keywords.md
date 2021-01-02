@@ -1,5 +1,5 @@
 ---
-title: "On Metadata in Hugo - or turning tags to keywords"
+title: "On metadata in Hugo - or turning tags to keywords"
 date: 2021-01-01T14:35:58Z
 tags: ["hugo", "keywords", "golang"]
 categories: ["web dev"]
@@ -15,9 +15,9 @@ The next choice was theme, another potential time sink, but [Cactus Plus](https:
 
 ## But meta
 
-But like anything off-the-shelf there have been a number of annoyances and those mostly relate to how the theme handles metadata within the Header element.  Apparently much of this, like keywords, has been so badly abused by those looking to game Google, that it is now routinely ignored by search engines.  And even if it isn't I have a hunch that the semantic web will (is?) being overtaken by algorithms - i.e. why rely on the page author to sum up what your page is about, when the machine can do that for you.  However ultimately if there is a box to fill in, I like to do it.
+But like anything off-the-shelf there have been a number of annoyances and those mostly relate to how the theme handles metadata within the Header element.  Apparently much of this, like keywords, has been so badly abused by those looking to game Google, that it is now routinely ignored by search engines.  And even if it isn't I have a hunch that the semantic web will (is?) being overtaken by algorithms - i.e. why rely on the page author to sum up what your page is about, when the machine can do that for you.  However ultimately I can't stand to see round holes without putting round pegs in them.
 
-After some time watching the excellent 
+Although having little exposure to Golang, after some time watching Mike Dane's excellent [video tutorials](https://www.mikedane.com/static-site-generators/hugo/) on Hugo I felt ready to jump in.
 
 ## Frontmatter example
 
@@ -25,7 +25,7 @@ As an example of what a typical frontmatter on this blog looks like, here is the
 
 ```toml
 ---
-title: "On Metadata in Hugo - or turning tags to keywords"
+title: "On metadata in Hugo - or turning tags to keywords"
 date: 2021-01-01T14:35:58Z
 tags: ["hugo", "keywords", "golang"]
 description: "How to automate metadata insertion within the HTML header using Hugo open-source static site generator"
