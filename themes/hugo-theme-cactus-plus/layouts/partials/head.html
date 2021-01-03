@@ -27,8 +27,8 @@
     {{ range .Site.Params.customCSS }}
     <link rel="stylesheet" href="{{ $.Site.BaseURL }}{{ . }}">
     {{ end }}
-    <!-- Added keywords /> -->
+    <!-- Added keywords -->
     <meta name="keywords" content="{{ with .Params.tags }}{{ delimit . ", "}}{{ end }}" />
-    <!-- Added canonical link /> -->
+    <!-- Added canonical link -->
     <link rel="canonical" href="{{ .Permalink }}" />
   </head>
