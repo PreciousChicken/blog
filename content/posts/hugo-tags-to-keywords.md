@@ -42,7 +42,7 @@ To get Hugo to default to this template, so that creating a new post produces bl
 
 ## Partial template *head.html*
 
-Within Cactus Plus to ensure our metadata gets dragged from the front matter into the outputted HTML we need to alter the partial template found at *themes/hugo-theme-cactus-plus/layouts/partials/head.html*.  All the following attributes will necessitate an amendment to that file.  Other themes of course might place the html elsewhere.
+Within Cactus Plus to ensure our metadata gets dragged from the front matter into the outputted HTML we need to alter the partial template found at *themes/hugo-theme-cactus-plus/layouts/partials/head.html*.  All the following attributes will necessitate an amendment to that file.  Other themes of course might place the HTML elsewhere.
 
 Nodejs' [original](https://github.com/nodejh/hugo-theme-cactus-plus/blob/master/layouts/partials/head.html) *head.html* can be compared to my [final](https://github.com/PreciousChicken/blog/blob/master/themes/hugo-theme-cactus-plus/layouts/partials/head.html) on github.
 
@@ -60,7 +60,7 @@ The Cactus Plus theme makes no attempt to complete the keywords metadata attribu
 
 Interestingly the [exact example](https://gohugo.io/functions/delimit/) of iterating through an array of tags is given in the Hugo documentation, but when used in anger it outputted a `Can't iterate over <nil>` error.  Thankfully the [solution](https://discourse.gohugo.io/t/error-calling-delimit-cant-iterate-over-nil/23016/2?u=preciouschicken) was in the community forum:  `with` was required.
 
-Example output:
+This should generate the following HTML:
 
 ```html
 <meta name="keywords" content="hugo, html, golang, metadata" />
@@ -86,7 +86,7 @@ However this inserts the description set within the [configuration file](https:/
 
 This inserts the front matter description attribute if there is one, otherwise defaults to the configuration file description, and just to be belts and braces, if it can't find one of those goes for a default of "Freelance software".
 
-Example output:
+This should generate the following HTML:
 
 ```html
 <meta name="description" content="How to automate metadata insertion within the HTML head element using the Hugo open-source static site generator" />
@@ -98,9 +98,9 @@ Cactus Plus does not insert a canonical link as metadata, which is described at 
 
 > The canonical link relation specifies the preferred [URL] from resources with duplicative content.  Common implementations of the canonical link relation are to specify the preferred version of an [URL] from duplicate pages
 
-In other words when you have two pages with identical content, this lets search engines know which of the two pages should be considered 'authoritative.'  This is particularly relevant to my circumstances, all my posts are distritbuted first to my [blog](https://www.preciouschicken.com/blog/index.html) and then syndicated to [dev.to](https://dev.to/preciouschicken).  I therefore need a canonical link to [let Google know](https://developers.google.com/search/docs/advanced/crawling/consolidate-duplicate-urls) that the authoritative copy is the one on my site, not dev.to.
+In other words when you have two pages with identical content, this lets search engines know which of the two pages should be considered 'authoritative.'  This is particularly relevant to my circumstances: all my posts are first uploaded to my [blog](https://www.preciouschicken.com/blog/index.html) and then syndicated to [dev.to](https://dev.to/preciouschicken).  I therefore need a canonical link to [let Google know](https://developers.google.com/search/docs/advanced/crawling/consolidate-duplicate-urls) that the authoritative copy is the one on my site, not dev.to.
 
-This to be fair is probably the correct behaviour on the part of Cactus Plus, it could well be that your use case means the pages you are generating via Hugo are not the authoritative copy.  It just doesn't work for me.
+This to be fair is probably the correct behaviour on the part of Cactus Plus, it might be that your use case means the pages you are generating via Hugo are not the authoritative copy, or simply the only copy.  It just doesn't work for me.
 
 The solution to this is easy, insert within the `<head>` element of *head.html* the following line:
 
@@ -108,7 +108,7 @@ The solution to this is easy, insert within the `<head>` element of *head.html* 
 <link rel="canonical" href="{{ .Permalink }}" />
 ```
 
-Example output:
+This should generate the following HTML:
 
 ```html
 <link rel="canonical" href="https://preciouschicken.com/blog/posts/hugo-tags-to-keywords/" />
@@ -116,7 +116,7 @@ Example output:
 
 ## Conclusion
 
-I enjoy using Hugo as a content management system, it allows one to write without getting bogged down in web design minutiae.  At the same time when change is required the framework offers powerful customisation and an active community: as long as you are prepared to get to grips with Golang.  
+I enjoy using Hugo as a content management system, it allows one to write from a standing start without getting bogged down in web design minutiae.  At the same time when change is required you are able to fully open the hood and tinker to your heart's content: as long as you are prepared to get to grips with Golang.  
 
 Cactus Plus is also a lovely theme, that does 99% of what I need - just a pity it is no longer maintained.
 
