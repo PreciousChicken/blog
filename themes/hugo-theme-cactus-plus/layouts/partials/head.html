@@ -8,7 +8,9 @@
     {{ partial "twitter-cards.html" . }}
     {{ end }}
     {{ with .Site.Params.author }}<meta name="author" content="{{ . }}">{{ end }}
-    <!-- JDH: Removed {{ with .Site.Params.description }}<meta name="description" content="{{ . }}">{{ end }} -->
+    <!-- Removed {{ with .Site.Params.description }}<meta name="description" content="{{ . }}">{{ end }} -->
+    <!-- Added page specific description -->
+    <meta name="description" content="{{ if .Params.Description }}{{ .Params.Description }}{{ else if .Site.Params.Description }}{{ .Site.Params.Description }}{{ else }}Freelance software{{ end }}" /> 
     {{ hugo.Generator }}
     <title>{{ if .IsHome }}{{ .Title }}{{ else }}{{ .Title }} &middot; {{ .Site.Title }}{{ end }}</title>
     <link rel="shortcut icon" href="{{ .Site.BaseURL }}images/favicon.ico">
@@ -25,9 +27,8 @@
     {{ range .Site.Params.customCSS }}
     <link rel="stylesheet" href="{{ $.Site.BaseURL }}{{ . }}">
     {{ end }}
-    <!-- JDH: Removed <link rel="canonical" href="https://www.preciouschicken.com/blog/" /> -->
-    <link rel="canonical" href="{{ .Permalink }}" />
-    <meta name="description" content="{{ if .Params.Description }}{{ .Params.Description }}{{ else if .Site.Params.Description }}{{ .Site.Params.Description }}{{ else }}Freelance software{{ end }}" /> 
-    <!-- JDH: Added keywords /> -->
+    <!-- Added keywords /> -->
     <meta name="keywords" content="{{ with .Params.tags }}{{ delimit . ", "}}{{ end }}" />
+    <!-- Added canonical link /> -->
+    <link rel="canonical" href="{{ .Permalink }}" />
   </head>
