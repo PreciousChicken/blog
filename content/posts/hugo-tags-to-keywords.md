@@ -4,7 +4,7 @@ date: 2021-01-01T14:35:58Z
 tags: ["hugo", "html", "golang", "metadata"]
 categories: ["web dev"]
 description: "How to automate metadata insertion within the HTML head element using the Hugo open-source static site generator"
-draft: true
+draft: false
 ---
 ## TL;DR
 
