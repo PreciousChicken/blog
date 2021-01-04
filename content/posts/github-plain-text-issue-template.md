@@ -1,9 +1,9 @@
 ---
-title: "A plain text issue template for use on Github"
+title: "A plain-text issue template for use on Github"
 date: 2021-01-04T11:48:41Z
 tags: ["github", "markdown"]
 categories: ["web dev"]
-description: "A plan text issue template for copying and pasting when creating a new issue on Github"
+description: "A plain-text issue template for copying and pasting when creating a new issue on Github"
 enableToc: false
 draft: false
 ---
