@@ -5,24 +5,24 @@ tags: ["github", "markdown"]
 categories: ["web dev"]
 description: "A plan text issue template for copying and pasting when creating a new issue on Github"
 toc: false
-draft: true
+draft: false
 ---
 
-When I'm creating a new issue on Github I like to use a template - it just helps me order my thoughts.  Here's the one I use if the site maintainer has not provided one:
+When I'm creating a new issue on Github I like to use a template - it just helps me order my thoughts.  Here's the one I copy and paste if the repository maintainer has not provided one:
 
 ```md
 ## Describe the issue
 
-## To Reproduce
+## To reproduce
 
-## Expected behavior
+## Expected behaviour
 
 ## Screenshots
 
-## Configuration:
+## Configuration
 
-### OS: 
-### Browser:
+- OS: 
+- Browser:
 
 ## Additional context
 ```
