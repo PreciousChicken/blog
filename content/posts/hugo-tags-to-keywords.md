@@ -8,7 +8,7 @@ draft: false
 ---
 ## TL;DR
 
-How (and why) to add the HTML metadata elements of keywords, description and canonical link to Hugo's Cactus Plus theme.  All code viewable on my [blog](https://github.com/PreciousChicken/blog) repository.
+How (and why) to add the HTML metadata of keywords, description and canonical link to Hugo's Cactus Plus theme.  All code viewable on my [blog](https://github.com/PreciousChicken/blog) repository.
 
 ## The best being the enemy of the good
 
