@@ -1,4 +1,5 @@
 ---
+enableToc: true
 title: "Short, sharp Solidity: pure vs view vs call"
 date: 2020-07-09T16:19:34+01:00
 tags: ["ethereum", "truffle", "solidity"]

@@ -1,4 +1,5 @@
 ---
+enableToc: true
 title: "Where Do I Put AppImages?"
 date: 2019-12-31T11:05:50Z
 tags: ["AppImage", "Linux"]

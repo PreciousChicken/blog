@@ -4,7 +4,7 @@ date: 2021-01-04T11:48:41Z
 tags: ["github", "markdown"]
 categories: ["web dev"]
 description: "A plan text issue template for copying and pasting when creating a new issue on Github"
-toc: false
+enableToc: false
 draft: false
 ---
 

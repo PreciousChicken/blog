@@ -1,4 +1,5 @@
 ---
+enableToc: true
 title: "On metadata in Hugo - or turning tags to keywords"
 date: 2021-01-01T14:35:58Z
 tags: ["hugo", "html", "golang", "metadata"]

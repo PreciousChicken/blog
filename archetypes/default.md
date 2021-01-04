@@ -4,6 +4,7 @@ date: {{ .Date }}
 tags: [""]
 categories: [""]
 description: ""
+enableToc: true
 draft: true
 ---
 

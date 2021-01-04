@@ -1,4 +1,5 @@
 ---
+enableToc: true
 title: "Barebones Guide to JUnit on the Command Line"
 date: 2020-02-15T22:19:39Z
 tags: ["Java", "Linux"]

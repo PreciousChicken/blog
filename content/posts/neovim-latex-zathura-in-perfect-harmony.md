@@ -1,4 +1,5 @@
 ---
+enableToc: true
 title: "Neovim, LaTeX and Zathura in perfect harmony"
 date: 2020-05-23T18:09:07+01:00
 tags: ["neovim", "LaTeX", "zathura", "vimscript"]

@@ -1,4 +1,5 @@
 ---
+enableToc: true
 title: "Configuring Deja Dup Ubuntu Backup on a WD My Cloud NAS"
 date: 2019-12-04T11:05:57Z
 tags: ["Linux", "Deja Dup Backup"]

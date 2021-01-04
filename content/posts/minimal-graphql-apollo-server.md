@@ -1,4 +1,5 @@
 ---
+enableToc: true
 title: "Oh-so minimal GraphQL API example with Apollo Server"
 date: 2020-11-16T07:48:47Z
 tags: ["Node", "GraphQL", "Apollo Server", "JavaScript"]

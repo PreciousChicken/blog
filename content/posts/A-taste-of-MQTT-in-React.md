@@ -1,4 +1,5 @@
 ---
+enableToc: true
 title: "A taste of MQTT in React"
 date: 2020-03-03T21:43:50Z
 tags: ["React", "MQTT", "JavaScript", "Node"]
