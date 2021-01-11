@@ -39,7 +39,7 @@ draft: false
 ---
 ```
 
-To get Hugo to default to this template, so that creating a new post produces blank variables ready for you to complete, one needs to alter the root file *archetypes\default.md*.  Editing the archetypes within your theme will make no difference - unless you have deleted your root *archetypes\default.md* (I'm not the only one to find this behaviour [slightly confusing](https://discourse.gohugo.io/t/hugo-doesnt-use-theme-archetypes/8382/5?u=preciouschicken)).
+To get Hugo to default to this template, so that creating a new post produces blank variables ready for you to complete, one needs to alter the root file *archetypes/default.md*.  Editing the archetypes within your theme will make no difference - unless you have deleted your root *archetypes/default.md* (I'm not the only one to find this behaviour [slightly confusing](https://discourse.gohugo.io/t/hugo-doesnt-use-theme-archetypes/8382/5?u=preciouschicken)).
 
 ## Partial template *head.html*
 
