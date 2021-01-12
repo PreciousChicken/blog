@@ -486,14 +486,19 @@ Your prompt should now change to `truffle(ganache)>` or similar.  Enter:
 token = await PreciousChickenToken.deployed()
 ```
 
-If successful this should return `undefined`.  We can now increase the allowance and then exit truffle console:
+If successful this should return `undefined`.  We can now increase the allowance:
 
 ```javascript
 token.increaseAllowance(accounts[1], 1000, {from: accounts[0]})
-.exit
 ```
 
 This code should output a transaction log to the console.  The command states that accounts[0] (e.g. the Ganache account at Index 0 - defined as the *owner* within the smart contract) authorises accounts[1] (e.g. Index 1) to hold up to 1000 tokens.
+
+Lastly exit the console:
+
+```javascript
+.exit
+```
 
 ## Start React
 
