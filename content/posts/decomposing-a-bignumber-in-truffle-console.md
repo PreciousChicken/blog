@@ -1,4 +1,5 @@
 ---
+enableToc: true
 title: "Decomposing a BigNumber in Truffle Console"
 date: 2020-06-18T14:15:17+01:00
 tags: ["ethereum", "truffle"]

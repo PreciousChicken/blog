@@ -25,7 +25,8 @@
                       </span>
                     </h2>
                 </header>
-                {{ if .Site.Params.enableToc }}
+                <!-- Changed from site to page param -->
+                {{ if .Params.enableToc }}
                   {{ if .TableOfContents }}
                     <div id="toc">
                       {{ .TableOfContents }}

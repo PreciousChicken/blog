@@ -1,4 +1,5 @@
 ---
+enableToc: true
 title: "On metadata in Hugo - or turning tags to keywords"
 date: 2021-01-01T14:35:58Z
 tags: ["hugo", "html", "golang", "metadata"]
@@ -8,7 +9,7 @@ draft: false
 ---
 ## TL;DR
 
-How (and why) to add the HTML metadata elements of keywords, description and canonical link to Hugo's Cactus Plus theme.  All code viewable on my [blog](https://github.com/PreciousChicken/blog) repository.
+How (and why) to add the HTML metadata of keywords, description and canonical link to Hugo's Cactus Plus theme.  All code viewable on my [blog](https://github.com/PreciousChicken/blog) repository.
 
 ## The best being the enemy of the good
 
@@ -20,7 +21,7 @@ The next choice was theme, another potential time sink, but [Cactus Plus](https:
 
 Like anything off-the-shelf some tweaking is required and for me that related to how Cactus Plus handles metadata within the HTML [head element](https://html.spec.whatwg.org/multipage/semantics.html#the-head-element).  Whether Cactus Plus' treatment of metadata is replicated more generally within the Hugo ecosystem, I don't know, but I do know that I preferred a more comprehensive approach.
 
-Possibly Cactus Plus does not emphasise metadata, because many aspects of it (such as keywords) have been so badly abused by those looking to game Google, that it is now routinely ignored by search engines.  And even if it isn't ignored I have a hunch that the semantic web will (is?) being overtaken by algorithms - i.e. why rely on the page author to sum up what your page is about, when the machine can do a better job.  However ultimately I can't stand to see a round metadata hole without hammering a round metadata attribute in; a twisted metaphor if there ever there was but hopefully you get the point.
+Possibly Cactus Plus does not emphasise metadata; because many aspects of it (such as keywords) have been so badly abused, by those looking to game Google, that it is now routinely ignored by search engines.  And even if it isn't ignored I have a hunch that the semantic web will (is?) being overtaken by algorithms - i.e. why rely on the page author to sum up what your page is about, when the machine can do a better job.  However ultimately I can't stand to see a round metadata hole without hammering a round metadata attribute in; a twisted metaphor if there ever there was but hopefully you get the point.
 
 Although not having used Golang before, after watching Mike Dane's excellent [video tutorials](https://www.mikedane.com/static-site-generators/hugo/) on Hugo I felt ready to jump in.
 
@@ -38,7 +39,7 @@ draft: false
 ---
 ```
 
-To get Hugo to default to this template, so that creating a new post produces blank variables ready for you to complete, one needs to alter the root file *archetypes\default.md*.  Editing the archetypes within your theme will make no difference - unless you have deleted your root *archetypes\default.md* (I'm not the only one to find this behaviour [slightly confusing](https://discourse.gohugo.io/t/hugo-doesnt-use-theme-archetypes/8382/5?u=preciouschicken)).
+To get Hugo to default to this template, so that creating a new post produces blank variables ready for you to complete, one needs to alter the root file *archetypes/default.md*.  Editing the archetypes within your theme will make no difference - unless you have deleted your root *archetypes/default.md* (I'm not the only one to find this behaviour [slightly confusing](https://discourse.gohugo.io/t/hugo-doesnt-use-theme-archetypes/8382/5?u=preciouschicken)).
 
 ## Partial template *head.html*
 

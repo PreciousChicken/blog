@@ -28,7 +28,8 @@ hasCJKLanguage = false
 #facebook = "your_facebook_id"
 
 	enableRSS = true
-	enableToc = true
+	# This variable is now set at page level
+	# enableToc = true
 
 	enableDisqus = true
 	disqusShortname = "preciouschicken"

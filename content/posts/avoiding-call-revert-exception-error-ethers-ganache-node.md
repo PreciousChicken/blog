@@ -1,4 +1,5 @@
 ---
+enableToc: true
 title: "Avoiding Call Revert Exception Error when accessing Truffle Ganache via Ethers in Node"
 date: 2020-07-20T09:30:29+01:00
 tags: ["ethereum", "truffle", "ganache", "solidity", "node", "ethers.js"]

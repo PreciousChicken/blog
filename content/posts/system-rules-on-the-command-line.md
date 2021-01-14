@@ -1,4 +1,5 @@
 ---
+enableToc: true
 title: "System Rules on the Command Line"
 date: 2020-04-18T10:30:21+01:00
 tags: ["Java", "Linux"]
