@@ -5,14 +5,14 @@ tags: ["GraphQL", "React", "Vercel", "Apollo Server"]
 categories: ["WebDev"]
 description: "A worked example how to host a GraphQL API Apollo Server on the Vercel platform with Create-React-App"
 enableToc: true
-draft: true
+draft: false
 ---
 
 ## Introduction
 
 I enjoy using [Vercel](https://vercel.com/docs/serverless-functions/introduction), it makes it very easy to deploy React single-page-applications.  Given its use of [serverless functions](https://vercel.com/docs/serverless-functions/introduction) however it is not entirely obvious how one might use it to host a GraphQL API Apollo Server.  This worked example for Linux demonstrates how it might be done - borrowing code from my earlier [Oh-so minimal GraphQL API example with Apollo Server](https://www.preciouschicken.com/blog/posts/minimal-graphql-apollo-server/) tutorial.
 
-All code can be found on github at my [vercel-apollo-server-react](https://github.com/PreciousChicken/vercel-apollo-server-react) repo.  The final product is also hosted on Vercel.
+All code can be found on github at my [vercel-apollo-server-react](https://github.com/PreciousChicken/vercel-apollo-server-react) repo.  The final product is also hosted on Vercel at [vercel-apollo-server-react.preciouschicken.vercel.app](https://vercel-apollo-server-react.preciouschicken.vercel.app/).
 
 ## Create-React-App
 
@@ -26,17 +26,17 @@ npm i apollo-server-micro @apollo/client
 
 ## GraphQL Server
 
-Vercel looks for a folder named *api* to run serverless functions, so first step is to create it:
+Vercel looks for a folder named *api* to run serverless functions, so this needs to be created:
 
 ```bash
 mkdir api
 ```
 
-Within this folder we need three files: some data for the server to play with, a schema explaining how the data is structured and an initiation of Apollo Server itself.
+Within this folder three files are needed: some data for the server to play with, a schema explaining how the data is structured and an instance of Apollo Server itself.
 
 ### The data
 
-As this is a demonstration only, we are going to use a JSON file to act as our datastore (I'm taking inspiration from [There Was an Old Lady Who Swallowed a Fly](https://en.wikipedia.org/wiki/There_Was_an_Old_Lady_Who_Swallowed_a_Fly).  Create the file *api/db.json* and paste the following:
+As this is a demonstration only, we are going to use a JSON file to act as our datastore (I'm taking inspiration from [There Was an Old Lady Who Swallowed a Fly](https://en.wikipedia.org/wiki/There_Was_an_Old_Lady_Who_Swallowed_a_Fly)).  Create the file *api/db.json* and paste the following:
 
 ```json
 {
@@ -224,14 +224,28 @@ At this point you will have to enter the address used to sign up to Vercel, a co
 ```bash
 npx vercel --prod
 ```
-Accept all of the default options and once uploaded you'll get the URL Vercel is hosting your app at.  If all has gone well it should look like:
+Accept all of the default options and, once uploaded, the URL Vercel is hosting your app at will be output to the terminal.  Following the link, if all has gone well, should take you to a page that looks like:
 
-Insert image here
+[![Vercel screenshot](https://www.preciouschicken.com/blog/images/stacking-vercel.png)](https://www.preciouschicken.com/blog/images/stacking-vercel.png)
 
+The above live version can be viewed on Vercel at [vercel-apollo-server-react.preciouschicken.vercel.app](https://vercel-apollo-server-react.preciouschicken.vercel.app).
+
+It's worth noting that for development purposes you will need to run vercel locally - running `npm start` will not work due to the serverless function.  This can be done with:
+
+```bash 
+npx vercel dev
+```
+
+## Conclusion
+
+If you have found this useful or have feedback, please do leave a comment below.  Some other resources I have produced on GraphQL are:
+
+- [Oh-so minimal GraphQL API example with Apollo Server](https://preciouschicken.com/blog/posts/minimal-graphql-apollo-server/) - A more comprehensive tutorial on GraphQL APIs.  
+- [A no jokes guide to testing a GraphQL API with Jest](https://www.preciouschicken.com/blog/posts/jest-testing-graphql-api/) - Worked example as to testing a GraphQL API.
 
 
 ## Version control
 
-This example uses Vercel CLI 21.1.0, node v15.2.0, npm v6.14.11, @apollo/client v3.3.6, apollo-server-micro v2.19.1 and Ubuntu 20.04.1 (Regolith flavour).  If following the instructions does not work first time then this might be the problem.
+This example uses Vercel CLI 21.1.0, node v15.2.0, npm v6.14.11, @apollo/client v3.3.6, apollo-server-micro v2.19.1 and Ubuntu 20.04.1 (Regolith flavour).  If following the instructions does not work first time then this might be the problem - try cloning the [repo](https://github.com/PreciousChicken/vercel-apollo-server-react) to start with and running `npx vercel dev`.
 
 
