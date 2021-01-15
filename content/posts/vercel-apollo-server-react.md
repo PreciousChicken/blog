@@ -10,9 +10,9 @@ draft: false
 
 ## Introduction
 
-I enjoy using [Vercel](https://vercel.com/docs/serverless-functions/introduction), it makes it very easy to deploy React single-page-applications.  Given its use of [serverless functions](https://vercel.com/docs/serverless-functions/introduction) however it is not entirely obvious how one might use it to host a GraphQL API Apollo Server.  This worked example for Linux demonstrates how it might be done - borrowing code from my earlier [Oh-so minimal GraphQL API example with Apollo Server](https://www.preciouschicken.com/blog/posts/minimal-graphql-apollo-server/) tutorial.
+[Vercel](https://vercel.com/docs/serverless-functions/introduction) makes it seamless to deploy React single-page-applications.  Given its use of [serverless functions](https://vercel.com/docs/serverless-functions/introduction) however it is not straightforward how one might use it to host a GraphQL API using Apollo Server.  This worked example for Linux demonstrates how it might be done - borrowing code from my earlier [Oh-so minimal GraphQL API example with Apollo Server](https://www.preciouschicken.com/blog/posts/minimal-graphql-apollo-server/) tutorial.
 
-All code can be found on github at my [vercel-apollo-server-react](https://github.com/PreciousChicken/vercel-apollo-server-react) repo.  The final product is also hosted on Vercel at [vercel-apollo-server-react.preciouschicken.vercel.app](https://vercel-apollo-server-react.preciouschicken.vercel.app/).
+All code can be found on github at my [vercel-apollo-server-react](https://github.com/PreciousChicken/vercel-apollo-server-react) repo.  The end result of the demo is also hosted on Vercel at [vercel-apollo-server-react.preciouschicken.vercel.app](https://vercel-apollo-server-react.preciouschicken.vercel.app/).
 
 ## Create-React-App
 
@@ -26,7 +26,7 @@ npm i apollo-server-micro @apollo/client
 
 ## GraphQL Server
 
-Vercel looks for a folder named *api* to run serverless functions, so this needs to be created:
+Vercel expects serverless functions to be located in a folder named *api*, so this needs to be created:
 
 ```bash
 mkdir api
@@ -36,7 +36,7 @@ Within this folder three files are needed: some data for the server to play with
 
 ### The data
 
-As this is a demonstration only, we are going to use a JSON file to act as our datastore (I'm taking inspiration from [There Was an Old Lady Who Swallowed a Fly](https://en.wikipedia.org/wiki/There_Was_an_Old_Lady_Who_Swallowed_a_Fly)).  Create the file *api/db.json* and paste the following:
+As this is a demonstration only, we are going to use a JSON file to act as our datastore (as for data content - I'm taking inspiration from [There Was an Old Lady Who Swallowed a Fly](https://en.wikipedia.org/wiki/There_Was_an_Old_Lady_Who_Swallowed_a_Fly)).  Create the file *api/db.json* and paste the following:
 
 ```json
 {
@@ -89,8 +89,6 @@ export const typeDefs = gql`
 		binomial: String
 		"a beast's name to you and I"
 		commonName: String
-		"taxonomy grouping"
-		taxClass: String
 	}
 
 	type Query {
