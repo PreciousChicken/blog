@@ -10,7 +10,7 @@ draft: false
 
 ## Introduction
 
-[Vercel](https://vercel.com/docs/serverless-functions/introduction) makes it seamless to deploy React single-page-applications.  Given its use of [serverless functions](https://vercel.com/docs/serverless-functions/introduction) however it is not straightforward how one might use it to host a GraphQL API using Apollo Server.  This worked example for Linux demonstrates how it might be done - borrowing code from my earlier [Oh-so minimal GraphQL API example with Apollo Server](https://www.preciouschicken.com/blog/posts/minimal-graphql-apollo-server/) tutorial.
+[Vercel](https://vercel.com/docs/serverless-functions/introduction) makes it seamless to deploy React single page applications.  Given its use of [serverless functions](https://vercel.com/docs/serverless-functions/introduction) however, hosting a GraphQL API using Apollo Server on Vercel is less straightforward.  This worked example for Linux demonstrates how it might be done - borrowing code from my earlier [Oh-so minimal GraphQL API example with Apollo Server](https://www.preciouschicken.com/blog/posts/minimal-graphql-apollo-server/) tutorial.
 
 All code can be found on github at my [vercel-apollo-server-react](https://github.com/PreciousChicken/vercel-apollo-server-react) repo.  The end result of the demo is also hosted on Vercel at [vercel-apollo-server-react.preciouschicken.vercel.app](https://vercel-apollo-server-react.preciouschicken.vercel.app/).
 
@@ -26,7 +26,7 @@ npm i apollo-server-micro @apollo/client
 
 ## GraphQL Server
 
-Vercel expects serverless functions to be located in a folder named *api*, so this needs to be created:
+Vercel expects serverless functions to be located in a folder named *api*, so create this first:
 
 ```bash
 mkdir api
@@ -121,7 +121,7 @@ export default new ApolloServer({
 })
 ```
 
-The `introspection` and `playground` variables are normally excluded in production, but I've left them in so the GraphQL playground is still accessible.
+The `introspection` and `playground` variables are normally excluded in production, but leaving them in means the GraphQL playground is still accessible.
 
 ## Front end
 
@@ -211,7 +211,7 @@ export default App;
 
 ## Upload to Vercel
 
-There are a number of ways to upload to Vercel, I typically use the Git repo integration, but for the purposes of this walk though we'll use the CLI option.  This of course assumes you have already signed up with Vercel.  Ensuring you are in the root directory login:
+There are a number of ways to upload to Vercel, I typically use the Github repo integration, but for the purposes of this walk though we'll use the CLI option.  This of course assumes you have already signed up with Vercel.  Ensuring you are in the root directory login:
 
 ```bash
 npx vercel login
@@ -222,13 +222,13 @@ At this point you will have to enter the address used to sign up to Vercel, a co
 ```bash
 npx vercel --prod
 ```
-Accept all of the default options and, once uploaded, the URL Vercel is hosting your app at will be output to the terminal.  Following the link, if all has gone well, should take you to a page that looks like:
+Accept all of the default options and, once uploaded, Vercel will confirm it has built correctly and will provide your application's URL.  Following the link, if all has gone well, should take you to a page that looks like:
 
-[![Vercel screenshot](https://www.preciouschicken.com/blog/images/stacking-vercel.png)](https://www.preciouschicken.com/blog/images/stacking-vercel.png)
+[![Vercel demo screenshot](https://www.preciouschicken.com/blog/images/stacking-vercel-thumb.png)](https://www.preciouschicken.com/blog/images/stacking-vercel.png)
 
 The above live version can be viewed on Vercel at [vercel-apollo-server-react.preciouschicken.vercel.app](https://vercel-apollo-server-react.preciouschicken.vercel.app).
 
-It's worth noting that for development purposes you will need to run vercel locally - running `npm start` will not work due to the serverless function.  This can be done with:
+It's worth noting that if you want to spin this up on your local machine for development purposes, without uploading to the web, then running `npm start` will not work due to the serverless function.  Instead use:
 
 ```bash 
 npx vercel dev
@@ -244,6 +244,6 @@ If you have found this useful or have feedback, please do leave a comment below.
 
 ## Version control
 
-This example uses Vercel CLI 21.1.0, node v15.2.0, npm v6.14.11, @apollo/client v3.3.6, apollo-server-micro v2.19.1 and Ubuntu 20.04.1 (Regolith flavour).  If following the instructions does not work first time then this might be the problem - try cloning the [repo](https://github.com/PreciousChicken/vercel-apollo-server-react) to start with and running `npx vercel dev`.
+This example uses Vercel CLI 21.1.0, node v15.2.0, npm v6.14.11, @apollo/client v3.3.6, apollo-server-micro v2.19.1 and Ubuntu 20.04.1 (Regolith flavour).  If following the instructions does not work first time then this might be the problem - try cloning the [repo](https://github.com/PreciousChicken/vercel-apollo-server-react) to start with and running `npm i && npx vercel dev` (assuming you have a Vercel logon).
 
 
