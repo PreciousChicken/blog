@@ -1,7 +1,7 @@
 ---
 title: "Stacking Vercel, a GraphQL Apollo Server and React"
 date: 2021-01-14T17:11:52Z
-tags: ["GraphQL", "React", "Vercel", "Apollo Server"]
+tags: ["GraphQL", "React", "Vercel", "Apollo Server", "JavaScript"]
 categories: ["WebDev"]
 description: "A worked example how to host a GraphQL API Apollo Server on the Vercel platform with Create-React-App"
 enableToc: true
