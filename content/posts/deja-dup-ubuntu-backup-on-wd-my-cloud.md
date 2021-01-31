@@ -29,7 +29,7 @@ Using the My Cloud interface create a 'share' on the WD My Cloud (see About Shar
 
 ![WD MyCloud Share Access](https://www.preciouschicken.com/blog/images/share_access.png)
 
-Update Jan 2021: Alternatively if you running the current My Cloud OS 5 will instead show:
+Update Jan 2021: Alternatively if you are running the current My Cloud OS 5 you will see:
 
 ![WD MyCloud Share Access OS 5](https://www.preciouschicken.com/blog/images/share_access_5.png)
 
