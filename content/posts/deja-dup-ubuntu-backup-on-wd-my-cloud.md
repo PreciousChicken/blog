@@ -9,9 +9,10 @@ draft: false
 
 Considering that the sole purpose of [Deja Dup](https://wiki.gnome.org/Apps/DejaDup) is to backup and one of the main selling points of a [WD My Cloud NAS](https://amzn.to/2MsLti5) drive[^1]  is as a place to store your backup; it is surprisingly difficult to do it in a seamless way on Ubuntu.  By seamless I mean it happens in the background without you having to think about it.
 
+This post was originally written in December 2019 for Western Digital's My Cloud OS 3 operating system and Ubuntu 18.04 LTS.  As I write this in February 2021 the current WD operating system is [My Cloud OS 5](https://shop.westerndigital.com/support/software/my-cloud-os), and of course Ubuntu has also moved on.  There might therefore be easier ways to do this - I haven't checked as this method still works for me.  Differences for both OSs are shown below.
+
 [^1]: Amazon affiliate link.
 
-Here is how I did it on Ubuntu 18.04 LTS with a WD My Cloud Mirror:
 
 ---
 ## 1. Install the NFS client
@@ -25,11 +26,12 @@ sudo apt install nfs-common
 
 ## 2. Create a share on WD My Cloud  
 
-Using the My Cloud interface create a 'share' on the WD My Cloud (see About Shares in the [User Manual](https://products.wdc.com/library/UM/ENG/4779-705145.pdf)), ensure NFS is set to on and give the share a relevant name (e.g. Backup).  If your NAS is running My Cloud OS 3 then this will look like:
+Using the My Cloud interface create a 'share' on the WD My Cloud (see About Shares in the [User Manual](https://products.wdc.com/library/UM/ENG/4779-705145.pdf)), ensure NFS is set to on and give the share a relevant name (e.g. Backup).  Once created take a note of the IP address of the share as shown in the screenshot below (here it is 192.168.0.32, your system will likely be different). 
 
-![WD MyCloud Share Access](https://www.preciouschicken.com/blog/images/share_access.png)
 
-Update Jan 2021: Alternatively if you are running the current My Cloud OS 5 you will see:
+### MyCloud OS 5
+
+If you are running the current My Cloud OS 5 (and you should be) then you will see:
 
 ![WD MyCloud Share Access OS 5](https://www.preciouschicken.com/blog/images/share_access_5.png)
 
@@ -37,9 +39,15 @@ In this version of the OS you will need to explicitly enable Write via the *Conf
 
 ![WD MyCloud Configure NFS](https://www.preciouschicken.com/blog/images/nfs_configure.png)
 
-The Host value refers to the IP address on your local network that can connect to the share - leave as asterisk to enable all.
+The Host value refers to the IP address on your local network that can connect to the share - leave as asterisk to enable all.  Alternatively add the IP address of the machine you are backing up from to restrict access.
 
-Once created take a note of the IP address of the share as shown in the screenshot (here it is 192.168.0.32, your system will likely be different):
+### MyCloud OS 3
+
+If your NAS is running My Cloud OS 3 then the dialog is slightly different:
+
+![WD MyCloud Share Access](https://www.preciouschicken.com/blog/images/share_access.png)
+
+Unlike OS 5 write access is on by default, but it does not hurt to check...
 
 
 ## 3. Create a local folder to act as mount point
