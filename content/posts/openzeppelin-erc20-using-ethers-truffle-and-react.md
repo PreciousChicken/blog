@@ -36,7 +36,7 @@ Although it is possible to roll your own ERC20 by implementing the interface pro
 
 Download the Appimage from their [homepage](https://www.trufflesuite.com/ganache) and run (I've blogged previously on how [I like to install Appimages](https://www.preciouschicken.com/blog/posts/where-do-i-put-appimages/), but clearly install how you want).  Once the application is running select the _Quickstart Ethereum_ option when you are invited to 'Create a workspace.'  You should be presented with something similar to the following:
 
-[![Ganache](https://www.preciouschicken.com/blog/images/ganache.png)](https://www.preciouschicken.com/blog/images/ganache.png)
+[![Ganache](https://www.preciouschicken.com/blog/images/ganache-thumb.png)](https://www.preciouschicken.com/blog/images/ganache.png)
 
 which gives a list of accounts (or wallets) Ganache has created for you and the pretend Ether they contain.
 
@@ -453,7 +453,7 @@ truffle deploy
 
 If everything works you should see output similar to this:
 
-[![Truffle deploying PreciousChickenToken](https://www.preciouschicken.com/blog/images/truffle_deploy.png)](https://www.preciouschicken.com/blog/images/truffle_deploy.png)
+[![Truffle deploying PreciousChickenToken](https://www.preciouschicken.com/blog/images/truffle_deploy-thumb.png)](https://www.preciouschicken.com/blog/images/truffle_deploy.png)
 
 I've highlighted the contract address in a yellow box on the above - this is the address on the blockchain that your contract has been deployed to (your address will be similar but different).  Copy this address to clipboard.
 
@@ -513,7 +513,7 @@ Your browser should now point to `localhost:3000`.  If you do not have [Metamask
 
 If your browser is suitably enabled you should otherwise see the rotating Ethereum symbol, and a number of blank fields:
 
-[![Pre-wallet import PreciousChickenToken splash screen](https://www.preciouschicken.com/blog/images/metamask_gc_blank.png)](https://www.preciouschicken.com/blog/images/metamask_gc_blank.png)
+[![Pre-wallet import PreciousChickenToken splash screen](https://www.preciouschicken.com/blog/images/metamask_gc_blank-thumb.png)](https://www.preciouschicken.com/blog/images/metamask_gc_blank.png)
 
 ## Import wallet into Metamask
 
@@ -521,90 +521,90 @@ This process will assume your starting point is a fresh install of Metamask on G
 
 Assuming you do have that fresh install selecting the Metamask extension icon will result in:
 
-[![Pre-wallet import PreciousChickenToken splash screen](https://www.preciouschicken.com/blog/images/metamask_gc_welcome.png)](https://www.preciouschicken.com/blog/images/metamask_gc_welcome.png)
+[![Pre-wallet import PreciousChickenToken splash screen](https://www.preciouschicken.com/blog/images/metamask_gc_welcome-thumb.png)](https://www.preciouschicken.com/blog/images/metamask_gc_welcome.png)
 
 Selecting the *Get Started* option will take us to our set up options.  Here we want to select *No, I already have a seed phrase*:
 
-[![Metamask: Choose seed](https://www.preciouschicken.com/blog/images/metamask_gc_new.png)](https://www.preciouschicken.com/blog/images/metamask_gc_new.png)
+[![Metamask: Choose seed](https://www.preciouschicken.com/blog/images/metamask_gc_new-thumb.png)](https://www.preciouschicken.com/blog/images/metamask_gc_new.png)
 
 We now need our seed phrase that Ganache has created for us; at the top of the screen we will find twelve words under the heading *Mnemonic*.  Copy and paste them into the *Wallet Seed* field below, and add a password of your choosing:
 
-[![Metamask: import seed](https://www.preciouschicken.com/blog/images/metamask_gc_import.png)](https://www.preciouschicken.com/blog/images/metamask_gc_import.png)
+[![Metamask: import seed](https://www.preciouschicken.com/blog/images/metamask_gc_import-thumb.png)](https://www.preciouschicken.com/blog/images/metamask_gc_import.png)
 
 There will be a number of congratulatory / analytics sreens to click through after which you will see your account.  Currently blank as we haven't connected it to our local blockchain instance.  Therefore select *Custom RPC* from the *Networks* drop-down menu accessed by selecting *Main Ethereum Network* (which is the currently selected network):
 
-[![Metamask: Networks](https://www.preciouschicken.com/blog/images/metamask_gc_networks.png)](https://www.preciouschicken.com/blog/images/metamask_gc_networks.png)
+[![Metamask: Networks](https://www.preciouschicken.com/blog/images/metamask_gc_networks-thumb.png)](https://www.preciouschicken.com/blog/images/metamask_gc_networks.png)
 
 We now need to enter the details of where Metamask can find Ganache on the network.  Returning to Ganache copy the *RPC Server* details (in my instance this is `HTTP://127.0.0.1:7545`) and copy them into *New RPC URL* field on the add network screen, give it a sensible *Network Name* (e.g. `Ganache`), and select *Save*:
 
-[![Metamask: Custom RPC](https://www.preciouschicken.com/blog/images/metamask_gc_customrpc.png)](https://www.preciouschicken.com/blog/images/metamask_gc_customrpc.png)
+[![Metamask: Custom RPC](https://www.preciouschicken.com/blog/images/metamask_gc_customrpc-thumb.png)](https://www.preciouschicken.com/blog/images/metamask_gc_customrpc.png)
 
 Confirm that *Ganache* (or whatever you called your network) is now displayed in the network dropdown menu at the top of the Metamask window, as opposed to the default of *Main Ethereum Network*.  This ensures the application is talking to your local blockchain (where we have deployed the smart contract), rather than the real-world Ethereum network (where we have not).
 
 <!---From the left hand menu select *Connections*: this will allow us to add our React site to the list of allowed sites.  Add `localhost` and select *Connect*:
 
 
-[![Metamask: Connect to localhost](https://www.preciouschicken.com/blog/images/metamask_gc_connections.png)](https://www.preciouschicken.com/blog/images/metamask_gc_connections.png)
+[![Metamask: Connect to localhost](https://www.preciouschicken.com/blog/images/metamask_gc_connections-thumb.png)](https://www.preciouschicken.com/blog/images/metamask_gc_connections.png)
 
 Returning to our React tab and refreshing the screen we see that Metamask has successfully connected and values appear:
 
-[![Chrome: Account 0 Details](https://www.preciouschicken.com/blog/images/metamask_gc_success0.png)](https://www.preciouschicken.com/blog/images/metamask_gc_success0.png) -->
+[![Chrome: Account 0 Details](https://www.preciouschicken.com/blog/images/metamask_gc_success0-thumb.png)](https://www.preciouschicken.com/blog/images/metamask_gc_success0.png) -->
 
 We now need to return to the page serving our React app (typically this is [http://localhost:3000/](http://localhost:3000/)).  A pop up should now appear asking to 'Connect with Metamask':
 
-[![Chrome: Connect with Metamask](https://www.preciouschicken.com/blog/images/metamask_gc_connect_with_m.png)](https://www.preciouschicken.com/blog/images/metamask_gc_connect_with_m.png)
+[![Chrome: Connect with Metamask](https://www.preciouschicken.com/blog/images/metamask_gc_connect_with_m-thumb.png)](https://www.preciouschicken.com/blog/images/metamask_gc_connect_with_m.png)
 
 We don't want to select *Next* to proceed yet though.  Slightly confusingly, as Ganache uses zero-based numbering, when it asks to connect to Account 1, this is actually Ganache Account 0 - which contains all of our PCT.  We want to connect on Ganache Account 1 (which Metamask refers to as Account 2).  Therefore select the *New Account* link, *save* the default option of *Account 2*; then de-select Account 1 and select Account 2 as shown:
 
-[![Chrome: Connect with Metamask to Account 1](https://www.preciouschicken.com/blog/images/metamask_gc_connect_with_newaccount.png)](https://www.preciouschicken.com/blog/images/metamask_gc_connect_with_newaccount.png)
+[![Chrome: Connect with Metamask to Account 1](https://www.preciouschicken.com/blog/images/metamask_gc_connect_with_newaccount-thumb.png)](https://www.preciouschicken.com/blog/images/metamask_gc_connect_with_newaccount.png)
 
 
 <!---Slightly confusingly although Metamask refers to this as Account 1, within Ganache this account is Account, or Index, 0 - which currently owns all thousand PCT minted.  We will be transacting on Account 1; so we now need to import this account into Metamask.
 
 Returning to Ganache select the key icon to the right of the text *Index 1* and then copy the Private Key that appears:
 
-[![Ganache: private key reveal](https://www.preciouschicken.com/blog/images/ganache_privatekey.png)](https://www.preciouschicken.com/blog/images/ganache_privatekey.png)
+[![Ganache: private key reveal](https://www.preciouschicken.com/blog/images/ganache_privatekey-thumb.png)](https://www.preciouschicken.com/blog/images/ganache_privatekey.png)
 
 Returning to Chrome and the Metamask extension select the Accounts menu, by selecting the multicoloured circular icon on the top-right, and then the *Import account* option:
 
-[![Metamask: import account](https://www.preciouschicken.com/blog/images/metamask_gc_importaccount.png)](https://www.preciouschicken.com/blog/images/metamask_gc_importaccount.png)
+[![Metamask: import account](https://www.preciouschicken.com/blog/images/metamask_gc_importaccount-thumb.png)](https://www.preciouschicken.com/blog/images/metamask_gc_importaccount.png)
 
 And paste the Private Key from Ganache in:
 
-[![Metamask: import private key](https://www.preciouschicken.com/blog/images/metamask_gc_privatekey.png)](https://www.preciouschicken.com/blog/images/metamask_gc_privatekey.png)
+[![Metamask: import private key](https://www.preciouschicken.com/blog/images/metamask_gc_privatekey-thumb.png)](https://www.preciouschicken.com/blog/images/metamask_gc_privatekey.png)
 
 -->
 
 Once done select *Next*.  We now get another confirmation from Metamask as to whether we want to connect Account 2:
 
-[![Chrome: Connect with Metamask to Account 1](https://www.preciouschicken.com/blog/images/metamask_gc_connect_to_a2.png)](https://www.preciouschicken.com/blog/images/metamask_gc_connect_to_a2.png)
+[![Chrome: Connect with Metamask to Account 1](https://www.preciouschicken.com/blog/images/metamask_gc_connect_to_a2-thumb.png)](https://www.preciouschicken.com/blog/images/metamask_gc_connect_to_a2.png)
 
 Select *Connect* and after a browser refresh we should now have the details of Ganache Account 1 on screen:
 
-[![Chrome: Account 1 Details](https://www.preciouschicken.com/blog/images/metamask_gc_success1.png)](https://www.preciouschicken.com/blog/images/metamask_gc_success1.png)
+[![Chrome: Account 1 Details](https://www.preciouschicken.com/blog/images/metamask_gc_success1-thumb.png)](https://www.preciouschicken.com/blog/images/metamask_gc_success1.png)
 
 Success!  A bit of a tortuous process, that varies across browsers.  For instance other browsers might not produce a pop-up, but rather have a far less obvious notification on the Metamask icon itself.
 
 <!---
 For instance if you are using Firefox (v78.0.1) then connecting to a local site is handled differently using a *Connected sites* menu option:
 
-[![Firefox: Connected sites](https://www.preciouschicken.com/blog/images/metamask_ff_connectedsites.png)](https://www.preciouschicken.com/blog/images/metamask_ff_connectedsites.png)
-[![Firefox: Connect with Metamask](https://www.preciouschicken.com/blog/images/metamask_ff_localsiteconnect.png)](https://www.preciouschicken.com/blog/images/metamask_ff_localsiteconnect.png)
+[![Firefox: Connected sites](https://www.preciouschicken.com/blog/images/metamask_ff_connectedsites-thumb.png)](https://www.preciouschicken.com/blog/images/metamask_ff_connectedsites.png)
+[![Firefox: Connect with Metamask](https://www.preciouschicken.com/blog/images/metamask_ff_localsiteconnect-thumb.png)](https://www.preciouschicken.com/blog/images/metamask_ff_localsiteconnect.png)
 -->
 
 ## Buy, buy, buy; sell, sell, sell!
 
 At this point we can go ahead, test the application, and buy and sell some PCT.  Putting an order to buy PCT will result in a request for authorisation from Metamask (this might pop up, or remain in the background, in which case you will have to manually select the Metamask icon):
 
-[![Metamask authorisation](https://www.preciouschicken.com/blog/images/metamask_gc_authorisation.png)](https://www.preciouschicken.com/blog/images/metamask_gc_authorisation.png)
+[![Metamask authorisation](https://www.preciouschicken.com/blog/images/metamask_gc_authorisation-thumb.png)](https://www.preciouschicken.com/blog/images/metamask_gc_authorisation.png)
 
 Authorisation will lead to the relevant block being mined on the local blockchain and if successful a pop up will appear:
 
-[![Google Chrome event success](https://www.preciouschicken.com/blog/images/metamask_gc_eventsuccess.png)](https://www.preciouschicken.com/blog/images/metamask_gc_eventsuccess.png)
+[![Google Chrome event success](https://www.preciouschicken.com/blog/images/metamask_gc_eventsuccess-thumb.png)](https://www.preciouschicken.com/blog/images/metamask_gc_eventsuccess.png)
 
 Likewise failure (in this case trying to sell more PCT than the Account holds) will lead to an error message:
 
-[![Google Chrome event fail](https://www.preciouschicken.com/blog/images/metamask_gc_eventfail.png)](https://www.preciouschicken.com/blog/images/metamask_gc_eventfail.png)
+[![Google Chrome event fail](https://www.preciouschicken.com/blog/images/metamask_gc_eventfail-thumb.png)](https://www.preciouschicken.com/blog/images/metamask_gc_eventfail.png)
 
 Go ahead and try and break things.
 

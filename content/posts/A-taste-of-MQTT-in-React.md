@@ -106,7 +106,7 @@ npm start
 
 and point your browser to [localhost:3000](http://localhost:3000) where you should see:
 
-[![Nothing heard](https://www.preciouschicken.com/blog/images/taste_of_react_nothing_heard.png)](https://www.preciouschicken.com/blog/images/taste_of_react_nothing_heard.png)
+[![Nothing heard](https://www.preciouschicken.com/blog/images/taste_of_react_nothing_heard-thumb.png)](https://www.preciouschicken.com/blog/images/taste_of_react_nothing_heard.png)
 
 ### Publish a message via the command line
 
@@ -120,7 +120,7 @@ mqtt pub -t 'preciouschicken.com' -h 'test.mosquitto.org' -m 'Your message here!
 
 Go back to [localhost:3000](http://localhost:3000) and you should see:
 
-[![Your message here](https://www.preciouschicken.com/blog/images/taste_of_react_your_message.png)](https://www.preciouschicken.com/blog/images/taste_of_react_your_message.png)
+[![Your message here](https://www.preciouschicken.com/blog/images/taste_of_react_your_message-thumb.png)](https://www.preciouschicken.com/blog/images/taste_of_react_your_message.png)
 
 The message should also appear in your browser's console.
 

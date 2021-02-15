@@ -52,7 +52,7 @@ A web application, written in React, has been published at [forget-me-block-msg-
 
 The resulting DApp is as shown:
 
-[![Forget-me-Block: Message Time Store](https://www.preciouschicken.com/blog/images/message-time-store.png)](https://www.preciouschicken.com/blog/images/message-time-store.png)
+[![Forget-me-Block: Message Time Store](https://www.preciouschicken.com/blog/images/message-time-store-thumb.png)](https://www.preciouschicken.com/blog/images/message-time-store.png)
 
 Users will require a suitable in browser wallet (e.g. [Metamask](https://metamask.io)) and Ropsten test network Ether, available from the [Ropsten Ethereum Faucet](https://faucet.ropsten.be).
 

@@ -45,15 +45,15 @@ The artefacts above seek to demonstrate that there may be alternatives to the cu
 
 The UML use case diagram below illustrates that both Alice and Bob maintain accounts directly on *CalStore*, they also both have access (though at different levels) to a group calendar maintained by *shef.ac.uk*.  Bob also has access to a group calendar maintained by *bgh.nhs.uk*.
 
-[![Eth-cal: UML Use Case diagram](https://www.preciouschicken.com/blog/images/ethcal-Use_Case_Architecture.png)](https://www.preciouschicken.com/blog/images/ethcal-Use_Case_Architecture.png)
+[![Eth-cal: UML Use Case diagram](https://www.preciouschicken.com/blog/images/ethcal-Use_Case_Architecture-thumb.png)](https://www.preciouschicken.com/blog/images/ethcal-Use_Case_Architecture.png)
 
 The following UML sequence diagram shows the processes involved with Bob reading and writing to a *CalAuth* and *CalStore* contract.
 
-[![Eth-cal: UML Sequence diagram](https://www.preciouschicken.com/blog/images/ethcal-Sequence.png)](https://www.preciouschicken.com/blog/images/ethcal-Sequence.png)
+[![Eth-cal: UML Sequence diagram](https://www.preciouschicken.com/blog/images/ethcal-Sequence-thumb.png)](https://www.preciouschicken.com/blog/images/ethcal-Sequence.png)
 
 ## Eth-cal-open
 
-[![Eth-cal-open](https://www.preciouschicken.com/blog/images/ethcalopen-view.png)](https://www.preciouschicken.com/blog/images/ethcalopen-view.png)
+[![Eth-cal-open](https://www.preciouschicken.com/blog/images/ethcalopen-view-thumb.png)](https://www.preciouschicken.com/blog/images/ethcalopen-view.png)
 
 This instance is live on the Ropsten test net and will accept read-write access from any account.  Access is either via a web interface, as featured above, or via a read-only iCal feed which a standard calendar application (e.g. MS Office) can ingest.
 
@@ -69,11 +69,11 @@ The React web interface was built using [Big Calendar](https://jquense.github.io
 
 This instance is live on the Ropsten test net; however, unlike eth-cal-open, the view will differ depending on whether you have administrator, read-write, read-only or nil access.  Considerable use of the OpenZeppelin [Access Control](https://docs.openzeppelin.com/contracts/2.x/access-control) solidity library was used in this deliverable.  The screenshot below shows administrator access:
 
-[![Eth-cal-auth: Dashboard](https://www.preciouschicken.com/blog/images/ethcalauth-dashboard.png)](https://www.preciouschicken.com/blog/images/ethcalauth-dashboard.png)
+[![Eth-cal-auth: Dashboard](https://www.preciouschicken.com/blog/images/ethcalauth-dashboard-thumb.png)](https://www.preciouschicken.com/blog/images/ethcalauth-dashboard.png)
 
 Although the administrator account automatically defaults to the contract owner, a 'back door' allows administrator rights to be requested by anyone.  Read-write or read-only privileges can then be granted to any account, which will allow those accounts to access the eth-cal-auth calendar as below (read-write or read-only access being indicated next to the logged-on account address):
 
-[![Eth-cal-auth: Calendar](https://www.preciouschicken.com/blog/images/ethcalauth-view.png)](https://www.preciouschicken.com/blog/images/ethcalauth-view.png)
+[![Eth-cal-auth: Calendar](https://www.preciouschicken.com/blog/images/ethcalauth-view-thumb.png)](https://www.preciouschicken.com/blog/images/ethcalauth-view.png)
 
 ### Live instance
 [forget-me-block-eth-cal-auth.preciouschicken.com](https://forget-me-block-eth-cal-auth.preciouschicken.com/)

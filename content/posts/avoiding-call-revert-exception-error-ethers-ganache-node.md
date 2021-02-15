@@ -90,7 +90,7 @@ truffle deploy
 
 If all good we should get a screen that looks like:
 
-[![Truffle deploying JustSayHi](https://www.preciouschicken.com/blog/images/just_say_hi_truffle_deploy.png)](https://www.preciouschicken.com/blog/images/just_say_hi_truffle_deploy.png)
+[![Truffle deploying JustSayHi](https://www.preciouschicken.com/blog/images/just_say_hi_truffle_deploy-thumb.png)](https://www.preciouschicken.com/blog/images/just_say_hi_truffle_deploy.png)
 
 Copy the highlighted *contract address* above and paste it into the *contractAddress* variable line in *node_server.js*, which is this line in my example above:
 

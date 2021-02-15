@@ -12,7 +12,7 @@ draft: false
 
 [Zathura](https://pwmt.org/projects/zathura/) is my pdf viewer of choice: it is minimalist and has vim key bindings by default.  I use it a lot when I'm writing TeX files in [Neovim](https://neovim.io), partly as you can open it without leaving Neovim.  And when you recompile the TeX file (I tend to use a makefile for this which I run from within vim) then it updates on the fly.  As I'm using the i3 window tiling manager as part of Regolith OS this results in my screen reconfiguring itself just how I want it:
 
-[![Neovim and Zathura side by side](https://www.preciouschicken.com/blog/images/nvim_zathura.png)](https://www.preciouschicken.com/blog/images/nvim_zathura.png)
+[![Neovim and Zathura side by side](https://www.preciouschicken.com/blog/images/nvim_zathura-thumb.png)](https://www.preciouschicken.com/blog/images/nvim_zathura.png)
 
 Although calling Zathura isn't a big deal from inside Neovim (`:!zathura mydocument.pdf &`), I thought I'd shave off a couple of seconds each time and reduce this to a key press by taking half a day to write my first ever vimscript.  You may say false economy, I say a good way to procrastinate when you have a deadline due.
 

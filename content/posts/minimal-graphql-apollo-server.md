@@ -278,7 +278,7 @@ Below the statement *#Write your query or mutation here* enter the following que
 
 If everything has worked you should see the following response:
 
-[![GraphQL playground](https://www.preciouschicken.com/blog/images/graphql_beast_query.png)](https://www.preciouschicken.com/blog/images/graphql_beast_query.png)
+[![GraphQL playground](https://www.preciouschicken.com/blog/images/graphql_beast_query-thumb.png)](https://www.preciouschicken.com/blog/images/graphql_beast_query.png)
 
 ## Arguments
 
@@ -296,7 +296,7 @@ The resolvers we have built also allow us to supply arguments to define our sear
 
 Will pull up data on the crow only:
 
-[![GraphQL playground](https://www.preciouschicken.com/blog/images/graphql_beast_args.png)](https://www.preciouschicken.com/blog/images/graphql_beast_args.png)
+[![GraphQL playground](https://www.preciouschicken.com/blog/images/graphql_beast_args-thumb.png)](https://www.preciouschicken.com/blog/images/graphql_beast_args.png)
 
 ## Query variables
 
@@ -319,7 +319,7 @@ then in the *Query variables* field found at the bottom of the browser window en
 
 which should result in the following:
 
-[![GraphQL playground](https://www.preciouschicken.com/blog/images/graphql_beasts_query_variables.png)](https://www.preciouschicken.com/blog/images/graphql_beasts_query_variables.png)
+[![GraphQL playground](https://www.preciouschicken.com/blog/images/graphql_beasts_query_variables-thumb.png)](https://www.preciouschicken.com/blog/images/graphql_beasts_query_variables.png)
 
 ## Mutations
 
@@ -347,7 +347,7 @@ mutation {
 
 Success that the data has been entered should appear with a list of the beasts the poor lady has eaten:
 
-[![GraphQL playground](https://www.preciouschicken.com/blog/images/graphql_beasts_mutation.png)](https://www.preciouschicken.com/blog/images/graphql_beasts_mutation.png)
+[![GraphQL playground](https://www.preciouschicken.com/blog/images/graphql_beasts_mutation-thumb.png)](https://www.preciouschicken.com/blog/images/graphql_beasts_mutation.png)
 
 As this is a minimal example this mutation is in-memory only and isn't saved to disk (i.e. the *db.json* file) - if you restart the server the data will be erased.
 
