@@ -8,19 +8,19 @@ enableToc: false
 draft: false
 ---
 
-Recently Google Search Console has been throwing *Mobile Usability issues* at me, specifically to do with *Content wider than screen*, as per:
+Recently [Google Search Console](https://search.google.com/search-console/) has been alerting me to *mobile usability issues*, specifically *content wider than screen*:
 
 ![Google Search Console](https://www.preciouschicken.com/blog/images/usability_issues.png)
 
-Digging into this I realised the problem was how my blog generating software, [Hugo](https://gohugo.io/), was linking to images.  Typically I insert images into markdown in the following way:
+Digging further I found the problem was how my blog generating software, [Hugo](https://gohugo.io/), was linking to images.  Typically I insert images into markdown as so:
 
 ```md
 [![Your message here](https://www.preciouschicken.com/blog/images/taste_of_react_your_message.png)](https://www.preciouschicken.com/blog/images/taste_of_react_your_message.png)
 ```
 
-The link is repeated twice as the first time is the image to be used in the page, which Hugo formats to fit with the content, while the second link is to the actual size image should a user want to look at it up close.
+The image URL features twice: the first one displays the image on page resized to fit the theme; the second provides a 'clickable' link to the actual image should the user want to see the image in its full, actual size.
 
-The problem ultimately is that I am providing an image that is way bigger than the content and the browser is having to resize on the fly to fit the content.   It would be far better to provide a smaller image for display (at the size it appears in the browser) e.g. a thumbnail, while still providing the link to the bigger image.  Like so:
+The issue that Google Search Console has is that I am providing an image that is too large and the browser is having to resize on the fly to fit the content.   It would be far better to provide a smaller image for display (at the size it appears in the browser), e.g. a thumbnail, while still providing the link to the bigger image.  Like so:
 
 ```md
 [![Your message here](https://www.preciouschicken.com/blog/images/taste_of_react_your_message-thumb.png)](https://www.preciouschicken.com/blog/images/taste_of_react_your_message.png)
@@ -59,3 +59,6 @@ chmod u+x thumb_create
 ```
 
 You should now be left with a folder full of original images, plus resized thumbnails as indicated by *-thumb.png*.  Apart from any original images which are smaller than the width you specified - these will not have a thumbnail created.  The script can be run as many times as you want, on subsequent runs it will ignore any files it has already generated (e.g. those ending *-thumb.png*).
+
+NB - It could also probably be optimised: checking the filename prior to storing the width would likely speed things up.
+
