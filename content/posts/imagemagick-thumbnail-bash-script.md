@@ -1,7 +1,7 @@
 ---
 title: "A bash script for creating image thumbnails using ImageMagick"
 date: 2021-02-15T21:58:02Z
-tags: ["Linux", "ImageMagick", "MarkDown", "Bash"]
+tags: ["Linux", "ImageMagick", "MarkDown", "Bash", "Hugo"]
 categories: ["SysOp"]
 description: "A bash script for creating image thumbnails"
 enableToc: false
