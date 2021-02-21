@@ -63,3 +63,7 @@ I've set my TiddlyWiki up so that my open tasks are the first visible tiddler on
 ## What, no screenshots?
 
 True, I do normally, but in this case you can go and look at the [video](https://www.youtube.com/watch?v=mzoMhKx0j8g).  If you have any other feedback - feel free to add in comments.
+
+## Addendum
+
+As is always the case, in the course of writing a post I always later stumble across more on the subject.  Now I find the WikiText to complete the above is already within the TiddlyWiki documentation at their [TaskManagementExample](https://tiddlywiki.com/#TaskManagementExample) tiddler.  Their code is more concise, and they also provide a further [draggable example](https://tiddlywiki.com/#TaskManagementExample%20(Draggable)), so take a look if you want to dig deeper.
