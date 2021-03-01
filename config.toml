@@ -1,7 +1,7 @@
 # Site settings
 baseurl = "https://www.preciouschicken.com/blog/"
 languageCode = "en-gb"
-title = "Precious Chicken: Blog"
+title = "PreciousChicken: Blog"
 theme = "hugo-theme-cactus-plus"
 #googleAnalytics = "your_google_analytics_id"
 # Set the value to true if your site include CJK (Chinese, Japanese, and Korean languages) characters
@@ -20,7 +20,7 @@ hasCJKLanguage = false
     tabWidth = 4
 
 [params]
-	author = "Precious Chicken"
+	author = "PreciousChicken"
 	description = "freelance software"
 	bio = "freelance software"
 
