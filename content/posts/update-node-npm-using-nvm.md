@@ -24,6 +24,8 @@ nvm install --lts
 nvm install-latest-npm
 ```
 
+I only realised this was an option recently thanks to a [post by MuffinMan](https://muffinman.io/blog/nvm-updating-npm/).
+
 ## Where am I again?
 
 And to confirm which versions you are using:
@@ -31,3 +33,4 @@ And to confirm which versions you are using:
 ```bash
 node --version && npm --version
 ```
+
