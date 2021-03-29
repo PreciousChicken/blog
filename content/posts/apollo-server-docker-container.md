@@ -10,7 +10,7 @@ draft: false
 
 ## Introduction
 
-[GraphQL](https://graphql.org/) is a query language for APIs, while [Apollo Server](https://www.apollographql.com/) is a popular server used for providing GraphQL APIs.  Whereas a [Docker container](https://www.docker.com/why-docker) is a "standardized unit of software that allows developers to isolate their app from its environment."  This post is a concise handrail for Linux as to how to put an Apollo GraphQL server in a Node Docker container.  It assumes you have already [installed Docker](https://docs.docker.com/get-docker/) and [Node](https://nodejs.org/en/).
+[GraphQL](https://graphql.org/) is a query language for APIs, while [Apollo Server](https://www.apollographql.com/) is a popular server used for providing GraphQL APIs.  This post is a concise handrail as to how to put an Apollo GraphQL server in a Node.js [Docker container](https://www.docker.com/why-docker) - a "standardized unit of software that allows developers to isolate their app from its environment."  This tutorial uses the Linux command line and assumes you have already [installed Docker](https://docs.docker.com/get-docker/) and [Node](https://nodejs.org/en/download/package-manager/).
 
 All code can be found in the [PreciousChicken/apollo-server-docker-container](https://github.com/PreciousChicken/apollo-server-docker-container) repository.
 
@@ -28,7 +28,7 @@ npm install apollo-server graphql
 
 ## Create the GraphQL server, schema et al
 
-Not good practice to put everything into the same file, but as this is a handrail only create a file named *index.js* and copy / paste the below:
+Not good practice to put everything into the same file, but as this is a demo only create a file named *index.js* and copy / paste the below:
 
 ```javascript
 const { ApolloServer, gql } = require('apollo-server');
@@ -88,7 +88,7 @@ const server = new ApolloServer({ typeDefs, resolvers });
 server.listen(4000);
 ```
 
-This creates a very basic Apollo server with a minimal GraphQL schema.  Running `node index.js` now would spin this up and we would be able to interact with the server - but the aim is to run within a Docker container, not directly on our machine: which is the next step.
+This creates a very basic Apollo server with a minimal GraphQL schema.  Running `node index.js` now would spin this up and allow interaction with the server - but the aim is to run within a Docker container, not directly on our machine: which is the next step.
 
 ## Dockerfile
 
@@ -181,7 +181,7 @@ docker stop apollo-server
 
 Comments, feedback?  Post below.
 
-Oh and if you are wondering, what is a tie down scheme anyway?  It's a schematic for how to fasten a load within an aircraft or container.  Think of it like a very weak joke.
+Oh and if you are wondering, what is a tie down scheme anyway?  It's a schematic for how to fasten a load within an aircraft or ISO container.  Think of it like a very weak joke.
 
 ## Related work
 
