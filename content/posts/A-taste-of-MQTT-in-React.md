@@ -19,6 +19,8 @@ It was first used to monitor an oil pipeline through the desert, and is now used
 
 For reference I'm using Ubuntu 18.04.4 LTS on the [Regolith](https://regolith-linux.org) desktop environment, mqtt.js 3.0.0, npm 6.14.4 and node 12.6.0.
 
+All code can be found in the [PreciousChicken/taste_of_mqtt_in_react](https://github.com/PreciousChicken/taste_of_mqtt_in_react) repository.
+
 ### Prerequisites
 
 -  [NodeJS](https://nodejs.org) - If you haven't installed it before, I found installing it using the Node Version Manager as suggested on this [Stack Overflow answer](https://stackoverflow.com/a/24404451/6333825) to cause less aggravation than downloading via the official website.
