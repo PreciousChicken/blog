@@ -122,7 +122,7 @@ Next we tell Docker to use the newly created Dockerfile to create the image:
 docker build -t preciouschicken-apollo .
 ```
 
-Docker will pull down the parent image and run through the Dockerfile.
+If you encounter a [permissions error](https://stackoverflow.com/q/48957195), then try again but prefix your Docker commands with `sudo`.  Assuming you encounter no errors, Docker should pull down the parent image and run through the Dockerfile.
 
 The *-t* option names the image created, in this case as *preciouschicken-apollo*.  To confirm success all images created can be listed with:
 
