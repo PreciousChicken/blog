@@ -635,6 +635,7 @@ If you have feedback, observations, etc; I'd love to read them in the comments s
 - [How to Connect a React App to the Blockchain](https://www.publish0x.com/blockchain-developer/how-to-connect-a-react-app-to-the-blockchain-xvveoe)
 - [How to create an ERC20 token the simple way](https://www.toptal.com/ethereum/create-erc20-token-tutorial)
 - [Ethereum Dapps with Truffle,Ganache, Metamask, OppenZippelin and React](https://www.techiediaries.com/ethereum-truffle-react/)
+-  [The Complete Guide to Full Stack Ethereum Development](https://dev.to/dabit3/the-complete-guide-to-full-stack-ethereum-development-3j13).  Not ERC20, but nice run through on connecting React to a Ethereum test network.
 ### Additional background
 - [Points to consider when creating a fungible token (ERC20, ERC777)](https://forum.openzeppelin.com/t/points-to-consider-when-creating-a-fungible-token-erc20-erc777/2915) by OpenZeppelin
 - [Ethereum smart contract security best practices](https://consensys.github.io/smart-contract-best-practices/)
