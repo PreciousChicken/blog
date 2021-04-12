@@ -55,4 +55,4 @@ Another option given in the AppImage FAQ is *$HOME/.local/bin* and *$HOME/bin* b
 
 ---
 
-A highly opinionated rant; */opt* works for me, use wherever works for you.  It's also worth adding the designers of AppImages where probably more interested in technical challenges and getting kudos from Linus Torvalds than these minor housekeeping points.  Comment below if you think I'm being dangerously outrageous.
+A highly opinionated rant; */opt* works for me, use wherever works for you.  It's also worth adding the designers of AppImages were probably more interested in technical challenges and getting kudos from Linus Torvalds than these minor housekeeping points.  Comment below if you think I'm being dangerously outrageous.
