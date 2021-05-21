@@ -10,11 +10,15 @@ draft: true
 
 ## Introduction
 
-Having played around with various personal information management implementations for what seems most of my life, having been impressed with the zettelkasten method I decided to try this out [TiddlyWiki](https://tiddlywiki.com/).  These were the requirements:
+The practice of personal information management has always left me unsatisfied; a square hole in the puzzle of life that you just don't have a square peg for.  After some time into square peg research and decided to try out the zettelkasten method using a [TiddlyWiki](https://tiddlywiki.com/).  Wanting to do things my way, here were the requirements:
 
 -  Host TiddlyWiki 5 on a Raspberry Pi.
 -  Let other computers on my home network access that (including tablets and mobiles).
 -  Be able to directly edit tiddlers using neovim (or other text edit), so I don't always have to go through a browser.
+
+Version here.  
+
+After the long-winded and unnecessary background I go through the steps as to how I achieved this.
 
 ## Long-winded and unnecessary background
 
