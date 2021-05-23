@@ -85,9 +85,10 @@ This is where nodemon comes in.  Nodemon is software that watches a directory an
 To do so at the terminal enter this, intimidatingly long, command:
 
 ```bash
-nodemon --delay 30 -e tid --ignore 'wiki/tiddlers/$*.tid' --watch wiki/tiddlers/ /home/pi/.nvm/versions/node/v14.11.0/bin/tiddlywiki wiki --listen host=192.168.0.19
+ nodemon --delay 30 -e tid --ignore 'TW5nodemon2/tiddlers/$*.tid' --watch TW5nodemon2/tiddlers/ $NVM_BIN/tiddlywiki TW5nodemon2 --listen host=192.168.0.19
 ```
 
+I now just close the terminal!
 
 ## Off and running?
 
