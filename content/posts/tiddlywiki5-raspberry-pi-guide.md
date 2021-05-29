@@ -137,24 +137,33 @@ Create a file named *tw* wherever you keep user-specific executable files (so fo
 # Opens a new tiddlywiki tiddler named after arguments that follow commands
 # Uses vim-tiddlywiki plugin to create metadata
 
-tidtitle=''
-# Loops through all arguments
-for var in "$@"
+# Replaces non-alphanumeric characters in arguments
+alpha_args=''
+for argument in "$@"
 do
-	# Changes argument to lowercase
-	lowercasevar=${var,,}
-	# Capitalises first character of argument
-	sentencevar=${lowercasevar^}
-	tidtitle+="$sentencevar"
+	argument=$(echo $argument | tr -c [:alnum:] ' ')
+	alpha_args+=$argument
 done
 
-if [[ -f $TIDDLYWIKIPATH$tidtitle'.tid' ]]
+# CamelCase converts all arguments
+tid_title=''
+for word in $alpha_args
+do
+	# Changes argument to lowercase
+	lowercasevar=${word,,}
+	# Capitalises first character of argument
+	sentencevar=${lowercasevar^}
+	tid_title+="$sentencevar"
+done
+
+# Opens neovim with correct tiddler name
+if [[ -f $TIDDLYWIKIPATH$tid_title'.tid' ]]
 then
 	# Updates metadata if tiddler exists
-	nvim -c TiddlyWikiUpdateMetadata $TIDDLYWIKIPATH$tidtitle'.tid'
+	nvim -c TiddlyWikiUpdateMetadata $TIDDLYWIKIPATH$tid_title'.tid'
 else
 	# Creates tiddler if not found
-	nvim -c TiddlyWikiInitializeTemplate $TIDDLYWIKIPATH$tidtitle'.tid'
+	nvim -c TiddlyWikiInitializeTemplate $TIDDLYWIKIPATH$tid_title'.tid'
 fi
 ```
 
