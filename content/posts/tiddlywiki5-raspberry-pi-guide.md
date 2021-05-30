@@ -138,16 +138,12 @@ Create a file named *tw* wherever you keep user-specific executable files (so fo
 # Uses vim-tiddlywiki plugin to create metadata
 
 # Replaces non-alphanumeric characters in arguments
-alpha_args=''
-for argument in "$@"
-do
-	argument=$(echo $argument | tr -c [:alnum:] ' ')
-	alpha_args+=$argument
-done
+arguments=$(echo $@ | sed "s/[’]//g")
+arguments=$(echo $arguments | sed 's/[^a-zA-Z0-9]/ /g')
 
 # CamelCase converts all arguments
 tid_title=''
-for word in $alpha_args
+for word in $arguments
 do
 	# Changes argument to lowercase
 	lowercasevar=${word,,}
