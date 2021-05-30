@@ -16,7 +16,7 @@ The practice of personal information management has always left me unsatisfied; 
 -  Let other computers on my home network access that (including tablets and mobiles).
 -  Be able to directly edit tiddlers (the basic unit of information in TiddlyWiki) using neovim, so I don't always have to go through a browser.
 
-Version here.  
+Version here.  On the desktop / laptop I'm using Manjaro Linux 21.0.5.
 
 After the long-winded and unnecessary background I go through the steps as to how I achieved this.
 
@@ -110,16 +110,17 @@ export TIDDLYWIKIPATH=$HOME/wiki/tiddlers/
 
 ## Vim plugin
 
-Tiddlers are not recognised as file types by default by Vim, but there is a plugin to help: [vim-tiddlywiki](https://github.com/sukima/vim-tiddlywiki).  I like to install my plugins without using a plugin manager, so I install it into neovim as follows:
+I don't have that many plugins enabled in Neovim, but [vim-tiddlywiki](https://github.com/sukima/vim-tiddlywiki) is absolutely outstanding for managing tiddlers in Vim.  I don't use a plugin manager, so installing it into Neovim is as follows:
 
 ```bash
-git -C "$HOME/.config/nvim/pack/sukima/start/vim-tiddlywiki" pull || git clone --depth 1 https://github.com/sukima/vim-tiddlywiki ~/.config/nvim/pack/sukima/start/vim-tiddlywiki
+ git clone --depth 1 https://github.com/sukima/vim-tiddlywiki ~/.config/nvim/pack/sukima/start/vim-tiddlywiki
 ```
-The longish command ensures that we pull the repo, rather than clone it if it already exists.
 
-This plugin not only means that the tiddler format is recognised, but also allows you to create new tiddlers with the right metadata in place.
+If you are using original Vim rather than Neovim, then the path above will need amending as Vim does not use the *.config* directory.
 
-You will also need to update your `init.vim` or `.vimrc` with the location of the tiddlers: 
+This plugin not only means that the tiddler format is recognised, but also allows you to create new tiddlers with the right metadata in place and jump to the other tiddlers using CamelCase links.
+
+For full use you will also need to let the plugin know where you keep your tiddlers by adding the following line to your *~/.config/nvim/init.vim* or `~/.vimrc`, e.g.: 
 
 ```vimrc
 let g:tiddlywiki_dir = '~/docs/notes/wiki' TODO
@@ -170,6 +171,8 @@ chmod a+x ~/.local/bin/tw
 ```
 
 On next restart of terminal `tw The use of knowledge in society` should create a new tiddler ready for us to type.  If the tiddler already exists then the shell script will recognise that and update the metadata instead.
+
+The shell script does its best to cope with non-alphanumeric characters.  So apostrophes are deleted (*We're not really strangers* gets changed to *WereNotReallyStrangers*) while other non-alphanumerics characters are replaced by a space (so *Knee-deep in the Big Muddy* ends up as *KneeDeepInTheBigMuddy*).  I'm sure there will be edge cases which will not work out - feel free to comment below.
 
 ## A note on spawning
 
