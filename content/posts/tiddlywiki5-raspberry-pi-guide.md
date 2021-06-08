@@ -32,7 +32,7 @@ Rather than starting with an entirely fresh installed I wondered if there might 
 
 First we'll cover the steps you need to take with the Pi.  This assumes you've installed the standard Pi OS.
 
-### Enable Port 8080
+### a. Enable Port 8080
 
 As I've [blogged about previously](https://www.preciouschicken.com/blog/posts/node-tiddlywiki5-raspberry-pi-port-8080/), if you are using the default [Raspberry Pi OS](https://www.raspberrypi.org/software/) ports are shut down by default.  These therefore need to be opened by entering the following commands into the terminal:
 
@@ -47,7 +47,7 @@ The second line is only required if you are using ssh to remote into your Pi, if
 
 This installs [Uncomplicated Firewall](https://en.wikipedia.org/wiki/Uncomplicated_Firewall) onto your Pi, enables it and then allows the port that your TiddlyWiki will be listening on.
 
-### Install Tiddlywiki5 and Nodemon
+### b. Install Tiddlywiki5 and Nodemon
 
 At the terminal type:
 
@@ -57,7 +57,7 @@ npm install tiddlywiki nodemon -g
 
 The `g` flag installs the software globally, rather than in a particular folder.
 
-### Initiate a wiki
+### c. Initiate a wiki
 
 We are now going to use TiddlyWiki to install a fresh wiki.  At the terminal:
 
@@ -67,11 +67,11 @@ tiddlywiki wiki --init server
 
 This creates a directory called `wiki` which includes server-related components.
 
-### Find your IP
+### d. Find your IP
 
 Now we have to [find the IP address of your Raspberry Pi](https://www.raspberrypi.org/documentation/remote-access/ip-address.md) and make a note of it.  For the purposes of this tutorial we are going to say it is `192.168.0.12`.
 
-## Starting TiddlyWiki with nodemon
+### e. Starting TiddlyWiki with nodemon
 
 Ok, so now the fun bit, starting.  If you weren't bothered about editing the tiddlers in a text editor you could just simply go for:
 
@@ -100,7 +100,9 @@ So what does this do?  The flags / arguments to nodemon are as follows:
 -  `--watch wiki/tiddlers/` tells nodemon the folder to watch where changes will happen.
 -  `$NVM_BIN/tiddlywiki wiki --listen host=192.168.0.19` lastly this is the previous command as at the start of the section, but as we aren't running the command via node we have to explicitly tell nodemon where to find the tiddlywiki executable (in *$NVM_BIN*).
 
-## Mapping a drive
+## Desktop
+
+### a. Mapping a drive
 
 Connecting to Pi goes here
 
