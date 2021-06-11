@@ -43,7 +43,7 @@ sudo ufw enable
 sudo ufw allow 8080
 ```
 
-The second line is only required if you are using ssh to remote into your Pi, if you aren't leave it out.  Hint - if you are using a keyboard connected to your Pi, then you aren't using ssh...
+The second line is only required if you are using ssh to remote into your Pi, if you aren't leave it out.  Hint - if you are using a keyboard connected to your Pi, then you aren't using ssh.  My use case relies on ssh, so I'm going to assume you are using it from now on in.
 
 This installs [Uncomplicated Firewall](https://en.wikipedia.org/wiki/Uncomplicated_Firewall) onto your Pi, enables it and then allows the port that your TiddlyWiki will be listening on.
 
@@ -100,18 +100,42 @@ So what does this do?  The flags / arguments to nodemon are as follows:
 -  `--watch wiki/tiddlers/` tells nodemon the folder to watch where changes will happen.
 -  `$NVM_BIN/tiddlywiki wiki --listen host=192.168.0.19` lastly this is the previous command as at the start of the section, but as we aren't running the command via node we have to explicitly tell nodemon where to find the tiddlywiki executable (in *$NVM_BIN*).
 
-## Desktop
+## 2. Desktop
 
-### a. Mapping a drive
+### 2a. Mapping a drive
 
-Connecting to Pi goes here
+To make editing the tiddlers easier on my local machine, I want to mount the directory.  This is done in a number of steps (all from the local machine).
 
+First created the mountpoint (e.g. where on your local system you want the tiddlers to appear):
+
+```bash
+mkdir ~/wiki
+```
+
+Now we need to install *sshfs* which allows us to mount a drive over ssh.  I'm using Manjaro so it is:
+
+```bash
+pamac install sshfs
+```
+
+If you are using Ubuntu or derivative then it will be `sudo apt install sshfs`.
+
+To ensure it is mounted every time we start up this [StackOverflow answer](https://unix.stackexchange.com/a/29252) suggests including the following in a startup script.  I use the i3 window manager, so a good place is *~/.i3/config*, where I include:
+
+```bash
+exec --no-startup-id ssh-add /home/your_username/.ssh/id_ed25519
+exec --no-startup-id sshfs pi@192.168.0.19:/home/pi/wiki /home/your_username/wiki
+```
+
+Obviously change `your_username` to, ahem, your username.  You might also notice I'm using an Ed25519 key rather than a RSA key, change to whatever the name of your ssh key is.
 
 To make things a bit easier once we've decided where our tiddlers are we will set this path as an environment variable so we aren't having to retype the path again.  We do this by editing our `.bashrc` (or whatever shell we use - I use zsh so it is `.zshrc`) to include:
 
 ```bash
 export TIDDLYWIKIPATH=$HOME/wiki/tiddlers/
 ```
+
+Again, don't forget to change *your_username*...
 
 ## Vim plugin
 
@@ -125,10 +149,10 @@ If you are using original Vim rather than Neovim, then the path above will need 
 
 This plugin not only means that the tiddler format is recognised, but also allows you to create new tiddlers with the right metadata in place and jump to the other tiddlers using CamelCase links.
 
-For full use you will also need to let the plugin know where you keep your tiddlers by adding the following line to your *~/.config/nvim/init.vim* or `~/.vimrc`, e.g.: 
+For full use you will also need to let the plugin know where you keep your tiddlers by adding the following line to your *~/.config/nvim/init.vim* or *~/.vimrc*, e.g.: 
 
 ```vimrc
-let g:tiddlywiki_dir = '~/docs/notes/wiki' TODO
+let g:tiddlywiki_dir=$TIDDLYWIKIPATH
 ```
 
 ## Command line editing
