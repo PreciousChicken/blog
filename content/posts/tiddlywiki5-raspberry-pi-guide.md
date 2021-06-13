@@ -28,11 +28,11 @@ So I used this for a number of months - however there was a snag.  Every so ofte
 
 Rather than starting with an entirely fresh installed I wondered if there might be a better way.
 
-## Raspberry Pi
+## 1. Raspberry Pi
 
 First we'll cover the steps you need to take with the Pi.  This assumes you've installed the standard Pi OS.
 
-### a. Enable Port 8080
+### 1a. Enable Port 8080
 
 As I've [blogged about previously](https://www.preciouschicken.com/blog/posts/node-tiddlywiki5-raspberry-pi-port-8080/), if you are using the default [Raspberry Pi OS](https://www.raspberrypi.org/software/) ports are shut down by default.  These therefore need to be opened by entering the following commands into the terminal:
 
@@ -43,11 +43,9 @@ sudo ufw enable
 sudo ufw allow 8080
 ```
 
-The second line is only required if you are using ssh to remote into your Pi, if you aren't leave it out.  Hint - if you are using a keyboard connected to your Pi, then you aren't using ssh.  My use case relies on ssh, so I'm going to assume you are using it from now on in.
-
 This installs [Uncomplicated Firewall](https://en.wikipedia.org/wiki/Uncomplicated_Firewall) onto your Pi, enables it and then allows the port that your TiddlyWiki will be listening on.
 
-### b. Install Tiddlywiki5 and Nodemon
+### 1b. Install Tiddlywiki5 and Nodemon
 
 At the terminal type:
 
@@ -57,7 +55,7 @@ npm install tiddlywiki nodemon -g
 
 The `g` flag installs the software globally, rather than in a particular folder.
 
-### c. Initiate a wiki
+### 1c. Initiate a wiki
 
 We are now going to use TiddlyWiki to install a fresh wiki.  At the terminal:
 
@@ -67,11 +65,11 @@ tiddlywiki wiki --init server
 
 This creates a directory called `wiki` which includes server-related components.
 
-### d. Find your IP
+### 1d. Find your IP
 
 Now we have to [find the IP address of your Raspberry Pi](https://www.raspberrypi.org/documentation/remote-access/ip-address.md) and make a note of it.  For the purposes of this tutorial we are going to say it is `192.168.0.12`.
 
-### e. Starting TiddlyWiki with nodemon
+### 1e. Starting TiddlyWiki with nodemon
 
 Ok, so now the fun bit, starting.  If you weren't bothered about editing the tiddlers in a text editor you could just simply go for:
 
@@ -137,7 +135,7 @@ export TIDDLYWIKIPATH=$HOME/wiki/tiddlers/
 
 Again, don't forget to change *your_username*...
 
-## Vim plugin
+### 2b. Vim plugin
 
 I don't have that many plugins enabled in Neovim, but [vim-tiddlywiki](https://github.com/sukima/vim-tiddlywiki) is absolutely outstanding for managing tiddlers in Vim.  I don't use a plugin manager, so installing it into Neovim is as follows:
 
@@ -155,7 +153,7 @@ For full use you will also need to let the plugin know where you keep your tiddl
 let g:tiddlywiki_dir=$TIDDLYWIKIPATH
 ```
 
-## Command line editing
+### 2c.  Command line editing
 
 To make the process buttery smooth I want to automate my workflow.  This being: read an article on the net, copy the title of the article and have neovim open a tiddler already named using CamelCase.  So for example, let's say I want to take some notes on Hayek's paper on open markets: [The use of knowledge in society](https://doi.org/10.1142/9789812701275_0025).  I want to open a terminal, type `tw The use of knowledge in society` and start editing a tiddler named TheUseOfKnowledgeInSociety.tid in neovim.
 
