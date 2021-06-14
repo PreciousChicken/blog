@@ -98,7 +98,9 @@ So what does this do?  The flags / arguments to nodemon are as follows:
 -  `--watch wiki/tiddlers/` tells nodemon the folder to watch where changes will happen.
 -  `$NVM_BIN/tiddlywiki wiki --listen host=192.168.0.19` lastly this is the previous command as at the start of the section, but as we aren't running the command via node we have to explicitly tell nodemon where to find the tiddlywiki executable (in *$NVM_BIN*).
 
-## 2. Desktop
+## 2. Desktop / Local machine
+
+Switching back from the Raspberry Pi to your Linux machine, these are the actions 
 
 ### 2a. Mapping a drive
 
@@ -127,7 +129,9 @@ exec --no-startup-id sshfs pi@192.168.0.19:/home/pi/wiki /home/your_username/wik
 
 Obviously change `your_username` to, ahem, your username.  You might also notice I'm using an Ed25519 key rather than a RSA key, change to whatever the name of your ssh key is.
 
-To make things a bit easier once we've decided where our tiddlers are we will set this path as an environment variable so we aren't having to retype the path again.  We do this by editing our `.bashrc` (or whatever shell we use - I use zsh so it is `.zshrc`) to include:
+To make things a bit easier once we've decided where our tiddlers are we will set this path as an environment variable so we aren't having to retype the path again.  We do this by editing our `.bashrc` (or whatever shell we use - I use zsh so it is `~/.zshrc`)[^1] to include:
+
+[^1]  It https://unix.stackexchange.com/a/71258
 
 ```bash
 export TIDDLYWIKIPATH=$HOME/wiki/tiddlers/
