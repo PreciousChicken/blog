@@ -129,9 +129,9 @@ exec --no-startup-id sshfs pi@192.168.0.19:/home/pi/wiki /home/your_username/wik
 
 Obviously change `your_username` to, ahem, your username.  You might also notice I'm using an Ed25519 key rather than a RSA key, change to whatever the name of your ssh key is.
 
-To make things a bit easier once we've decided where our tiddlers are we will set this path as an environment variable so we aren't having to retype the path again.  We do this by editing our `.bashrc` (or whatever shell we use - I use zsh so it is `~/.zshrc`)[^1] to include:
+To make things a bit easier once we've decided where our tiddlers are we will set this path as an environment variable so we aren't having to retype the path again.  We do this by editing our `~/.bash_profile` (or whatever shell we use - I use zsh so it is `~/.zshenv`)[^1] to include:
 
-[^1]  It https://unix.stackexchange.com/a/71258
+[^1]:  You could also use your *~/.bashrc* or *~/.zshrc*, but I think the profile / env files are [preferable](https://unix.stackexchange.com/a/71258).
 
 ```bash
 export TIDDLYWIKIPATH=$HOME/wiki/tiddlers/
