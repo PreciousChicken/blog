@@ -3,22 +3,18 @@ title: "TiddlyWiki5, Raspberry Pi and Vim: A guide for the command line aficiona
 date: 2021-05-15T22:03:28+01:00
 tags: ["tiddlywiki", "node", "Raspberry Pi", "bash", "vim"]
 categories: ["PIM"]
-description: ""
+description: "A guide to hosting TiddlyWiki on a Raspberry Pi, allowing tiddlers to be edited by a text editor and integration with vim."
 enableToc: true
-draft: true
+draft: false
 ---
 
 ## Introduction
 
-The practice of personal information management has always left me unsatisfied; a square hole in the puzzle of life that you just don't have a square peg for.  After looking into options for square pegs I've opted for a zettelkasten method implemented via a [TiddlyWiki](https://tiddlywiki.com/).  Wanting to do things my way, here were the requirements:
+The practice of personal information management has always left me unsatisfied; a square hole in the puzzle of life that you just don't have a square peg for.  After looking into options for square pegs I've opted for a zettelkasten method implemented via a [TiddlyWiki](https://tiddlywiki.com/).  
 
--  Host TiddlyWiki 5 on a Raspberry Pi.
--  Let other computers on my home network access that (including tablets and mobiles).
--  Be able to directly edit tiddlers (the basic unit of information in TiddlyWiki) using neovim, so I don't always have to go through a browser.
+I wanted to host this on Raspberry Pi, and access this on all the computers on my local network (e.g. tables, phones, etc).  However I also wanted the ability to directly edit tiddlers (the basic unit of information in TiddlyWiki) using neovim, so I don't always have to go through a browser.
 
-Version here.  On the desktop / laptop I'm using Manjaro Linux 21.0.5.
-
-After the long-winded and unnecessary background I go through how I set up both my Raspberry Pi and Linux work station to enable this.
+This proved problematic, which I explain in the long-winded and unnecessary background, so the steps I took follow.
 
 ## Long-winded and unnecessary background
 
@@ -30,11 +26,11 @@ Rather than starting with an entirely fresh installed I wondered if there might 
 
 ## 1. Raspberry Pi
 
-First we'll cover the steps you need to take with the Pi.  This assumes you've installed the standard Pi OS.
+First the steps you need to take with the Pi.  This assumes you've installed the standard Pi OS (see [Version control](#version-control) for the software used).
 
 ### 1a. Enable Port 8080
 
-As I've [blogged about previously](https://www.preciouschicken.com/blog/posts/node-tiddlywiki5-raspberry-pi-port-8080/), if you are using the default [Raspberry Pi OS](https://www.raspberrypi.org/software/) ports are shut down by default.  These therefore need to be opened by entering the following commands into the terminal:
+As [blogged about previously](https://www.preciouschicken.com/blog/posts/node-tiddlywiki5-raspberry-pi-port-8080/), if you are using the default [Raspberry Pi OS](https://www.raspberrypi.org/software/) ports are shut down by default.  These therefore need to be opened by entering the following into the Pi terminal:
 
 ```bash
 sudo apt install ufw
@@ -47,27 +43,27 @@ This installs [Uncomplicated Firewall](https://en.wikipedia.org/wiki/Uncomplicat
 
 ### 1b. Install Tiddlywiki5 and Nodemon
 
-At the terminal type:
+At the terminal:
 
 ```bash
 npm install tiddlywiki nodemon -g
 ```
 
-The `g` flag installs the software globally, rather than in a particular folder.
+The `-g` flag installs the software globally, rather than in a particular folder.
 
 ### 1c. Initiate a wiki
 
-We are now going to use TiddlyWiki to install a fresh wiki.  At the terminal:
+We now use the TiddlyWiki software just installed to initiate a fresh wiki.  At the terminal:
 
 ```bash
 tiddlywiki wiki --init server
 ```
 
-This creates a directory called `wiki` which includes server-related components.
+This creates a directory called *wiki* which includes server-related components.  You can change the name of the directory to whatever you wish, but the remainder of the instructions assume the directory is called *wiki*.
 
 ### 1d. Find your IP
 
-Now we have to [find the IP address of your Raspberry Pi](https://www.raspberrypi.org/documentation/remote-access/ip-address.md) and make a note of it.  For the purposes of this tutorial we are going to say it is `192.168.0.12`.
+Now we have to [find the IP address of your Raspberry Pi](https://www.raspberrypi.org/documentation/remote-access/ip-address.md) on your local network and make a note of it.  For the purposes of this tutorial we are going to say it is `192.168.0.12`.
 
 ### 1e. Starting TiddlyWiki with nodemon
 
@@ -79,16 +75,16 @@ tiddlywiki wiki --listen host=192.168.0.12
 
 And if you go to [http://192.168.0.12:8080/](http://192.168.0.12:8080/) in your browser you should see a new wiki.
 
-All well and good, however part of my requirements are to edit tiddlers in a text editor.  Using the above method to start would mean that edits do not get reflected in the browser - or not without manually restarting the node instance of TiddlyWiki.
+All well and good, however this makes editing tiddlers in a text editor awkward.  Using the above method means edits do not get reflected in the browser - or not without manually restarting the node instance of TiddlyWiki.
 
-This is where [nodemon](https://nodemon.io/) comes in.  Nodemon is software that watches a directory and restarts a node process any time there is a change in that directory.  It is commonly used for development purposes - if you are working on a JavaScript file you want that to be refreshed and reloaded every time you make a save - not every time you restart the server.  However it can be used to look for changes to tiddlers, rather than code.
+This is where [nodemon](https://nodemon.io/) comes in.  Nodemon watches a directory and restarts a node process any time there is a change in that directory.  It is commonly used for development purposes - if you are working on a JavaScript file you want node to be refreshed and reloaded every time you make a save - and not have to manually restart.  However it can be used to look for changes to tiddlers, rather than code.
 
-To do so enter at the terminal this, intimidatingly long, command:
+To do so enter at the terminal this intimidatingly long command:
 
 ```bash
 nodemon --delay 30 -e tid --ignore 'wiki/tiddlers/$*.tid' --watch wiki/tiddlers/ $NVM_BIN/tiddlywiki wiki --listen host=192.168.0.19
 ```
-At this point you can simply walk away leaving the terminal open and running if you have been directly inputting commands into your Raspberry Pi.  If you are accessing your Pi remotely via ssh then close the terminal window itself (on Manjaro i3 this is done via the `mod-Shift-q` keypress, but your distro will likely be different) without exiting the running program.
+At this point you can simply walk away leaving the terminal open and running if you have been directly inputting commands into your Raspberry Pi.  If you are accessing your Pi remotely via ssh then close the terminal window itself without exiting the running program (on Manjaro i3 this is done via the `mod-Shift-q` keypress, but your distro will likely be different).  This method of exit is required because closing the terminal via standard methods (e.g. `ctrl-c` followed by `exit`) will likely also kill nodemon.
 
 So what does this do?  The flags / arguments to nodemon are as follows:
 
@@ -100,11 +96,11 @@ So what does this do?  The flags / arguments to nodemon are as follows:
 
 ## 2. Desktop / Local machine
 
-Switching back from the Raspberry Pi to your Linux machine, these are the actions 
+Switching back from the Raspberry Pi to your Linux machine, the following will allow (relatively) seamless editing in vim / neovim.
 
 ### 2a. Mapping a drive
 
-To make editing the tiddlers easier on my local machine, I want to mount the directory.  This is done in a number of steps (all from the local machine).
+So that we have the tiddlers accessible on our local machine, the *wiki* directory on the Pi needs to be mounted.  This is done in a number of steps (all from the local machine).
 
 First created the mountpoint (e.g. where on your local system you want the tiddlers to appear):
 
@@ -127,9 +123,9 @@ exec --no-startup-id ssh-add /home/your_username/.ssh/id_ed25519
 exec --no-startup-id sshfs pi@192.168.0.19:/home/pi/wiki /home/your_username/wiki
 ```
 
-Obviously change `your_username` to, ahem, your username.  You might also notice I'm using an Ed25519 key rather than a RSA key, change to whatever the name of your ssh key is.
+Obviously change `your_username` to, ahem, your username.  You might also notice I'm using an Ed25519 key rather than a RSA key, change to whatever the name of your ssh key is.  The `exec --no-startup-id` prefix is relevant to the i3 config, so if you are using a different startup script location this might not be necessary.
 
-To make things a bit easier once we've decided where our tiddlers are we will set this path as an environment variable so we aren't having to retype the path again.  We do this by editing our `~/.bash_profile` (or whatever shell we use - I use zsh so it is `~/.zshenv`)[^1] to include:
+To make things a bit easier once we've decided where our tiddlers are mounted we will set this path as an environment variable so we aren't having to retype the path again.  We do this by editing our `~/.bash_profile` (or whatever shell we use - I use zsh so it is `~/.zshenv`)[^1] to include:
 
 [^1]:  You could also use your *~/.bashrc* or *~/.zshrc*, but I think the profile / env files are [preferable](https://unix.stackexchange.com/a/71258).
 
@@ -137,21 +133,19 @@ To make things a bit easier once we've decided where our tiddlers are we will se
 export TIDDLYWIKIPATH=$HOME/wiki/tiddlers/
 ```
 
-Again, don't forget to change *your_username*...
-
 ### 2b. Vim plugin
 
-I don't have that many plugins enabled in Neovim, but [vim-tiddlywiki](https://github.com/sukima/vim-tiddlywiki) is absolutely outstanding for managing tiddlers in Vim.  I don't use a plugin manager, so installing it into Neovim is as follows:
+The [vim-tiddlywiki](https://github.com/sukima/vim-tiddlywiki) plugin is absolutely outstanding for managing tiddlers in Vim.  If you don't use a plugin manager, install it into Neovim as follows:
 
 ```bash
  git clone --depth 1 https://github.com/sukima/vim-tiddlywiki ~/.config/nvim/pack/sukima/start/vim-tiddlywiki
 ```
 
-If you are using original Vim rather than Neovim, then the path above will need amending as Vim does not use the *.config* directory.
+If you are using original Vim rather than Neovim, then the path above will need amending as Vim does not use the *.config* directory (or use a plugin manager).
 
 This plugin not only means that the tiddler format is recognised, but also allows you to create new tiddlers with the right metadata in place and jump to the other tiddlers using CamelCase links.
 
-For full use you will also need to let the plugin know where you keep your tiddlers by adding the following line to your *~/.config/nvim/init.vim* or *~/.vimrc*, e.g.: 
+For full use you will also need to let the plugin know where you keep your tiddlers by adding the following line to your *~/.config/nvim/init.vim* or *~/.vimrc*, i.e.: 
 
 ```vimrc
 let g:tiddlywiki_dir=$TIDDLYWIKIPATH
@@ -201,14 +195,25 @@ Then make this executable:
 chmod a+x ~/.local/bin/tw
 ```
 
-On next restart of terminal `tw The use of knowledge in society` should create a new tiddler ready for us to type.  If the tiddler already exists then the shell script will recognise that and update the metadata instead.
+On next restart of terminal, typing `tw The use of knowledge in society` should create a new tiddler ready for us to type.  If the tiddler already exists then the shell script will recognise that and update the metadata instead.
 
-The shell script does its best to cope with non-alphanumeric characters.  So apostrophes are deleted (*We're not really strangers* gets changed to *WereNotReallyStrangers*) while other non-alphanumerics characters are replaced by a space (so *Knee-deep in the Big Muddy* ends up as *KneeDeepInTheBigMuddy*).  I'm sure there will be edge cases which will not work out - feel free to comment below.
+The shell script does its best to cope with non-alphanumeric characters.  So apostrophes are deleted (*We're not really strangers* gets changed to *WereNotReallyStrangers*) while it substitutes other non-alphanumerics characters for a space (so *Knee-deep in the Big Muddy* ends up as *KneeDeepInTheBigMuddy*).  I'm sure there will be edge cases which will not work out - feel free to comment below.
 
 ## A note on spawning
 
-It is worth noting that nodemon can be a bit difficult to stop once it is started.  One option is to [find the process](https://linustechtips.com/topic/1049531-nodejs-how-to-stop-nodemon/) running and stop them individually:
+It is worth noting that nodemon can be a bit difficult to stop once it is started.  One option is to find the process running and stop them individually, to quote [one particular solution](https://linustechtips.com/topic/1049531-nodejs-how-to-stop-nodemon/):
 
 > ps aux | grep -i nodemon, find out which process number nodemon is, then issue a kill -9 [process ID]
 
-Or alternatively reboot the Pi.  That can be easier..
+Or alternatively reboot the Pi.  That can be much easier...
+
+## Version control
+
+If this doesn't work for you, it might be due to version conflicts.  At the time of writing I was using:
+
+- Pi: Raspberry Pi 3 Model B Rev 1.2 running Raspbian GNU/Linux 10 (buster) armv7l.  Node v14.11.0, npm v6.14.8.  Tiddlywiki v5.1.23.
+- Desktop: Manjaro Linux 21.0.7 Omara.  zsh v5.8. neovim v0.4.4.
+
+## Conclusion
+
+This is not perfect - for instance there is a 30 second delay between creating a tiddler on the command line and it being reflected in the browser.  And there are probably all sorts of circumstances where the bash script will not work out.  Square peg in a square hole or Linux kludge?  Comments, feedback, etc below.
