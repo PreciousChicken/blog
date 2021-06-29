@@ -100,6 +100,8 @@ Switching back from the Raspberry Pi to your Linux machine, the following will a
 
 ### 2a. Mapping a drive
 
+*Edit 29 Jun 21: Since writing the below I am having some problem with the mapping - i3 is failing to mount the drive on start.  I will post a correction when I have some time to test further.*
+
 So that we have the tiddlers accessible on our local machine, the *wiki* directory on the Pi needs to be mounted.  This is done in a number of steps (all from the local machine).
 
 First created the mountpoint (e.g. where on your local system you want the tiddlers to appear):
