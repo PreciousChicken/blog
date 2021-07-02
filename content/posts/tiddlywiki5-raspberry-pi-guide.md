@@ -86,7 +86,7 @@ To do so enter at the terminal this intimidatingly long command:
 ```bash
 nodemon --delay 30 -e tid --ignore 'wiki/tiddlers/$*.tid' --watch wiki/tiddlers/ $NVM_BIN/tiddlywiki wiki --listen host=192.168.0.19
 ```
-At this point you can simply walk away leaving the terminal open and running if you have been directly inputting commands into your Raspberry Pi.  If you are accessing your Pi remotely via ssh then close the terminal window itself without exiting the running program (on Manjaro i3 this is done via the `mod-Shift-q` keypress, but your distro will likely be different).  This method of exit is required because closing the terminal via standard methods (e.g. `ctrl-c` followed by `exit`) will likely also kill nodemon.
+At this point you can simply walk away leaving the terminal open and running if you have been directly inputting commands into your Raspberry Pi.  If you are accessing your Pi remotely via SSH then close the terminal window itself without exiting the running program (on Manjaro i3 this is done via the `mod-Shift-q` keypress, but your distro will likely be different).  This method of exit is required because closing the terminal via standard methods (e.g. `ctrl-c` followed by `exit`) will likely also kill nodemon.
 
 So what does this do?  The flags / arguments to nodemon are as follows:
 
@@ -100,17 +100,19 @@ So what does this do?  The flags / arguments to nodemon are as follows:
 
 Switching back from the Raspberry Pi to your Linux machine, the following will allow (relatively) seamless editing in vim / neovim.
 
+These steps assume you have generated SSH keys allowing you to access your Pi from your Linux machine - if not follow DigitalOcean's excellent [How To Set Up SSH Keys](https://www.digitalocean.com/community/tutorials/how-to-set-up-ssh-keys-2) tutorial before anything else.
+
 ### 2a. Mapping a drive
 
-So that we have the tiddlers accessible on our local machine, the *wiki* directory on the Pi needs to be mounted.  Although the actual mount command is given in the *tw* shell script below, some initial steps need to be taken for this to work.
+So that we have the tiddlers accessible on our local machine, the *wiki* directory on the Pi needs to be mounted.  Although the actual mount command is given in the *tw* shell script below, some initial steps need to be taken for this to work.  
 
-First created the mountpoint (e.g. where on your local system you want the tiddlers to appear):
+First create the mountpoint (e.g. where on your local system you want the tiddlers to appear):
 
 ```bash
 mkdir ~/wiki
 ```
 
-Now we need to install *sshfs* which allows us to mount a drive over ssh.  I'm using Manjaro so it is:
+Now we need to install *sshfs* which allows us to mount a drive over SSH.  I'm using Manjaro so it is:
 
 ```bash
 pamac install sshfs
