@@ -12,17 +12,19 @@ draft: false
 
 The practice of personal information management has always left me unsatisfied; a square hole in the puzzle of life that you just don't have a square peg for.  After looking into options for square pegs I've opted for a zettelkasten method implemented via a [TiddlyWiki](https://tiddlywiki.com/).  
 
-I wanted to host this on Raspberry Pi, and access this on all the computers on my local network (e.g. tables, phones, etc).  However I also wanted the ability to directly edit tiddlers (the basic unit of information in TiddlyWiki) using neovim, so I don't always have to go through a browser.
+I wanted to host this on a Raspberry Pi and access this on all the computers on my local network (e.g. tablets, phones, etc).  However I also wanted the ability to directly edit tiddlers (the basic unit of information in TiddlyWiki) using neovim, so I don't always have to go through a browser.
 
-This proved problematic, which I explain in the long-winded and unnecessary background, so the steps I took follow.
+This proved problematic, which I explain in the long-winded and unnecessary background, so I thought worth recording the steps I took on both the Raspberry Pi and my Linux box below.
 
 ## Long-winded and unnecessary background
 
 This turned out to be more difficult than I thought.  The [vanilla node.js installation](https://github.com/Jermolene/TiddlyWiki5) of TiddlyWiki doesn't play well with direct editing of tiddlers, i.e. editing the tiddlers requires a manual node restart before it appears in the browser.  [OokTech](https://ooktech.com/) has an [executable](https://github.com/OokTech/TW5-BobEXE) that does allow direct editing - but this [doesn't work](https://github.com/OokTech/TW5-BobEXE/issues/18) on a Raspberry Pi.  Not to fear however as OokTech also have a [plugin](https://github.com/OokTech/TW5-Bob) which gives the same functionality.
 
-So I used this for a number of months - however there was a snag.  Every so often a tiddler would appear to save correctly after a browser edit, but on return the changes would have dissapeared.  Not knowing exactly what the problem was my first thought was to upgrade to the latest version, in case this had been rectified.  So I updated both TiddlyWiki5 and the OokTech plugin; at which point it stopped working altogether.
+So I used this for a number of months - however there was a snag.  Every so often a tiddler would appear to save correctly after a browser edit, but on return the changes would have dissapeared.  Not knowing exactly what the problem was my first thought was to upgrade to the latest version, in case this solved the problem[^1].  So I updated both TiddlyWiki5 and the OokTech plugin; at which point it stopped working altogether.
 
-Rather than starting with an entirely fresh installed I wondered if there might be a better way.
+[^1]:  For clarity I suspect the problem was something to do with how I had installed or configured Bob, rather than an error in the system itself.  But a fresh install is never a bad idea anyway.
+
+Rather than starting over again I wondered if there might be another way.
 
 ## 1. Raspberry Pi
 
@@ -41,7 +43,7 @@ sudo ufw allow 8080
 
 This installs [Uncomplicated Firewall](https://en.wikipedia.org/wiki/Uncomplicated_Firewall) onto your Pi, enables it and then allows the port that your TiddlyWiki will be listening on.
 
-### 1b. Install Tiddlywiki5 and Nodemon
+### 1b. Install TiddlyWiki5 and Nodemon
 
 At the terminal:
 
@@ -100,9 +102,7 @@ Switching back from the Raspberry Pi to your Linux machine, the following will a
 
 ### 2a. Mapping a drive
 
-*Edit 29 Jun 21: Since writing the below I am having some problem with the mapping - i3 is failing to mount the drive on start.  I will post a correction when I have some time to test further.*
-
-So that we have the tiddlers accessible on our local machine, the *wiki* directory on the Pi needs to be mounted.  This is done in a number of steps (all from the local machine).
+So that we have the tiddlers accessible on our local machine, the *wiki* directory on the Pi needs to be mounted.  Although the actual mount command is given in the *tw* shell script below, some initial steps need to be taken for this to work.
 
 First created the mountpoint (e.g. where on your local system you want the tiddlers to appear):
 
@@ -118,18 +118,9 @@ pamac install sshfs
 
 If you are using Ubuntu or derivative then it will be `sudo apt install sshfs`.
 
-To ensure it is mounted every time we start up this [StackOverflow answer](https://unix.stackexchange.com/a/29252) suggests including the following in a startup script.  I use the i3 window manager, so a good place is *~/.i3/config*, where I include:
+To make things a bit easier once we've decided where our tiddlers are mounted we will set this path as an environment variable so we aren't having to retype the path again.  We do this by editing our `~/.bash_profile` (or whatever shell we use - I use zsh so it is `~/.zshenv`)[^2] to include:
 
-```bash
-exec --no-startup-id ssh-add /home/your_username/.ssh/id_ed25519
-exec --no-startup-id sshfs pi@192.168.0.19:/home/pi/wiki /home/your_username/wiki
-```
-
-Obviously change `your_username` to, ahem, your username.  You might also notice I'm using an Ed25519 key rather than a RSA key, change to whatever the name of your ssh key is.  The `exec --no-startup-id` prefix is relevant to the i3 config, so if you are using a different startup script location this might not be necessary.
-
-To make things a bit easier once we've decided where our tiddlers are mounted we will set this path as an environment variable so we aren't having to retype the path again.  We do this by editing our `~/.bash_profile` (or whatever shell we use - I use zsh so it is `~/.zshenv`)[^1] to include:
-
-[^1]:  You could also use your *~/.bashrc* or *~/.zshrc*, but I think the profile / env files are [preferable](https://unix.stackexchange.com/a/71258).
+[^2]:  You could also use your *~/.bashrc* or *~/.zshrc*, but I think the profile / env files are [preferable](https://unix.stackexchange.com/a/71258).
 
 ```bash
 export TIDDLYWIKIPATH=$HOME/wiki/tiddlers/
@@ -143,7 +134,7 @@ The [vim-tiddlywiki](https://github.com/sukima/vim-tiddlywiki) plugin is absolut
  git clone --depth 1 https://github.com/sukima/vim-tiddlywiki ~/.config/nvim/pack/sukima/start/vim-tiddlywiki
 ```
 
-If you are using original Vim rather than Neovim, then the path above will need amending as Vim does not use the *.config* directory (or use a plugin manager).
+If you are using original Vim rather than Neovim, then the path above will need amending as Vim does not use the *.config* directory.  Or simply use a plugin manager.
 
 This plugin not only means that the tiddler format is recognised, but also allows you to create new tiddlers with the right metadata in place and jump to the other tiddlers using CamelCase links.
 
@@ -155,15 +146,22 @@ let g:tiddlywiki_dir=$TIDDLYWIKIPATH
 
 ### 2c.  Command line editing
 
-To make the process buttery smooth I want to automate my workflow.  This being: read an article on the net, copy the title of the article and have neovim open a tiddler already named using CamelCase.  So for example, let's say I want to take some notes on Hayek's paper on open markets: [The use of knowledge in society](https://doi.org/10.1142/9789812701275_0025).  I want to open a terminal, type `tw The use of knowledge in society` and start editing a tiddler named TheUseOfKnowledgeInSociety.tid in neovim.
+To make the process buttery smooth I want to automate my workflow.  This being: read an article on the net, copy/paste the title of the article and have neovim open a tiddler already named using CamelCase.  So for example, let's say I want to take some notes on Hayek's paper on open markets: [The use of knowledge in society](https://doi.org/10.1142/9789812701275_0025).  I want to open a terminal, type `tw The use of knowledge in society` and start editing a tiddler named TheUseOfKnowledgeInSociety.tid in neovim.
 
-Create a file named *tw* wherever you keep user-specific executable files (so for me this is *~/.local/bin/tw*, but if you are using Ubuntu it will likely be *~/bin/tw*) and copy / paste the following:
+Create a file named *tw* wherever you keep user-specific executable files (so for me this is *~/.local/bin/tw*, but if you are using Ubuntu it will likely be *~/bin/tw*) and copy / paste the following code.  This assumes that you've created your mount point at *~/wiki* as above, if not then you will need to change the sshfs line.
 
 ```bash
 #!/bin/bash
 
 # Opens a new tiddlywiki tiddler named after arguments that follow commands
 # Uses vim-tiddlywiki plugin to create metadata
+# https://www.preciouschicken.com/blog/posts/tiddlywiki5-raspberry-pi-guide/
+
+# Checks if pi is mounted, if not mounts in folder created earlier
+if (( $(mount | grep -e 'pi@'| wc -l) == 0 ));
+then     
+	sshfs pi@192.168.0.19:/home/pi/wiki /home/$USER/wiki -o reconnect
+fi
 
 # Replaces non-alphanumeric characters in arguments
 arguments=$(echo $@ | sed "s/[’]//g")
@@ -213,7 +211,7 @@ Or alternatively reboot the Pi.  That can be much easier...
 
 If this doesn't work for you, it might be due to version conflicts.  At the time of writing I was using:
 
-- Pi: Raspberry Pi 3 Model B Rev 1.2 running Raspbian GNU/Linux 10 (buster) armv7l.  Node v14.11.0, npm v6.14.8.  Tiddlywiki v5.1.23.
+- Pi: Raspberry Pi 3 Model B Rev 1.2 running Raspbian GNU/Linux 10 (buster) armv7l.  Node v14.11.0, npm v6.14.8.  TiddlyWiki v5.1.23.
 - Desktop: Manjaro Linux 21.0.7 Omara.  zsh v5.8. neovim v0.4.4.
 
 ## Conclusion
