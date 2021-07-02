@@ -148,7 +148,7 @@ let g:tiddlywiki_dir=$TIDDLYWIKIPATH
 
 To make the process buttery smooth I want to automate my workflow.  This being: read an article on the net, copy/paste the title of the article and have neovim open a tiddler already named using CamelCase.  So for example, let's say I want to take some notes on Hayek's paper on open markets: [The use of knowledge in society](https://doi.org/10.1142/9789812701275_0025).  I want to open a terminal, type `tw The use of knowledge in society` and start editing a tiddler named TheUseOfKnowledgeInSociety.tid in neovim.
 
-Create a file named *tw* wherever you keep user-specific executable files (so for me this is *~/.local/bin/tw*, but if you are using Ubuntu it will likely be *~/bin/tw*) and copy / paste the following code.  This assumes that you've created your mount point at *~/wiki* as above, if not then you will need to change the sshfs line.
+Create a file named *tw* wherever you keep user-specific executable files (so for me this is *~/.local/bin/tw*, but if you are using Ubuntu it will likely be *~/bin/tw*) and copy / paste the following code.  Alternatively you can download from the [github repo](https://github.com/PreciousChicken/tiddlywiki5-raspberry-pi-guide).  This code assumes that you've created your mount point at *~/wiki* as above, if not then you will need to change the sshfs line.
 
 ```bash
 #!/bin/bash
