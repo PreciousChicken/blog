@@ -10,7 +10,7 @@ draft: false
 
 ## Introduction
 
-The practice of personal information management has always left me unsatisfied; a square hole in the puzzle of life that you just don't have a square peg for.  After looking into options for square pegs I've opted for a zettelkasten method implemented via a [TiddlyWiki](https://tiddlywiki.com/).  
+The practice of personal information management has always left me unsatisfied; a square hole in the puzzle of life that you just don't have a square peg for.  After looking into options for square pegs I've opted for a zettelkasten method implemented via a [TiddlyWiki](https://tiddlywiki.com/).
 
 I wanted to host this on a Raspberry Pi and access this on all the computers on my local network (e.g. tablets, phones, etc).  However I also wanted the ability to directly edit tiddlers (the basic unit of information in TiddlyWiki) using neovim, so I don't always have to go through a browser.
 
@@ -162,7 +162,7 @@ Create a file named *tw* wherever you keep user-specific executable files (so fo
 # Checks if pi is mounted, if not mounts in folder created earlier
 if (( $(mount | grep -e 'pi@'| wc -l) == 0 ));
 then     
-	sshfs pi@192.168.0.19:/home/pi/wiki /home/$USER/wiki -o reconnect
+	sshfs pi@192.168.0.19:/home/pi/wiki "$(dirname $TIDDLYWIKIPATH)" -o reconnect
 fi
 
 # Replaces non-alphanumeric characters in arguments
