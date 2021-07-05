@@ -8,11 +8,14 @@ enableToc: true
 draft: false
 ---
 
+
+{{< youtube id="2bvEY5Ru5ZQ" title="TiddlyWiki5, Raspberry Pi and Vim: A guide for the command line aficionado" >}}
+
 ## Introduction
 
 The practice of personal information management has always left me unsatisfied; a square hole in the puzzle of life that you just don't have a square peg for.  After looking into options for square pegs I've opted for a zettelkasten method implemented via a [TiddlyWiki](https://tiddlywiki.com/).
 
-I wanted to host this on a Raspberry Pi and access this on all the computers on my local network (e.g. tablets, phones, etc).  However I also wanted the ability to directly edit tiddlers (the basic unit of information in TiddlyWiki) using neovim, so I don't always have to go through a browser.
+I wanted to host this on a Raspberry Pi and access this on all the computers on my local network (e.g. tablets, phones, etc).  However I also wanted the ability to directly edit tiddlers (the basic unit of information in TiddlyWiki) using neovim, so I don't always have to go through a browser.  Seen as I was using neovim I also wanted to be able to initiate a tiddler from the command line - copying a title in from whatever I'm reading and having it CamelCase create a tiddler in Tiddlywiki as per the above video.
 
 This proved problematic, which I explain in the long-winded and unnecessary background, so I thought worth recording the steps I took on both the Raspberry Pi and my Linux box below.
 
