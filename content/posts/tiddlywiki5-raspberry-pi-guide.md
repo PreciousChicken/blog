@@ -222,3 +222,5 @@ If this doesn't work for you, it might be due to version conflicts.  At the time
 ## Conclusion
 
 This is not perfect - for instance there is a 30 second delay between creating a tiddler on the command line and it being reflected in the browser.  And there are probably all sorts of circumstances where the bash script will not work out.  Square peg in a square hole or Linux kludge?  Comments, feedback, etc below.
+
+Addendum: A neater alternative to using nodemon would be to directly interface with the TiddlyWiki API on saving the tiddler, as was helpfully [pointed out on the TiddlyWiki mailing list](https://groups.google.com/g/tiddlywiki/c/gssKE66gPv0/m/nOuSsCg-AwAJ).
