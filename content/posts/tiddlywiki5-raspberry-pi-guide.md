@@ -223,4 +223,30 @@ If this doesn't work for you, it might be due to version conflicts.  At the time
 
 This is not perfect - for instance there is a 30 second delay between creating a tiddler on the command line and it being reflected in the browser.  And there are probably all sorts of circumstances where the bash script will not work out.  Square peg in a square hole or Linux kludge?  Comments, feedback, etc below.
 
-Addendum: A neater alternative to using nodemon would be to directly interface with the TiddlyWiki API on saving the tiddler, as was helpfully [pointed out on the TiddlyWiki mailing list](https://groups.google.com/g/tiddlywiki/c/gssKE66gPv0/m/nOuSsCg-AwAJ).
+## Addendum: Other options
+
+Following making this post live, a thread on the [TiddlyWiki mailing list](https://groups.google.com/g/tiddlywiki/c/gssKE66gPv0) pointed out a number of alternatives to using nodemon:
+
+### watch-fs plugin
+
+The [watch-fs](https://github.com/linonetwo/tiddlywiki-plugins/tree/master/plugins/linonetwo/watch-fs) TiddlyWiki plugin states that it "enables TiddlyWiki to watch the change in your disk, and if you edit one of your tiddler using editor likes VSCode and save it on the disk, the change will immediately reflected in the browser."  
+
+### TiddlyWiki API
+
+An option suggested by [Saq Imtiaz](https://github.com/saqimtiaz) is instead of saving newly created tiddler files directly into the wiki directory, one could save the tiddler with a PUT request via cURL using the [TiddlyWiki API](https://tiddlywiki.com/#WebServer%20API%3A%20Put%20Tiddler:%5B%5BWebServer%20API%3A%20Put%20Tiddler%5D%5D); for example:
+
+```bash
+curl -X PUT -i 'http://192.168.0.12:8080/recipes/default/tiddlers/NewTiddlerTitle' --data '{
+ "tags": "firstTag anotherTag",
+ "creator": "gene",
+ "modifier": "gene",
+ "text": "The use of knowledge in society"
+}' -H "X-Requested-With: TiddlyWiki"
+```
+
+Using this example as a basis a Vim plugin or a shell script called by Vim could be written.
+
+### TW5-Bob plugin
+
+Although as previously covered this did not quite work out for me, the [TW5-Bob](https://github.com/OokTech/TW5-Bob) plugin is also an alternative given that it offers "two-way real-time syncing between the browser and file system".
+
