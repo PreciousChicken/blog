@@ -225,7 +225,7 @@ This is not perfect - for instance there is a 30 second delay between creating a
 
 ## Addendum: Other options
 
-Following making this post live, a thread on the [TiddlyWiki mailing list](https://groups.google.com/g/tiddlywiki/c/gssKE66gPv0) pointed out a number of alternatives to using nodemon:
+A thread on the [TiddlyWiki mailing list](https://groups.google.com/g/tiddlywiki/c/gssKE66gPv0), subsequent to this post, pointed out a number of alternatives to using nodemon:
 
 ### watch-fs plugin
 
