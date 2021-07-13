@@ -98,7 +98,7 @@ As groff is very low-level then macro facilities are grouped together into packa
 
 ## Conclusion
 
-Thoughts, observations?  Feel free to add below.
+I guess the one obvious question is why use groff at all, as opposed to LaTeX?    Possibly because there is something satisfying about learning modern uses for an application whose lineage dates back to 1964.   Or maybe just, to paraphrase George Mallory, because it is there?  Thoughts, observations?  Feel free to add below.  
 
 ## Further References
 
