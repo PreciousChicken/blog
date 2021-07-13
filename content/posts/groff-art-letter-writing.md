@@ -3,14 +3,14 @@ title: "Groff and the art of letter writing"
 date: 2021-07-11T16:55:45+01:00
 tags: ["groff", "linux"]
 categories: ["text processing"]
-description: ""
+description: "Worked example using groff text processing on Linux for letter writing."
 enableToc: true
 draft: true
 ---
 
 ## Introduction
 
-Although I've blogged previously about using [LaTeX for academic writing](https://www.preciouschicken.com/blog/posts/neovim-latex-zathura-in-perfect-harmony/) I wanted to try [groff](https://www.gnu.org/software/groff/) out for the less complicated task of letter writing - groff being similar to LaTeX but [far less popular](https://unix.stackexchange.com/questions/89625/is-troff-groff-relevant-anymore/). A typesetting system such as groff appeals as the originals are stored in plain text which is memory efficient, useful for text searching within files and scores high for digital preservation (text files being easy to read as opposed to word processing formats).
+Although I've blogged previously about using [LaTeX for academic writing](https://www.preciouschicken.com/blog/posts/neovim-latex-zathura-in-perfect-harmony/) I wanted to try [groff](https://www.gnu.org/software/groff/) out for the less complicated task of letter writing - groff being similar to LaTeX but [far less popular](https://unix.stackexchange.com/questions/89625/is-troff-groff-relevant-anymore/). Using a typesetting system such as groff instead of word processing software has several advantages: saving documents in plain text is memory efficient, easily searchable and scores highly for digital preservation (proprietary word processing file formats tending to eventually obsolesce.
 
 ## The letter
 
@@ -42,7 +42,7 @@ Basildon
 PO Box 200
 .sp
 Dear Sir / Madam,
-.pp \" Paragrapgh start
+.pp \" Paragraph start
 I am outraged and upset with your response\** \" Places footnote
 .(f \" Footnote start
 \** Reference C/A/O123 dated 1st July 2021.
@@ -75,32 +75,32 @@ This command pipes postscript into Zathura's standard input with the following r
 
 [![A letter of complaint written in groff](https://www.preciouschicken.com/blog/images/groff-letter-thumb.png)](https://www.preciouschicken.com/blog/images/groff-letter.png)
 
+## Output directly to print
+
+Assuming a [default printer has been set](https://www.mattcutts.com/blog/change-default-printer-linux-firefox/), then we can also send the postcript directly to the printer:
+
+```bash
+groff -me complaint.me | lp
+```
 ## Output pdf file
 
-If you would rather have a pdf file, then you add the *-T* flag which indicates you want the output as something other than the default postscript:
+The previous commands avoided the use of PDF all together, but if you would rather have a pdf file, then adding the *-T* flag indicates you want the output something other than default postscript:
 
 ```bash
 groff -me -T pdf complaint.me > complaint.pdf
 ```
 
-## Output directly to print
-
-Assuming a [default printer has been set](https://www.mattcutts.com/blog/change-default-printer-linux-firefox/), then we can also send the postcript directly to the printer (with no internmediate pdf needing to be produced):
-
-```bash
-groff -me complaint.me | lp
-```
 
 ## Me, me, me?
 
-As groff is very low-level then macro facilities are grouped together into packages to allow routine operations (such as footnotes) to be done efficiently.  *Me* is one of these packages; although [far from the only option](https://www.stephenlindholm.com/groff_macros.html).  The *-me* flag on the command line means that groff uses this package and we save it with a .me extension.
+As groff is very low-level then macro facilities are grouped together into packages to allow routine operations (such as footnotes) to be done efficiently.  *Me* is one of these packages; although [far from the only option](https://www.stephenlindholm.com/groff_macros.html).  The *-me* flag on the command line informs groff this notation is being used, likewise the recommended file extension [TODO](https://man.cx/groff_filename(5)) to use is *.me*.
 
 ## Further References
 
-- [How to format academic papers on Linux with groff -me](https://opensource.com/article/18/2/how-format-academic-papers-linux-groff-me).
-- [Writing Papers with NROFF using −me](https://docs.freebsd.org/44doc/usd/19.memacros/paper.pdf).
-- [-me Reference Manual](https://docs.freebsd.org/44doc/usd/20.meref/paper.pdf).
-- [groff_me man page](https://man.cx/groff_me(7)).
-- Luke Smith's [groff/troff: MUH MINIMALIST Documents](https://videos.lukesmith.xyz/videos/watch/6e8047a6-a940-481b-803c-6fc13fa22eb9) introduction video.
-- [The GNU Troff Manual](https://www.gnu.org/software/groff/manual/groff.html)
+- [How to format academic papers on Linux with groff -me](https://opensource.com/article/18/2/how-format-academic-papers-linux-groff-me).  Gentle introduction to groff and the -me package.
+- [Writing Papers with NROFF using −me](https://docs.freebsd.org/44doc/usd/19.memacros/paper.pdf).  Introductory paper by the author of the -me package.
+- [-me Reference Manual](https://docs.freebsd.org/44doc/usd/20.meref/paper.pdf).  Full reference for -me, again by the author.
+- [groff_me man page](https://man.cx/groff_me(7)).  Unix GROFF_ME(7) Miscellaneous Information Manual.
+-  [groff/troff: MUH MINIMALIST Documents](https://videos.lukesmith.xyz/videos/watch/6e8047a6-a940-481b-803c-6fc13fa22eb9) Luke Smith's introductory video to groff, though uses the -ms package rather than -me.
+- [The GNU Troff Manual](https://www.gnu.org/software/groff/manual/groff.html).  The definitive groff manual.
 
