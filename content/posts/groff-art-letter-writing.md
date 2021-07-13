@@ -10,7 +10,7 @@ draft: true
 
 ## Introduction
 
-Although I've blogged previously about using [LaTeX for academic writing](https://www.preciouschicken.com/blog/posts/neovim-latex-zathura-in-perfect-harmony/) I wanted to try Groff out for the less complicated task of letter writing.  Typically these are covering letters or letters of complaint or some such.  A typesetting system such as Groff appeals as the originals are stored in plain text which is memory efficient, useful for text searching within files and scores high for digital preservation (text files being easy to read as opposed to word processing formats).
+Although I've blogged previously about using [LaTeX for academic writing](https://www.preciouschicken.com/blog/posts/neovim-latex-zathura-in-perfect-harmony/) I wanted to try [groff](https://www.gnu.org/software/groff/) out for the less complicated task of letter writing - groff being similar to LaTeX but [far less popular](https://unix.stackexchange.com/questions/89625/is-troff-groff-relevant-anymore/). A typesetting system such as groff appeals as the originals are stored in plain text which is memory efficient, useful for text searching within files and scores high for digital preservation (text files being easy to read as opposed to word processing formats).
 
 ## The letter
 
@@ -73,7 +73,7 @@ groff -me complaint.me | zathura -
 
 This command pipes postscript into Zathura's standard input with the following result:
 
-[![A letter of complaint written in Groff](https://www.preciouschicken.com/blog/images/groff-letter-thumb.png)](https://www.preciouschicken.com/blog/images/groff-letter.png)
+[![A letter of complaint written in groff](https://www.preciouschicken.com/blog/images/groff-letter-thumb.png)](https://www.preciouschicken.com/blog/images/groff-letter.png)
 
 ## Output pdf file
 
