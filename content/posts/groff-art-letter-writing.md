@@ -10,7 +10,7 @@ draft: true
 
 ## Introduction
 
-Although I've blogged previously about using [LaTeX for academic writing](https://www.preciouschicken.com/blog/posts/neovim-latex-zathura-in-perfect-harmony/) I wanted to give Groff a whirl for something I do from time to time: write formal letters.  Typically these are covering letters or letters of complaint or some such.  A typesetting system such as Groff appeals as the originals are stored in plain text which is memory efficient, useful for text searching within files and scores high for digital preservation (text files being easy to read as opposed to word processing formats).
+Although I've blogged previously about using [LaTeX for academic writing](https://www.preciouschicken.com/blog/posts/neovim-latex-zathura-in-perfect-harmony/) I wanted to try Groff out for the less complicated task of letter writing.  Typically these are covering letters or letters of complaint or some such.  A typesetting system such as Groff appeals as the originals are stored in plain text which is memory efficient, useful for text searching within files and scores high for digital preservation (text files being easy to read as opposed to word processing formats).
 
 ## The letter
 
@@ -91,9 +91,9 @@ Assuming a [default printer has been set](https://www.mattcutts.com/blog/change-
 groff -me complaint.me | lp
 ```
 
-## What's with the *-me*?
+## Me, me, me?
 
-As groff is very low-level then macro facilities are grouped together into packages to allow routine operations (such as footnotes) to be done efficiently.  *Me* is one of these packages; although [far from the only option](https://www.stephenlindholm.com/groff_macros.html).
+As groff is very low-level then macro facilities are grouped together into packages to allow routine operations (such as footnotes) to be done efficiently.  *Me* is one of these packages; although [far from the only option](https://www.stephenlindholm.com/groff_macros.html).  The *-me* flag on the command line means that groff uses this package and we save it with a .me extension.
 
 ## Further References
 
