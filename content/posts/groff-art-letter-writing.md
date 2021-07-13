@@ -5,7 +5,7 @@ tags: ["groff", "linux"]
 categories: ["text processing"]
 description: "Worked example using groff text processing on Linux for letter writing."
 enableToc: true
-draft: true
+draft: false
 ---
 
 ## Introduction
