@@ -94,7 +94,7 @@ groff -me -T pdf complaint.me > complaint.pdf
 
 ## Me, me, me?
 
-As groff is very low-level then macro facilities are grouped together into packages to allow routine operations (such as footnotes) to be done efficiently.  *Me* is one of these packages; although [far from the only option](https://www.stephenlindholm.com/groff_macros.html).  The *-me* flag on the command line informs groff this notation is being used, likewise the [recommended file extension](https://man7.org/linux/man-pages/man5/groff_filenames.5.html) to use is *.me*.
+As groff is very low-level then macro facilities are grouped together into packages to allow routine operations (such as footnotes) to be done efficiently.  *Me* is one of these packages; although [far from the only option](https://www.stephenlindholm.com/groff_macros.html); in fact a new macro package, *[-mk](http://ankarstrom.se/~john/mk.html)*, was released this very month.  The *-me* flag on the command line informs groff this notation is being used, likewise the [recommended file extension](https://man7.org/linux/man-pages/man5/groff_filenames.5.html) to use is *.me*.
 
 ## Conclusion
 
