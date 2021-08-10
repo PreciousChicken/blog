@@ -70,7 +70,7 @@ A N Other
 Assuming you have the [Zathura](https://pwmt.org/projects/zathura/) document viewer installed at the terminal type:
 
 ```bash
-groff -me complaint.me | zathura -
+groff -me -dpaper=a4 complaint.me | zathura -
 ```
 
 This command pipes postscript into Zathura's standard input with the following result:
@@ -82,14 +82,17 @@ This command pipes postscript into Zathura's standard input with the following r
 Assuming a [default printer has been set](https://www.mattcutts.com/blog/change-default-printer-linux-firefox/), then we can also send the postcript directly to the printer:
 
 ```bash
-groff -me complaint.me | lp
+groff -me -dpaper=a4 complaint.me | lp
 ```
+
+As with the previous command this instructs groff to format for A4 sized paper.
+
 ## Output pdf file
 
 The previous commands avoided the use of PDF all together, but if you would rather save in that format, then adding the *-T* flag indicates you want the output something other than default postscript:
 
 ```bash
-groff -me -T pdf complaint.me > complaint.pdf
+groff -me -dpaper=a4 -T pdf complaint.me > complaint.pdf
 ```
 
 ## Me, me, me?
