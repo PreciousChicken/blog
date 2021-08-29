@@ -1,9 +1,10 @@
 ---
 enableToc: true
-title: "Configuring Deja Dup Ubuntu Backup on a WD My Cloud NAS"
+title: "Configuring Deja Dup Ubuntu backup on a WD My Cloud NAS"
 date: 2019-12-04T11:05:57Z
-tags: ["Linux", "Deja Dup Backup"]
-description: "How to set up automated Deja Dup Ubuntu Backups on a WD My Cloud NAS"
+tags: ["Linux", "Deja Dup", "NAS", "Backup"]
+description: "How to set up automated Deja Dup Ubuntu backups on a WD My Cloud NAS"
+categories: ["SysAdmin"]
 draft: false
 ---
 
