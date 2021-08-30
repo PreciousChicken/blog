@@ -1,14 +1,14 @@
 ---
 title: "Automating restic backups from a Raspberry Pi to a WD My Cloud NAS"
 date: 2021-08-29T08:05:25+01:00
-tags: ["Linux", "Restic", "NAS", "Backup"]
+tags: ["Linux", "Restic", "NAS", "Backup", "Raspberry Pi"]
 categories: ["SysAdmin"]
 description: "How to set up automated restic backups from a Raspberry Pi to a WD My Cloud NAS"
 enableToc: true
 draft: true
 ---
 
-I've blogged previously on using [Deja Dup to backup Ubuntu Linux to a NAS drive](https://www.preciouschicken.com/blog/posts/deja-dup-ubuntu-backup-on-wd-my-cloud/).  However I found using the same strategy on a Raspberry Pi did not work so well; the Pi kept on forgetting the backup password meaning it was hard to automate and encrypt backups.  Although a solvable problem, I thought I would take a look at restic instead as a solution.  The article below features a how-to on how this was automated written for the [WD My Cloud NAS](https://amzn.to/2MsLti5) drive[^1] using NFS (Network File System) as the file system protocol.
+I've blogged previously on using [Deja Dup to backup Ubuntu Linux to a NAS drive](https://www.preciouschicken.com/blog/posts/deja-dup-ubuntu-backup-on-wd-my-cloud/).  However I found using the same strategy on a Raspberry Pi did not work so well; the Pi kept on forgetting the backup password meaning it was hard to automate and encrypt backups.  Although a solvable problem, I thought I would take a look at restic instead as a solution to back up a [Tiddlywiki hosted on a Raspberry Pi](https://preciouschicken.com/blog/posts/tiddlywiki5-raspberry-pi-guide/).  The article below features a how-to on how this was automated written for the [WD My Cloud NAS](https://amzn.to/2MsLti5) drive[^1] using NFS (Network File System) as the file system protocol.
 
 [^1]: Amazon affiliate link.
 
@@ -26,7 +26,7 @@ The Host value refers to the IP address on your local network that can connect t
 
 ## Install the NFS client on the Raspberry Pi
 
-The remained of the instructions are now based within the Raspberry Pi using the command line.  Install the NFS client package by running the following at the terminal:
+Turning to the Raspberry Pi for the remainder of these instructions, first the NFS client package should be installed using the following command at the terminal:
 
 ```bash
 sudo apt update
@@ -35,29 +35,23 @@ sudo apt install nfs-common
 
 ## Create a local folder to act as mount point
 
-Using the terminal create a folder on the computer you are backing up: `sudo mkdir /mnt/Backup`.  This is the folder you will mount the NAS drive too; you can create this folder anywhere you consider sensible.
+Next create a local folder we will back up to: `sudo mkdir /mnt/Backup`.  This is the folder you will mount the NAS drive to; you can create this folder anywhere you consider sensible.
 
-## Open *fstab* file 
+## Edit *fstab* file 
 
-Using the terminal open your fstab file using `sudo vim /etc/fstab`. This fstab file determines what drive Ubuntu mounts at startup.
+Using the your favourite text editor open the *fstab* file with root privileges e.g. at the terminal type `sudo vim /etc/fstab`. This *fstab* file determines what drive the Pi mounts at startup.
 
-## Add new line to *fstab* file
-
-Create a new line at the end of the *fstab* file and; where '192.168.0.32' is your IP address from Step 1, the first `Backup` is the share you created at Step 1 and `/mnt/Backup` is the folder you created at Step 2; add the following 
+Create a new line at the end of the *fstab* file and; where '192.168.0.32' is the IP address of the NAS, the first `Backup` is the share created on your NAS and `/mnt/Backup` is the local folder created; add the following 
 
 ```bash
 192.168.0.32:/nfs/Backup /mnt/Backup nfs defaults 0 0
 ```
 
-If you aren't familiar with vim it can be a little tricky to figure out how to edit text and save, but you can [pick up the bare minimum quickly](https://yos.io/2013/07/10/learn-vim-in-5-minutes/).
+If aren't familiar with vim and you are using it to edit from the command line, it can be a little tricky to figure out how to edit text and save, but you can [pick up the bare minimum quickly](https://yos.io/2013/07/10/learn-vim-in-5-minutes/).
 
 ## Create */etc/network/if-up.d/fstab* file  
 
-Using the terminal create a file with the command `sudo vim /etc/network/if-up.d/fstab`.
-
-## Edit */etc/network/if-up.d/fstab* file
-
-Copy and paste the following text to the file created at Step 5:
+From the terminal create a file with the command `sudo vim /etc/network/if-up.d/fstab`.  Copy and paste the following into this new file:
 
 ```bash
 #!/bin/sh
@@ -79,7 +73,7 @@ Having specified where we are going to host the backup, it is time to initiate t
 At the command line enter:
 
 ```bash
-restic init --repo /mnt/Backup
+restic init --repo /mnt/Backup/wiki-restic-repo
 ```
 
 If successful restic will prompt you for a password to encrypt your repository and then create a new repository in your mounted backup directory.
@@ -91,12 +85,21 @@ When the repo was created a password was provided at the command line - however 
 Changing *your_password* as required enter the following at the terminal:
 
 ```bash
-echo "your_password" > .config/restic-backup-password.txt
-chmod 600 .config/restic-backup-password.txt
+echo "your_password" > ~/.config/restic-backup-password.txt
+chmod 600 ~/.config/restic-backup-password.txt
 ```
 
 This creates a text file containing your password, then alters the permissions for that file so only the current user can read it.
 
 ## Add restic commands to Crontab
 
-Having 
+Having initated a restic repository we now need to automate the backup process using cron, which allows a user to schedule tasks to run on a periodic basis.
+
+In the terminal enter `crontab -e` which will prompt you to choose a text editor to alter your crontab.  At the bottom of this file enter two new lines:
+
+```bash
+@hourly /usr/bin/restic -r /mnt/Backup/wiki-restic-repo/ backup /home/pi/wiki/ --tag auto --password-file=/home/pi/.config/restic-backup-password.txt
+@daily restic forget -r /mnt/Backup/wiki-restic-repo/ --password-file=/home/pi/.config/restic-backup-password.txt --keep-last 8 --keep-daily 5 --keep-weekly 4 --keep-monthly 10 --keep-yearly 5 --tag auto --prune
+```
+
+The first of these lines backsup the chosen directory every hour, the second line prunes the repository so that it doesn't grow to an unmanageable size.
