@@ -53,7 +53,7 @@ Unlike OS 5 write access is on by default, but it does not hurt to check...
 
 ## 3. Create a local folder to act as mount point
 
-Using the terminal create a folder on the computer you are backing up: `sudo mkdir /mnt/Backup`.  This is the folder you will mount the NAS drive too; you can create this folder anywhere you consider sensible.
+Using the terminal create a folder on the computer you are backing up: `sudo mkdir /mnt/Backup`.  This is the folder you will mount the NAS drive to; you can create this folder anywhere you consider sensible.
 
 ## 4. Open *fstab* file 
 
