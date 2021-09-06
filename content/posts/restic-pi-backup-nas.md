@@ -49,22 +49,25 @@ Create a new line at the end of the *fstab* file and; where '192.168.0.32' is th
 
 If aren't familiar with vim and you are using it to edit from the command line, it can be a little tricky to figure out how to edit text and save, but you can [pick up the bare minimum quickly](https://yos.io/2013/07/10/learn-vim-in-5-minutes/).
 
-## Create */etc/network/if-up.d/fstab* file  
-
-From the terminal create a file with the command `sudo vim /etc/network/if-up.d/fstab`.  Copy and paste the following into this new file:
-
-```bash
-#!/bin/sh
-mount -a
-```
-
-## Make */etc/network/if-up.d/fstab* file executable
-
-Make the file executable: `sudo chmod +x /etc/network/if-up.d/fstab`.
-
 ## Mount the drive  
 
-Run `sudo mount -a` from the terminal and the drive should now mount.  If you have done something wrong, like entered the wrong IP in *fstab*, you will get a message similar to `mount.nfs: Network is unreachable`; success meanwhile is marked simply by the lack of error message.  Alternatively you could also reboot your system which has the same effect - although you don't get to see the error message immediately if there is one.
+Run `sudo mount -a` from the terminal and the drive should now mount.  If you have done something wrong, like entered the wrong IP in *fstab*, you will get a message similar to `mount.nfs: Network is unreachable`; success meanwhile is marked simply by the lack of error message.  
+
+## Edit Pi Config
+
+In theory editing the *fstab* should allow the drive to be mounted every time the Pi is booted, but a further modification is required to do this (as discovered via a StackOverflow [answer](https://raspberrypi.stackexchange.com/a/53147/138949)).  At the command line enter the Pi configuration by running:
+
+```bash
+sudo raspi-config
+```
+
+Then select the following options: *1 System Options* - *S6 Network at Boot* and in answer to the question 
+
+> Would you like boot to wait until a network connection is established?
+
+select *Yes*.  If all went well the Pi confirms:
+
+> Waiting for network on boot is enabled
 
 ## Initiate restic repo
 
