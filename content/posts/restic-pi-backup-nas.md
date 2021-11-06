@@ -106,3 +106,7 @@ In the terminal enter `crontab -e` which will prompt you to choose a text editor
 ```
 
 The first of these lines backsup the chosen directory every hour, the second line prunes the repository so that it doesn't grow to an unmanageable size.
+
+## Further resources
+
+-  [How To Use Cron to Automate Tasks on Ubuntu 18.04](https://www.digitalocean.com/community/tutorials/how-to-use-cron-to-automate-tasks-ubuntu-1804).  Excellent tutorial from Digital Ocean (as many of them are).
