@@ -102,11 +102,12 @@ In the terminal enter `crontab -e` which will prompt you to choose a text editor
 
 ```bash
 @hourly /usr/bin/restic -r /mnt/Backup/wiki-restic-repo/ backup /home/pi/wiki/ --tag auto --password-file=/home/pi/.config/restic-backup-password.txt
-@daily restic forget -r /mnt/Backup/wiki-restic-repo/ --password-file=/home/pi/.config/restic-backup-password.txt --keep-last 8 --keep-daily 5 --keep-weekly 4 --keep-monthly 10 --keep-yearly 5 --tag auto --prune
+@daily /usr/bin/restic forget -r /mnt/Backup/wiki-restic-repo/ --password-file=/home/pi/.config/restic-backup-password.txt --keep-last 8 --keep-daily 5 --keep-weekly 4 --keep-monthly 10 --keep-yearly 5 --tag auto --prune
 ```
 
-The first of these lines backsup the chosen directory every hour, the second line prunes the repository so that it doesn't grow to an unmanageable size.
+The first of these lines backs-up the chosen directory every hour, the second line prunes the repository so that it doesn't grow to an unmanageable size.
 
 ## Further resources
 
 -  [How To Use Cron to Automate Tasks on Ubuntu 18.04](https://www.digitalocean.com/community/tutorials/how-to-use-cron-to-automate-tasks-ubuntu-1804).  Excellent tutorial from Digital Ocean (as many of them are).
+-  [Restic documentation](https://restic.readthedocs.io/en/stable/).  Official documentation that is comprehensive and easy to follow.
