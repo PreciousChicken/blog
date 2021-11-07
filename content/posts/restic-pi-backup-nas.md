@@ -69,6 +69,12 @@ select *Yes*.  If all went well the Pi confirms:
 
 > Waiting for network on boot is enabled
 
+OR EDIT:
+
+Have to run this command on Manjaro, works on PI????
+sudo systemctl enable systemd-networkd-wait-online
+https://forum.manjaro.org/t/fstab-mounting-network-drive-on-boot-not-working/53699/4
+
 ## Initiate restic repo
 
 Having specified where we are going to host the backup, it is time to initiate the repository restic will use to store our backup on the NAS drive.
