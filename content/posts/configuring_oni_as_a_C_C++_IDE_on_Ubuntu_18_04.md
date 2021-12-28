@@ -2,7 +2,7 @@
 enableToc: true
 title: "Configuring Oni as a C / C++ IDE on Ubuntu 18.04"
 date: 2018-09-15T16:39:04Z
-tags: ["Vim", "C Programming Language", "Oni", "IDE"]
+tags: ["neovim", "C Programming Language", "Oni", "IDE"]
 description: "Setting up Oni as an Integrated Development Environment for the C Programming Language on Ubuntu"
 draft: false
 ---

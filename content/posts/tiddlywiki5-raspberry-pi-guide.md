@@ -1,7 +1,7 @@
 ---
 title: "TiddlyWiki5, Raspberry Pi and Vim: A guide for the command line aficionado"
 date: 2021-05-15T22:03:28+01:00
-tags: ["tiddlywiki", "node", "Raspberry Pi", "bash", "vim"]
+tags: ["tiddlywiki", "node", "Raspberry Pi", "bash", "neovim"]
 categories: ["PIM"]
 description: "A guide to hosting TiddlyWiki on a Raspberry Pi, allowing tiddlers to be edited by a text editor and integration with vim."
 enableToc: true
