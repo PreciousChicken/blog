@@ -64,7 +64,95 @@ git push -u origin main
 
 ## 5.  Download publish profile from Azure
 
-Navigate to your Web App within the Azure portal and select the ***Get publish profile*** option to download a 
+Navigate to your Web App within the Azure portal and select the ***Get publish profile*** option, as shown below, to download a file named *react-apod.PublishSettings* to your local machine:
+
+[![Azure portal get publish profile](https://www.preciouschicken.com/blog/images/azure-react-apod_get_publish_profile-thumb.png)](https://www.preciouschicken.com/blog/images/azure-react-apod_get_publish_profile.png)
+
+## 6.  Add publish profile as a secret to GitHub repo
+
+Following the GitHub guide [Creating encrypted secrets for a repository](https://docs.github.com/en/actions/security-guides/encrypted-secrets#creating-encrypted-secrets-for-a-repository) create a new secret with the name ***AZURE_WEBAPP_PUBLISH_PROFILE*** and copy and paste the contents of the publish profile you downloaded earlier.  To make this easier on Linux you can copy a file into the clipboard from the terminal (assuming you have [xsel](http://www.vergenet.net/~conrad/software/xsel/) installed) like so:
+
+```bash
+xsel -b < ~/Downloads/azure-react-apod.PublishSettings
+```
+
+This secret will allow GitHub to access Azure portal in order to deploy your web app on your behalf.
+
+## 7.  Add a workflow to Github
+
+We now need to tell GitHub how to deploy your web app, we do this by adding a workflow.
+
+Therefore create a new file, named *azure-webapps-node.yml*,  located in a new GitHub workflow directory in your local repo:
+
+```bash
+mkdir -p  ./.github/workflows/ && touch ./.github/workflows/azure-webapps-node.yml
+```
+
+Then copy and paste the following into it (changing the name of the *env* variables according to the comments):
+
+```yaml
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+env:
+  AZURE_WEBAPP_NAME: react-apod    # change to your application's name in Azure
+  AZURE_WEBAPP_PACKAGE_PATH: '/home/runner/work/azure-react-apod/azure-react-apod'  # change both instances of azure-react-apod to the name of your repo 
+  NODE_VERSION: '16.x'                # set this to the node version to use if not 16
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: ${{ env.NODE_VERSION }}
+        cache: 'npm'
+
+    - name: npm install, build, and test
+      run: |
+        npm install
+        npm run build --if-present
+        npm run test --if-present
+
+    - name: Add process.json
+      run: |
+        echo '{ "script": "serve", "env": { "PM2_SERVE_SPA": "true", "PM2_SERVE_HOMEPAGE": "index.html" } }' >> ./build/process.json
+    - name: Upload artifact for deployment job
+      uses: actions/upload-artifact@v2
+      with:
+        name: node-app
+        path: ./build
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    environment:
+      name: 'Development'
+      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+
+    steps:
+    - name: Download artifact from build job
+      uses: actions/download-artifact@v2
+      with:
+        name: node-app
+
+
+    - name: 'Deploy to Azure WebApp'
+      id: deploy-to-webapp 
+      uses: azure/webapps-deploy@v2
+      with:
+        app-name: ${{ env.AZURE_WEBAPP_NAME }}
+        publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+        package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
+```
+
+
 
 Install az cli:
 
