@@ -17,17 +17,42 @@ The nub of the problem is that once you've created a React app the actually part
 
 And CI/CD via Github workflow is not exactly a joy either; none of the explanations online appear from start to finish without modification.  As an aside the access the Azure App Service wants of your Github account is onerous too (you can't restrict access to private repos - which, er, are meant to be private).
 
-This therefore is going to be a run through of how to set this up relatively start to finish.  It assumes you have an Azure account.  Development is being done on Manjaro Linx 21.2.1, Node 16.13.2, npm 8.3.2.
+This therefore is going to be a run through of how to set this up relatively start to finish on a Linux machine.  It assumes you have an Azure account and node / npm installed.  Development is being done on Manjaro Linx 21.2.1, Node 16.13.2, npm 8.3.2.
 
-## 1.  Set up a Azure 
+## 1.  Set up an Azure Web App
 
-First we need to set up a Web App on Azure.  From the Azure portal select ***Create a Resource*** and then ***Web App***.  Go through the various options until you are faced with a confirmation screen that looks like:
+First we need to set up a Web App on Azure.  From the Azure portal select **Create a Resource** and then **Web App**.  Go through the various options until you are faced with a confirmation screen that looks like:
 
 
+![Azure create Web App](https://www.preciouschicken.com/blog/images/azure-react-apod-create_web_app.png)
+
+The key point here is that the **Operating System** is given as **Windows**, if **Linux** is selected it will not work.  You might want to check that you are on the Free plan too (**F1**) as opposed to the paid for (**B1**) which is the default.  We've named the app *react-apod* but name it whatever you wish.
+
+## 2.  Use create-react-app to generate the React SPA
+
+On our local machine from the terminal enter:
 
 ```bash
 npx create-react-app azure-react-apod
 ```
+
+A React SPA will now be created using [create-react-app](https://create-react-app.dev/) tool.
+
+Once installed change directory into the App:
+
+```bash
+cd azure-react-apod
+```
+
+## 3.  Make some changes to the React App
+
+TODO.
+
+## 4.  Create a Github repo and push the local React app
+
+To enable CI/CD on this project we are going to add it to Github.  Assuming you haven't done it before (or in a while) then create a blank repo in Github (without adding README, .gitignore or licence) and then push the project to it.  Digital Ocean features a good tutorial on [pushing an existing project to GitHub](https://www.digitalocean.com/community/tutorials/how-to-push-an-existing-project-to-github).
+
+
 
 Install az cli:
 
