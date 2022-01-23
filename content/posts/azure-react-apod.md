@@ -3,7 +3,7 @@ title: "Azure React Apod"
 date: 2022-01-21T22:16:06Z
 tags: ["React", "Azure Web App", "Node"]
 categories: ["Web development"]
-description: "A demonstration of NASA's Astronomy Picture of the Dat (APOD) using the React framework, hosted as an Azure web app."
+description: "A demonstration of NASA's Astronomy Picture of the Day (APOD) using the React framework, hosted as an Azure web app."
 enableToc: true
 draft: true
 ---
@@ -17,7 +17,7 @@ The nub of the problem is that once you've created a React app the actually part
 
 And CI/CD via Github workflow is not exactly a joy either; none of the explanations online appear from start to finish without modification.  As an aside the access the Azure App Service wants of your Github account is onerous too (you can't restrict access to private repos - which, er, are meant to be private).
 
-This therefore is going to be a run through of how to set this up relatively start to finish on a Linux machine.  It assumes you have an Azure account and node / npm installed.  Development is being done on Manjaro Linx 21.2.1, Node 16.13.2, npm 8.3.2.
+This therefore is going to be a run through of how to set this up relatively start to finish on a Linux machine.  It assumes you have an Azure account, a GitHub account and node / npm installed.  Development is being done on Manjaro Linux 21.2.1, Node 16.13.2, npm 8.3.2.
 
 ## 1.  Set up an Azure Web App
 
@@ -50,9 +50,21 @@ TODO.
 
 ## 4.  Create a Github repo and push the local React app
 
-To enable CI/CD on this project we are going to add it to Github.  Assuming you haven't done it before (or in a while) then create a blank repo in Github (without adding README, .gitignore or licence) and then push the project to it.  Digital Ocean features a good tutorial on [pushing an existing project to GitHub](https://www.digitalocean.com/community/tutorials/how-to-push-an-existing-project-to-github).
+We are going to enable continuous deployment (CD) on this project via Github.  Therefore create a new repo in Github (without adding README, .gitignore or licence) and then push the project to it.  Digital Ocean features a good tutorial on [pushing an existing project to GitHub](https://www.digitalocean.com/community/tutorials/how-to-push-an-existing-project-to-github).
 
+As a reminder the basic terminal commands (once you've created the new empty repo), changing the github PreciousChicken url to your own, are:
 
+```bash
+git add .
+git commit -m "Initial commit"
+git remote add origin git@github.com:PreciousChicken/azure-react-apod.git
+git branch -M main
+git push -u origin main
+```
+
+## 5.  Download publish profile from Azure
+
+Navigate to your Web App within the Azure portal and select the ***Get publish profile*** option to download a 
 
 Install az cli:
 
@@ -67,3 +79,4 @@ az webapp up --sku F1 --name azure-react-apod
 ## Further reading:
 
 * [Host a web application with Azure App Service](https://docs.microsoft.com/en-gb/learn/modules/host-a-web-app-with-azure-app-service/?WT.mc_id=azureportalcard_Service_App%20Services_-inproduct-azureportal)
+* [https://websitebeaver.com/deploy-create-react-app-to-azure-app-services](https://websitebeaver.com/deploy-create-react-app-to-azure-app-services) - This was a good attempt at getting ninety percent there, but did not work out all the way.
