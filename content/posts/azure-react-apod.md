@@ -9,6 +9,8 @@ draft: true
 ---
 
 
+TODO: Link to Repo
+
 ## Introduction
 
 Hosting a React framework Single Page Application as an Web App on the Microsoft Azure can be an extremely frustrating process, for a number of reasons.  To start with despite React being (rightly or wrongly) the [most popular web framework](https://www.statista.com/statistics/1124699/worldwide-developer-survey-most-used-frameworks-web/), there are no specific instructions within the Microsoft documentation for how one might deploy a React SPA as an Azure Web App.  Far worse however is that the choice of how operating system when creating a web app (Windows or Linux) is an essential criteria - in short it is [very difficult to use create-react-app to deploy a Web App on a base Linux OS](https://github.com/MicrosoftDocs/azure-docs/issues/32572#issuecomment-637832128)) - yet this is both unintuitive and seemingly undocumented.
@@ -256,8 +258,16 @@ test('renders link to APOD about', () => {
   const nasaAbout = screen.getByRole('link', { name: /about nasa's astronomy picture of the day/i });
   expect(nasaAbout).toBeInTheDocument();
 });
-
 ```
+
+### 3f.  Install additional node dependencies
+
+At the terminal:
+
+```bash
+npm i date-fns isomorphic-fetch @mui/material @emotion/react @emotion/styled @mui/lab
+```
+
 ## 4.  Add a workflow to Github
 
 We now need to tell GitHub how to deploy your web app to Azure, we do this by adding a workflow.
@@ -287,7 +297,7 @@ env:
   # NASA API key recorded as GitHub secret, delete if you haven't followed APOD section
   REACT_APP_NASA_API_KEY: ${{ secrets.REACT_APP_NASA_API_KEY }} 
 
-  jobs:
+jobs:
   build:
     runs-on: ubuntu-latest
     steps:
@@ -303,11 +313,11 @@ env:
       run: |
         npm install
         npm run build --if-present
-        npm run test --if-present
+        npm run test --if-present        
 
     - name: Add process.json
       run: |
-        echo '{ "script": "serve", "env": { "PM2_SERVE_SPA": "true", "PM2_SERVE_HOMEPAGE": "index.html" } }' >> ./build/process.json
+                echo '{ "script": "serve", "env": { "PM2_SERVE_SPA": "true", "PM2_SERVE_HOMEPAGE": "index.html" } }' >> ./build/process.json
     - name: Upload artifact for deployment job
       uses: actions/upload-artifact@v2
       with:
@@ -340,7 +350,7 @@ env:
 
 ## 5.  Create an empty Github repo
 
-We are going to enable continuous deployment (CD) on this project via Github.  Therefore create a new repo in Github (without adding README, .gitignore or licence).  We don't actually need to push the project at this stage however.
+We are going to enable continuous deployment (CD) on this project via Github.  Therefore create a new repo in GitHub entitled *azure-react-apod* (without adding README, .gitignore or licence).  We don't actually need to push the project at this stage however.
 
 ## 6.  Download publish profile from Azure
 
