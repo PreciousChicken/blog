@@ -1,5 +1,5 @@
 ---
-title: "Azure React Apod"
+title: "Astrophot: Deploying a React Web App on the Microsoft Azure Cloud"
 date: 2022-01-21T22:16:06Z
 tags: ["React", "Azure Web App", "Node"]
 categories: ["Web development"]
@@ -46,7 +46,20 @@ cd azure-react-apod
 
 ## 3.  Make some changes to the React App
 
-TODO.
+None of the below changes are neccessary for the purpose of uploading an App to Azure - you can simply leave the default create-react-app settings in place; but that seems a bit dull.  Rather we are going to host a lovely little SPA allowing a user to pick a date for APOD pictures.
+
+Change the App title and description to something more meaningful (we could do this by editing the *public/index.html* file, but using sed from the terminal is quicker:
+
+```bash
+sed -i 's/React App/NASA APOD Picker/g' public/index.html
+sed -i 's/Web site created using create-react-app/Date picker for NASAs Astronomy Picture of the Day/g' public/index.html
+```
+
+The favicon is currently the default create-react-app one; so we'll replace that with the PreciousChicken one (feel free to use whatever *ico* file you want, or simply leave the c-r-a one in place):
+
+```bash
+curl https://www.preciouschicken.com/blog/images/favicon.ico > public/favicon.ico
+```
 
 ## 4.  Create a Github repo and push the local React app
 
