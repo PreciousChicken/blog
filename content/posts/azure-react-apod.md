@@ -315,9 +315,6 @@ jobs:
         npm run build --if-present
         npm run test --if-present        
 
-    - name: Add process.json
-      run: |
-                echo '{ "script": "serve", "env": { "PM2_SERVE_SPA": "true", "PM2_SERVE_HOMEPAGE": "index.html" } }' >> ./build/process.json
     - name: Upload artifact for deployment job
       uses: actions/upload-artifact@v2
       with:
@@ -347,6 +344,9 @@ jobs:
         package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
 ```
 
+The majority of the above yaml code came from websitebeaver.com's [Deploy Create React App to Azure App Services](https://websitebeaver.com/deploy-create-react-app-to-azure-app-services) tutorial; however a number of changes were made.  The addition of the *process.json* code step was removed as it appeared not to be needed.  Also the *AZURE_WEBAPP_PACKAGE_PATH* was changed from `build` to `/home/runner/work/azure-react-apod/azure-react-apod`, the latter being the location that the build apparently stores the zipped Web App in ready for upload to Azure [^3].
+
+[^3]:  I would like to say I figured this out though deductive reasoning; but in reality I watched the build fail many times, read the error messages and eventually worked out what directory the zip file was in...
 
 ## 5.  Create an empty Github repo
 
@@ -385,6 +385,10 @@ git branch -M main
 git push -u origin main
 ```
 
+
+Linux section:
+https://stackoverflow.com/questions/57618453/process-for-react-app-deployment-to-azure-web/61386411#61386411
+https://stackoverflow.com/questions/61377340/react-router-direct-links-not-working-on-azure-web-app-linux/61377913#61377913
 
 
 ## Further reading
