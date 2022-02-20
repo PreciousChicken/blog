@@ -1,7 +1,7 @@
 ---
 title: "Étoile du jour: Deploying a React Web App on the Microsoft Azure Cloud"
 date: 2022-01-21T22:16:06Z
-tags: ["React", "Azure Web App", "Node"]
+tags: ["React", "GitHub", "Azure Web App", "Node"]
 categories: ["Web development"]
 description: "A demonstration of NASA's Astronomy Picture of the Day (APOD) using the React framework, hosted as an Azure web app."
 enableToc: true
@@ -10,7 +10,7 @@ draft: false
 
 ## Introduction
 
-Hosting a React framework Single Page Application as a Web App on the Microsoft Azure can be an extremely frustrating process, for a number of reasons.  To start with despite React being (rightly or wrongly) the [most popular web framework](https://www.statista.com/statistics/1124699/worldwide-developer-survey-most-used-frameworks-web/), there are no specific instructions within the Microsoft documentation for how one might deploy a React Single Page Application (SPA) as an Azure Web App.  Far worse however is that the choice of operating system (Windows or Linux) when creating a React web app on Azure is key - in short it is [very difficult to use create-react-app to deploy to a base Linux OS](https://github.com/MicrosoftDocs/azure-docs/issues/32572#issuecomment-637832128) - yet this is both unintuitive and seemingly undocumented (see the [What's up with Linux?](#whats-up-with-linux) section).
+Hosting a React framework Single Page Application as a Web App on the Microsoft Azure can be an extremely frustrating process, for a number of reasons.  To start with despite React being (rightly or wrongly) the [most popular web framework](https://www.statista.com/statistics/1124699/worldwide-developer-survey-most-used-frameworks-web/), there are no specific instructions within the Microsoft documentation for how one might deploy a React Single Page Application (SPA) as an Azure Web App.  Far worse however is that the choice of operating system (Windows or Linux) when creating a React web app on Azure is key - in short it is [very difficult to use create-react-app to deploy to a base Linux O/S](https://github.com/MicrosoftDocs/azure-docs/issues/32572#issuecomment-637832128) - yet this is both unintuitive and seemingly undocumented (see the [What's up with Linux?](#whats-up-with-linux) section).
 
 
 And continuous integration / continuous development via Github workflow is painful on Azure too; I couldn't find a single explanation which worked from start to finish without inexplicably failing half way through.  As an aside the access the Azure App Service, which I'm not using in this demo, wants of your Github account is onerous too (you can't restrict access to private repos - which, er, are meant to be private).
