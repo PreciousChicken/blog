@@ -395,9 +395,11 @@ git branch -M main
 git push -u origin main
 ```
 
-## Show the thing
+## The final product
 
-If all has gone to plan pointing you should be able to see your app, depending on the name of your app, at an address similar to: [nasa-apod-picker.azurewebsites.net](https://nasa-apod-picker.azurewebsites.net/) a page similar to the following:
+If all has gone to plan your app should be deployed, depending on your Azure set-up configuration, at an address similar to [nasa-apod-picker.azurewebsites.net](https://nasa-apod-picker.azurewebsites.net/); as demonstrated:
+
+[![NASA Astronomy Picture of the Day Picker screenshot](https://www.preciouschicken.com/blog/images/azure-react-apod_final-thumb.png)](https://www.preciouschicken.com/blog/images/azure-react-apod_final.png)
 
 ## What's Up With Linux?
 
