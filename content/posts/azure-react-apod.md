@@ -192,6 +192,7 @@ function App() {
       </div>
       <Picture />
       <p className="footer"><a href="https://apod.nasa.gov/apod/lib/about_apod.html">About NASA's Astronomy Picture of the Day</a></p>
+      <p className="footer">This page is part of the web development tutorial: <br/> <a href="https://www.preciouschicken.com/blog/posts/azure-react-apod/">Étoile du jour: Deploying a React Web App on the Microsoft Azure Cloud</a></p>
     </>
   );
 }
