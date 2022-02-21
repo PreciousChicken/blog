@@ -1,7 +1,7 @@
 ---
 title: "Étoile du jour: Deploying a React Web App on the Microsoft Azure Cloud"
 date: 2022-01-21T22:16:06Z
-tags: ["React", "GitHub", "Azure Web App", "Node"]
+tags: ["React", "GitHub", "Azure Web App", "Node", "JavaScript"]
 categories: ["Web development"]
 description: "A demonstration of NASA's Astronomy Picture of the Day (APOD) using the React framework, hosted as an Azure web app."
 enableToc: true
