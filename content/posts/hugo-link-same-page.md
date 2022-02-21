@@ -1,12 +1,14 @@
 ---
-title: "Linking to the same page in Hugo"
+title: "Linking to a heading in the same page in Hugo"
 date: 2022-02-20T14:58:24Z
 tags: ["Hugo", "Markdown", "HTML"]
 categories: ["Web development"]
-description: "Linking to an element on the same page in Hugo framework"
+description: "Linking to an element on the same page in Hugo framework markdown"
 enableToc: false
 draft: false
 ---
+
+Linking to another page in markdown in [Hugo](https://gohugo.io/) is easy: i.e. `[Auntie Beeb](https://www.bbc.co.uk/)` renders as [Auntie Beeb](https://www.bbc.co.uk/) - but when you want a link to a heading in the same page I can never remember, so this is a quick aide-memoire:
 
 ## HTML
 
@@ -22,9 +24,9 @@ In HTML a [relative link to an element in the same page](https://developer.mozil
 <h2 id="Section_further_down">Section further down</h2>
 ```
 
-## Hugo
+## Hugo markdown
 
-In [Hugo](https://gohugo.io/) to achieve the same effect:
+In Hugo to achieve the same effect:
 
 ```markdown
 <!-- <a> element links to the section below -->
