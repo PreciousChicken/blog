@@ -26,7 +26,7 @@ First we need to set up a Web App on Azure.  From the Azure portal select *Creat
 
 ![Azure create Web App](https://www.preciouschicken.com/blog/images/azure-react-apod-create_web_app.png)
 
-The key point here is that the *Operating System* is given as *Windows*, if *Linux* is selected it will not work.  You might want to check that you are on the free plan too (*F1*) as opposed to the paid for (*B1*) which is the default.  We've named the app *nasa-apod-picker* but you will need to give it a different name to prevent conflict.
+The key point here is that the *Operating System* is given as *Windows*, if *Linux* is selected it will not work (see [What's up with Linux?](#whats-up-with-linux)).  You might want to check that you are on the free plan too (*F1*) as opposed to the paid for (*B1*) which is the default.  We've named the app *nasa-apod-picker* but you will need to give it a different name to prevent conflict.
 
 ### 2.  Use create-react-app to generate the React SPA
 
@@ -48,7 +48,7 @@ cd azure-react-apod
 
 If you are just interested in uploading any old React Single Page Application to Azure then you can safely skip this section and leave the default create-react-app settings in place.
 
-However that does seems a bit dull.  The (somewhate detailed) instructions below will let us create a rather lovely app where we can pick NASA's Astronomy Photo of the Day by date.
+However that does seems a bit dull.  The (somewhat detailed) instructions below will let us create a rather lovely app where we can pick NASA's Astronomy Photo of the Day by date.
 
 #### 3a.  Change app title and description
 
@@ -387,7 +387,7 @@ If you have been following the Astronomy Picture of the Day instructions in Sect
 ### 8.  Git push
 All that is left to do is the initial push of the project to our repo and GitHub and Azure will take care of the rest.  Digital Ocean features a good tutorial on [pushing an existing project to GitHub](https://www.digitalocean.com/community/tutorials/how-to-push-an-existing-project-to-github).
 
-As a reminder the basic terminal commands (once you've created the new empty repo), changing the github PreciousChicken url to your own, are:
+As a reminder the basic terminal commands, changing the github PreciousChicken url to your own, are:
 
 ```bash
 git add .
