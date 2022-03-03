@@ -15,9 +15,12 @@ Hosting a React framework Single Page Application as a Web App on the Microsoft 
 
 And continuous integration / continuous development via Github workflow is painful on Azure too; I couldn't find a single explanation which worked from start to finish without inexplicably failing half way through.  As an aside the access the Azure App Service, which I'm not using in this demo, wants of your Github account is onerous too (you can't restrict access to private repos - which, er, are meant to be private).
 
-This therefore is going to be a fully worked example of how to deploy a React Single Page Application to an Azure web app.  GitHub will be used for continuous integration / continuous development.  It assumes you have an Azure account, a GitHub account and node / npm installed.  Some common command line tools are also used: sed and curl.  Development is being done on Manjaro Linux 21.2.1, Node 16.13.2, npm 8.3.2.  To give the demo more flavour, I am going to use the [NASA Astronomy Picture of the Day API](https://github.com/nasa/apod-api) to make a fully featured app - you don't have to do this though, Section 3 can be omitted if you just want to deploy the create-react-app template to Azure.
+What follows therefore is a fully worked example of how to deploy a React Single Page Application to an Azure web app.  GitHub will be used for continuous integration / continuous development.  It assumes you have an Azure account, a GitHub account and node / npm installed.  Some common command line tools are also used: sed and curl.  Development is being done on Manjaro Linux 21.2.1, Node 16.13.2, npm 8.3.2.  To give the demo more flavour, I am going to use the [NASA Astronomy Picture of the Day API](https://github.com/nasa/apod-api) to make a fully featured app - you don't have to do this though, Section 3 can be omitted if you just want to deploy the create-react-app template to Azure.
+
+The steps below are also demonstrated in an accompanying video: {{< youtube id="b41G09Xft88" title="Étoile du jour: Deploying a React Web App on the Microsoft Azure Cloud" >}}
 
 All code is available on the [PreciousChicken/azure-react-apod](https://github.com/PreciousChicken/azure-react-apod) GitHub repository.
+
 
 ### 1.  Set up an Azure Web App
 
