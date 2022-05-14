@@ -10,7 +10,7 @@ draft: true
 
 ## Handsfree
 
-To manually install a [Neovim](https://neovim.io/) plugin without using a plug-in manager (using [Tim Pope's Commentary](https://github.com/tpope/vim-commentary) as an example) then at the terminal:
+To manually install a [Neovim](https://neovim.io/) plugin, for example [Tim Pope's Commentary](https://github.com/tpope/vim-commentary), without using a plug-in manager then at the terminal :
 
 ```bash
 mkdir -p ~/.local/share/nvim/site/pack/tpope/start/commentary
@@ -18,9 +18,11 @@ git clone https://tpope.io/vim/commentary.git ~/.local/share/nvim/site/pack/tpop
 nvim -u NONE -c "helptags ALL" -c q
 ```
 
+The install path always follows the pattern of ___~/.local/share/nvim/site/pack/foo/start/bar___, where the variables ___foo___ and ___bar___ can be whatever makes sense to you.
+
 ## Automation
 
-Which is great, but from time to time your plugins will get updated and you will need to pull fresh versions.  This can easily be achieved with a small script.  Create a file named ___~/.local/bin/vimpluginupdate___ and paste the following:
+Which is great, but from time to time your plugins will get updated and you will need to pull fresh versions.  This can easily be achieved on Linux systems with a small script.  Create a file named ___~/.local/bin/vimpluginupdate___ and paste the following:
 
 ```bash
 #!/bin/sh
@@ -51,4 +53,8 @@ All I've really done here is amended the [vim-commentary install section](https:
 
 ## I demand an authoritative source 
 
-See [:help packages](https://neovim.io/doc/user/repeat.html#packages) and [:help add-package](https://neovim.io/doc/user/usr_05.html#05.4)
+See [:help packages](https://neovim.io/doc/user/repeat.html#packages) and [:help add-package](https://neovim.io/doc/user/usr_05.html#05.4).
+
+## Version control
+
+This was tested corrected on Ubuntu Linux 22.04 LTS and Neovim v0.7.0.
