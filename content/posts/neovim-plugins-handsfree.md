@@ -25,7 +25,7 @@ Which is great, but from time to time your plugins will get updated and you will
 
 ```bash
 #!/bin/sh
-NVMPTH=$HOME/.local/share/nvim/site/pack
+NVMPTH="$HOME/.local/share/nvim/site/pack"
 git -C $NVMPTH/tpope/start/commentary pull || git clone --depth 1 https://tpope.io/vim/commentary.git $NVMPTH/tpope/start/commentary
 ```
 
