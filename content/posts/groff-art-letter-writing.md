@@ -99,6 +99,10 @@ groff -me -dpaper=a4 -T pdf complaint.me > complaint.pdf
 
 As groff is very low-level then macro facilities are grouped together into packages to allow routine operations (such as footnotes) to be done efficiently.  *Me* is one of these packages, although [far from the only option](https://www.stephenlindholm.com/groff_macros.html); in fact a new macro package, *[-mk](http://ankarstrom.se/~john/mk.html)*, was released this very month.  The *-me* flag on the command line informs groff this notation is being used, likewise the [recommended file extension](https://man7.org/linux/man-pages/man5/groff_filenames.5.html) to use is *.me*.
 
+## vim-groff-viewer
+
+If you are a Vim / Neovim user then the [vim-groff-viewer](https://github.com/PreciousChicken/vim-groff-viewer) plugin wraps these commands into a couple of key mappings so you don't have to leave the comfort of Vim for the command line.
+
 ## Conclusion
 
 I guess the one obvious question is why use groff at all, as opposed to LaTeX?    Possibly because there is something satisfying about learning modern uses for an application whose lineage dates back to 1964.   Or maybe just, to paraphrase George Mallory, because it is there?  Thoughts, observations?  Feel free to add below.  
