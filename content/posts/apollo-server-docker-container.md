@@ -1,8 +1,8 @@
 ---
 title: "Tie down scheme for an Apollo GraphQL server in a Node Docker container"
 date: 2021-03-27T21:08:34Z
-tags: ["Docker", "Node", "Apollo-server", "GraphQL", "Javascript"]
-categories: ["SysAdmin"]
+tags: ["Docker", "Node", "Apollo Server", "GraphQL", "Javascript"]
+categories: ["API"]
 description: "Worked example of deploying an Apollo GraphQL server in a Node Docker Container"
 enableToc: true
 draft: false
