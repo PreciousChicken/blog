@@ -2,13 +2,15 @@
     {{ if .Site.Social }}
         {{ partial "social.html" . }}
     {{ end }}
-    <p class="small">
+    <!-- <p class="small"> -->
     {{ with .Site.Params.copyright }}
-        {{ . | markdownify }}
+        {{ . | markdownify | safeHTML }}
     {{ else }}
-       © Copyright {{ now.Format "2006"}} {{ .Site.Params.Author }}
+       <!-- © Copyright {{ now.Format "2006"}} {{ .Site.Params.Author }} -->
+        <p class="small" xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><a property="dct:title" rel="cc:attributionURL" href="https://preciouschicken.com">preciouschicken.com</a> by <a rel="cc:attributionURL dct:creator" property="cc:attributionName" href="https://preciouschicken.com/blog/about">PreciousChicken</a> is licensed under <a href="http://creativecommons.org/licenses/by/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" >CC BY 4.0 </a></p>
+
     {{ end }}
-    </p>
+    <!-- </p> -->
     <p class="small">
         Powered by <a href="http://www.gohugo.io/">Hugo</a>. Theme based on <a href="https://github.com/nodejh/hugo-theme-cactus-plus">Cactus Plus</a>.
     </p>
