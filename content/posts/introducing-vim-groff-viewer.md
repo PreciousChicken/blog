@@ -20,7 +20,7 @@ To remedy this my first vim plugin - **vim-groff-viewer**.  It is probably easie
 
 ## Download, usage, configuration, etc
 
-Interested?  Find more on the Github repo [PreciousChicken/vim-groff-viewer](https://github.com/PreciousChicken/vim-groff-viewer).
+Interested?  Find more at [preciouschicken.com/software/vim-groff-viewer/](https://preciouschicken.com/software/vim-groff-viewer/).
 
 
 
