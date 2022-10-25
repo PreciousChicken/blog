@@ -115,8 +115,10 @@ and point your browser to [localhost:3000](http://localhost:3000) where you shou
 Open the terminal and enter:
 
 ```bash
-mqtt pub -t 'preciouschicken.com' -h 'test.mosquitto.org' -m 'Your message here!'
+npx mqtt pub -t 'preciouschicken.com' -h 'test.mosquitto.org' -m 'Your message here!'
 ```
+
+NB - Eagle-eyed readers might note this command differs slightly from that used in the [MQTT.js documentation](https://github.com/mqttjs/MQTT.js#cli).  This recommends that the npm package is installed globally (using the `-g` flag) so the `mqtt pub` command is available on your path, I prefer to use `npx` instead which means no need to install system-wide.
 
 ### See the results in the React app
 
