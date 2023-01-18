@@ -125,7 +125,3 @@ If you've found this useful please leave a comment below or star the github repo
 Apart from the [man(1) refer](https://man7.org/linux/man-pages/man1/refer.1.html) page there is not a huge amount of concise online guidance on including references within groff, however a useful video is Luke Smith's [Your Brain Using REFER to do your bibliographies automatically in groff/troff](https://videos.lukesmith.xyz/w/5ANbTYv7cgF69FhpAkVBwi).
 
 [^2]: You could also use `refer notears.ms | groff -m ms -T pdf > notears.pdf` or `grog -T pdf --run notears.ms > notears.pdf` or `pdfroff -R -m ms notears.ms --pdf-output=notears.pdf` all of which would produce the same result.  Though interestingly in my testing I noticed that pdfroff used a more up to date version of the PDF format: v1.7 compared to the others using v1.4.
-
-
-
-
