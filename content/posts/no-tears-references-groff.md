@@ -120,7 +120,7 @@ Of note is that the National Audit Office citations are disambiguated - i.e. 202
 
 ## Conclusion & further references
 
-If you've found this useful please leave a comment below or star the github repo.  You might also be interested in a previous post I wrote on [producing correspondence letters](https://www.preciouschicken.com/blog/posts/groff-art-letter-writing/) in groff or if you are a vim user my vim plugin: [vim-groff-viewer](https://preciouschicken.com/software/vim-groff-viewer/).
+If you've found this useful please leave a comment below or star the [github repo](https://github.com/PreciousChicken/no-tears-reference-groff).  You might also be interested in a previous post I wrote on [producing correspondence letters](https://www.preciouschicken.com/blog/posts/groff-art-letter-writing/) in groff or if you are a vim user my vim plugin: [vim-groff-viewer](https://preciouschicken.com/software/vim-groff-viewer/).
 
 Apart from the [man(1) refer](https://man7.org/linux/man-pages/man1/refer.1.html) page there is not a huge amount of concise online guidance on including references within groff, however a useful video is Luke Smith's [Your Brain Using REFER to do your bibliographies automatically in groff/troff](https://videos.lukesmith.xyz/w/5ANbTYv7cgF69FhpAkVBwi).
 
