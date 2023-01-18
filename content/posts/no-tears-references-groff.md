@@ -5,7 +5,7 @@ tags: ["groff", "linux"]
 categories: ["typesetting"]
 description: "Worked example of adding citations / references to Groff PDF documents using Refer and a bibliography file."
 enableToc: true
-draft: true
+draft: false
 ---
 
 ## Introduction
