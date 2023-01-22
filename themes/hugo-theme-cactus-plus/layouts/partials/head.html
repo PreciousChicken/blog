@@ -15,12 +15,14 @@
     <title>{{ if .IsHome }}{{ .Title }}{{ else }}{{ .Title }} &middot; {{ .Site.Title }}{{ end }}</title>
     <link rel="shortcut icon" href="{{ .Site.BaseURL }}images/favicon.ico">
     <link rel="stylesheet" href="{{ .Site.BaseURL }}css/style.css">
-    <link rel="stylesheet" href="{{ .Site.BaseURL }}css/highlight.css">
-    {{ if eq .Site.Params.iconFont "font-awesome" }}
-    <link rel="stylesheet" href="{{ .Site.BaseURL }}css/font-awesome.min.css">
-    {{ else }}
-    <link rel="stylesheet" href="{{ .Site.BaseURL }}css/monosocialiconsfont.css">
-    {{ end }}
+    <!-- Removed <link rel="stylesheet" href="{{ .Site.BaseURL }}css/highlight.css"> -->
+    <!-- Added from https://stackoverflow.com/questions/67647709/adding-a-twitter-icon-in-html-page -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Removed all below as above added {{ if eq .Site.Params.iconFont "font-awesome" }} -->
+    <!-- <link rel="stylesheet" href="{{ .Site.BaseURL }}css/font-awesome.min.css"> -->
+    <!-- {{ else }} -->
+    <!-- <link rel="stylesheet" href="{{ .Site.BaseURL }}css/monosocialiconsfont.css"> -->
+    <!-- {{ end }} -->
     {{ if .Site.Params.enableRSS }}
     <link href="{{ .Site.RSSLink }}" rel="alternate" type="application/rss+xml" title="{{ .Site.Title }}" />
     {{ end }}
