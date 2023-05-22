@@ -325,7 +325,7 @@ So now we have lined up our tests and the visualisation that shows us informatio
 
 This workflow however is best created from the GitHub website itself.  Therefore navigate to the Settings on your online repo and then select ***Pages*** from ***Code and automation***.  Under the heading ***Build and deployment*** select the ***GitHub Actions*** from the ***Source*** dropdown menu and then click on the ***create your own*** link.  
 
-[![GitHub pages settings](https://www.preciouschicken.com/blog/images/vegaration-github-pages-thumb.png)](https://www.preciouschicken.com/blog/images/vegaration-github-pages.png)
+[![GitHub pages settings](https://www.preciouschicken.com/blog/images/vegaration-visualisation-thumb.png)](https://www.preciouschicken.com/blog/images/vegaration-visualisation.png)
 
 You will then be taken to the code editor online, in the box entitled ***Name your file...*** paste the filename ***visualisation.yml*** and then in the main ***Edit*** body of the code editor itself delete the default contents and paste:
 
