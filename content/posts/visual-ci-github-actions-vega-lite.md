@@ -448,7 +448,7 @@ You'll notice a fair amount of [RegEx](https://xkcd.com/1171) used and old schoo
 
 [^2]: Grep was probably redundant and I could have used awk for everything, but it seemed simpler to use both in this instance.
 
-Of course this capture could have been achieved with something like Python, but seen as the GitHub workflow runs on an Ubuntu virtual machine, GNU tools work just fine.
+Of course this capture could have been achieved with something like Python, but seen as the GitHub workflow runs on an Ubuntu virtual machine, GNU tools work just fine.  They also have the advantage that you are implementing all the logic in the workflow itself, which is arguably more transparent and portable.
 
 NB - If you have sharp eyes you might notice that the filename periods have been changed to underscores in the json e.g. ***minus.test.js*** to ***minus_test_js***.  This is because vega-lite does not play well with field names that include periods, so to avoid complications these have been swapped out.
 
