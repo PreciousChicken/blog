@@ -10,11 +10,15 @@ draft: false
 
 ## Introduction
 
-This is a worked example which aims to visualise the software development practice of continuous integration (CI).  It uses [GitHub actions](https://github.com/features/actions) to manage the CI workflow and [vega-lite](https://vega.github.io/vega-lite/) as the visualisation specification.  Or to put it simply: every time someone commits to a repository on GitHub we can log elements associated with their commit (e.g. what tests passed, what tests failed) and then present this using a range of visualisations such as bar charts etc.
+> vegaration (noun) [vay-gah-grey-shuhn]: The use of **vega**-lite to visualise continuous integ**ration**.
 
-All code is contained in the repo [PreciousChicken/vegaration](https://github.com/PreciousChicken/vegaration) and the visualisations on the [associated vegaration GitHub page](https://preciouschicken.github.io/vegaration/).
+This is a worked example for Linux which aims to visualise the software development practice of continuous integration (CI).  It uses [GitHub actions](https://github.com/features/actions) to manage the CI workflow and [vega-lite](https://vega.github.io/vega-lite/) as the visualisation specification.  Or to put it simply: every time someone commits to a repository on GitHub we can log elements associated with their commit (e.g. what tests passed, what tests failed) and then present this data visually using a wide suite of metrics provided.
 
-This was written using Manjaro Linux 22.1.1, node v16.13.2 and npm v8.3.2.
+This demonstration proves the possibility of logging and visualising a whole suite of Continuous Improvement metrics which could help teams identify patterns, address problems and increase efficiency. The example created here, which can be viewed on the [Vegaration GitHub Page](https://preciouschicken.github.io/vegaration/), offers a very small slice of the total possibilities on offer.  It differs from other CI visualisations (e.g. Jenkins) in the flexibility it offers: vega-lite is a data science tool meaning it offers a very wide range of visualisation possibilities; likewise logging via GitHub actions allows you the freedom to capture almost anything about the CI/CD process that your team is interested in.
+
+All code is contained in the repo [PreciousChicken/vegaration](https://github.com/PreciousChicken/vegaration).
+
+This was written using Manjaro Linux 22.1.1, node v16.13.2, vega-lite 5.9.1 and npm v8.3.2.
 
 ## Create the GitHub repo
 
@@ -323,7 +327,7 @@ So now we have lined up our tests and the visualisation that shows us informatio
 
 [^1]: Normally failing tests would halt the progress of GitHub actions - for good reason - a failed test probably means you do not want to deploy.  As this was a visualisation however which was intended to capture both passing and failing tests, although the tests were run their results were captured in a shell environment variable, rather than being outputted to standard output / standard error which would have halted the workflow.  In a production system therefore you would want a seperate workflow which is actually running the tests in their normal manner allowing a return to standard output / standard error.
 
-This workflow however is best created from the GitHub website itself.  Therefore navigate to the Settings on your online repo and then select ***Pages*** from ***Code and automation***.  Under the heading ***Build and deployment*** select the ***GitHub Actions*** from the ***Source*** dropdown menu and then click on the ***create your own*** link.  
+This workflow however is best created from the GitHub website itself.  Therefore navigate to the Settings on your online repo and then select ***Pages*** from ***Code and automation***.  Under the heading ***Build and deployment*** select the ***GitHub Actions*** from the ***Source*** dropdown menu and then click on the ***create your own*** link as shown:
 
 [![GitHub pages settings](https://www.preciouschicken.com/blog/images/vegaration-github-pages-thumb.png)](https://www.preciouschicken.com/blog/images/vegaration-github-pages.png)
 
