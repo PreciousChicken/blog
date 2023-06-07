@@ -25,6 +25,8 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
     display: block
 }
 
+
+
 body {
     line-height: 1
 }
@@ -960,3 +962,12 @@ code {
     margin: 0;
     padding: 0
 }
+
+a#lightning_button {
+    text-align:center;
+    width: auto;
+    display: block;
+    margin: auto;
+    margin-top: 20px
+}
+
