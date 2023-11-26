@@ -10,9 +10,9 @@ draft: false
 
 ## Introduction
 
-[Nextcloud](https://nextcloud.com/) is an open-source collaboration platform where teams can share files, calendars and other resources. When a new user on Nextcloud is created by a system administrator, when they first log onto the system they are presented with default files and folders automatically pre-generated (e.g. a pdf file entitled *Reasons to use Nextcloud*, etc).  As the administrator you may want your users to view a different set of files and folders; and if you have installed Nextcloud via the [All-in-One Docker Image](https://github.com/nextcloud/all-in-one), this has to be done whilst navigating a docker container.
+[Nextcloud](https://nextcloud.com/) is an open-source collaboration platform where teams can share files, calendars and other resources. When a system administrator creates a new user on Nextcloud, the default files and folders that user views on their initial login are automatically populated as part of the Nextcloud setup (e.g. a pdf file entitled *Reasons to use Nextcloud*, etc).  As the administrator you may want your users to view a different set of files and folders; and if you have installed Nextcloud via the [All-in-One Docker Image](https://github.com/nextcloud/all-in-one), this has to be done whilst navigating a docker container.
 
-This is a worked example demonstrating how to change these default files and folders (also called the skeleton directory), based on the already existing Nextcloud tutorial on [providing default files](https://docs.nextcloud.com/server/latest/admin_manual/configuration_files/default_files_configuration.html).  The versions used in this guide are Nextcloud AIO v7.6.2 installed on Ubuntu Linux 22.04.3 LTS.  If you have installed on a non-Linux server, this guide be less useful...
+This is a worked example demonstrating how to change these default files and folders (also called the skeleton directory), based on the already existing Nextcloud tutorial on [providing default files](https://docs.nextcloud.com/server/latest/admin_manual/configuration_files/default_files_configuration.html).  The versions used in this guide are Nextcloud AIO v7.6.2 installed on Ubuntu Linux 22.04.3 LTS.  If you have installed on a non-Linux server, this guide will be less useful...
 
 ## Opening a secure shell
 
@@ -28,7 +28,7 @@ DigitalOcean provide a great [overview of connecting with ssh](https://www.digit
 
 ## Enter the docker container
 
-The Nextcloud AIO installation will have started a number of docker containers on your server, we will now enter the one containing the *skeleton* directory where the default files are kept:
+Now we have accessed the server, we need to peel back the layer on the Docker container itself.  The Nextcloud AIO installation will have started a number of docker containers on your server, to access the one containing the *skeleton* directory where the default files are kept, enter the following command at the terminal:
 
 ```bash
 sudo docker exec -it nextcloud-aio-nextcloud bash
@@ -38,7 +38,7 @@ After probably being prompted for your password you will enter the container and
 
 ## Create a new skeleton folder
 
-The default files and folders that Nextcloud uses can be viewed in the `core/skeleton` directory, we need to create now going to create a new skeleton directory to hold our new resources:
+The default files and folders that Nextcloud uses can be viewed in the `core/skeleton` directory, we now need to create a new skeleton directory to hold our new resources (using whatever name you choose):
 
 ```bash
 mkdir core/admin_skeleton
@@ -84,7 +84,7 @@ NB - The 755 / 644 permissions choice suggested above are based on the current v
 
 ## Scan the new files
 
-As we've been manually created new files it probably is not a bad idea[^1] to run the [occ file:scan](https://docs.nextcloud.com/server/15/admin_manual/configuration_server/occ_command.html?highlight=occ#scan) command to make sure everything has been found and indexed:
+As we have been manually creating new files it probably is not a bad idea[^1] to run the [occ file:scan](https://docs.nextcloud.com/server/15/admin_manual/configuration_server/occ_command.html?highlight=occ#scan) command to make sure everything has been found and indexed:
 
 ```bash
 sudo docker exec --user www-data -it nextcloud-aio-nextcloud php occ files:scan --all
@@ -108,7 +108,7 @@ exit
 
 ## Conclusion
 
-And we are done.  Any new users created should see the new skeleton folder you have created for them by default (users created before this change may be left viewing the old folders too...).
+And we are done.  Any new users created should see the new skeleton folder you have created for them by default (users created before this change may be left viewing the old folders...).
 
 It is worth adding that any folders you create will be individual folders for that user only; so if you create a folder named *UsefulDocs* and User A puts a file in that, User B will not be able to view it by default.  If you are looking to create folders that more than one user can use then take a look at the [Group folders](https://apps.nextcloud.com/apps/groupfolders) application.
 
