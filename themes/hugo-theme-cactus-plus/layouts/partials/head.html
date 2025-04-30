@@ -2,7 +2,7 @@
 <html {{ with .Site.LanguageCode }}lang="{{ . }}"{{ end }}>
   <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     {{ if .Site.Params.enableTwitterCard }} 
     {{ partial "twitter-cards.html" . }}
@@ -10,7 +10,7 @@
     {{ with .Site.Params.author }}<meta name="author" content="{{ . }}">{{ end }}
     <!-- Removed {{ with .Site.Params.description }}<meta name="description" content="{{ . }}">{{ end }} -->
     <!-- Added page specific description -->
-    <meta name="description" content="{{ if .Params.Description }}{{ .Params.Description }}{{ else if .Site.Params.Description }}{{ .Site.Params.Description }}{{ else }}Freelance software{{ end }}" /> 
+    <meta name="description" content="{{ if .Params.Description }}{{ .Params.Description }}{{ else if .Site.Params.Description }}{{ .Site.Params.Description }}{{ else }}Freelance software{{ end }}"> 
     {{ hugo.Generator }}
     <title>{{ if .IsHome }}{{ .Title }}{{ else }}{{ .Title }} &middot; {{ .Site.Title }}{{ end }}</title>
     <link rel="shortcut icon" href="{{ .Site.BaseURL }}images/favicon.ico">
@@ -22,15 +22,15 @@
     <!-- <link rel="stylesheet" href="{{ .Site.BaseURL }}css/monosocialiconsfont.css"> -->
     <!-- {{ end }} -->
     {{ if .Site.Params.enableRSS }}
-    <link href="{{ .Site.RSSLink }}" rel="alternate" type="application/rss+xml" title="{{ .Site.Title }}" />
+    <link href="{{ .Site.RSSLink }}" rel="alternate" type="application/rss+xml" title="{{ .Site.Title }}">
     {{ end }}
     {{ range .Site.Params.customCSS }}
     <link rel="stylesheet" href="{{ $.Site.BaseURL }}{{ . }}">
     {{ end }}
     <!-- Added keywords -->
-    <meta name="keywords" content="{{ with .Params.tags }}{{ delimit . ", "}}{{ end }}" />
+    <meta name="keywords" content="{{ with .Params.tags }}{{ delimit . ", "}}{{ end }}">
     <!-- Added canonical link -->
-    <link rel="canonical" href="{{ .Permalink }}" />
+    <link rel="canonical" href="{{ .Permalink }}">
     <!-- Added lightning tips facility -->
     <!-- ref: https://webdeveloper.com/tips-tricks/how-to-accept-bitcoin-lightning-tips-on-your-website/ -->
     <meta name="lightning" content="lnurlp:preciouschicken@getalby.com">
