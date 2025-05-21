@@ -15,15 +15,18 @@
     <title>{{ if .IsHome }}{{ .Title }}{{ else }}{{ .Title }} &middot; {{ .Site.Title }}{{ end }}</title>
     <link rel="shortcut icon" href="{{ .Site.BaseURL }}images/favicon.ico">
     <link rel="stylesheet" href="{{ .Site.BaseURL }}css/style.css">
+    {{/*
     <!-- Removed <link rel="stylesheet" href="{{ .Site.BaseURL }}css/highlight.css"> -->
     <!-- Removed all below as above added {{ if eq .Site.Params.iconFont "font-awesome" }} -->
     <!-- <link rel="stylesheet" href="{{ .Site.BaseURL }}css/font-awesome.min.css"> -->
     <!-- {{ else }} -->
     <!-- <link rel="stylesheet" href="{{ .Site.BaseURL }}css/monosocialiconsfont.css"> -->
     <!-- {{ end }} -->
-    {{ if .Site.Params.enableRSS }}
-    <link href="{{ .Site.RSSLink }}" rel="alternate" type="application/rss+xml" title="{{ .Site.Title }}">
-    {{ end }}
+    <!-- TODO: Fix RSS -->
+    <!-- {{ if .Site.Params.enableRSS }} -->
+    <!-- <link href="{{ .Site.RSSLink }}" rel="alternate" type="application/rss+xml" title="{{ .Site.Title }}"> -->
+    <!-- {{ end }} -->
+    */}}
     {{ range .Site.Params.customCSS }}
     <link rel="stylesheet" href="{{ $.Site.BaseURL }}{{ . }}">
     {{ end }}
